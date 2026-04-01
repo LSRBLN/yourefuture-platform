@@ -1,11 +1,29 @@
 import { createHmac } from 'node:crypto';
 
+/**
+ * Secure storage configuration supporting both local MinIO and AWS S3.
+ * 
+ * For S3:
+ * - TRUSTSHIELD_STORAGE_ENDPOINT: https://s3.amazonaws.com (or region endpoint)
+ * - TRUSTSHIELD_STORAGE_USE_S3_SIGV4: "true" 
+ * - TRUSTSHIELD_STORAGE_AWS_REGION: region for SigV4
+ * - TRUSTSHIELD_STORAGE_AWS_KEY_ID: AWS access key
+ * - TRUSTSHIELD_STORAGE_AWS_SECRET_KEY: AWS secret key
+ * 
+ * For MinIO (default dev):
+ * - TRUSTSHIELD_STORAGE_ENDPOINT: http://localhost:9000
+ * - TRUSTSHIELD_STORAGE_PRESIGN_SECRET: HMAC secret
+ */
 export type SecureStorageRuntimeConfig = {
   endpoint: string;
   quarantineBucket: string;
   privateBucket: string;
   presignSecret: string;
   ttlSeconds: number;
+  useS3Sigv4?: boolean;
+  awsRegion?: string;
+  awsKeyId?: string;
+  awsSecretKey?: string;
 };
 
 export type SecureStorageUploadDescriptor = {
@@ -34,6 +52,10 @@ export function createSecureStorageRuntimeConfig(environment: NodeJS.ProcessEnv 
     privateBucket: environment.TRUSTSHIELD_STORAGE_PRIVATE_BUCKET ?? 'trustshield-private',
     presignSecret: environment.TRUSTSHIELD_STORAGE_PRESIGN_SECRET ?? 'trustshield-local-dev-secret',
     ttlSeconds: Number.parseInt(environment.TRUSTSHIELD_STORAGE_PRESIGN_TTL_SECONDS ?? '900', 10),
+    useS3Sigv4: environment.TRUSTSHIELD_STORAGE_USE_S3_SIGV4 === 'true',
+    awsRegion: environment.TRUSTSHIELD_STORAGE_AWS_REGION,
+    awsKeyId: environment.TRUSTSHIELD_STORAGE_AWS_KEY_ID,
+    awsSecretKey: environment.TRUSTSHIELD_STORAGE_AWS_SECRET_KEY,
   };
 }
 
