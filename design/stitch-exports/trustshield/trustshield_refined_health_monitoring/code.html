@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield | Removal Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;family=Public_Sans:wght@400;600;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#dcc661",
+                        "on-primary-fixed": "#001946",
+                        "tertiary": "#6d5e00",
+                        "on-surface": "#1b1c1d",
+                        "on-secondary-container": "#606569",
+                        "outline-variant": "#c3c6d5",
+                        "on-surface-variant": "#434653",
+                        "surface-container-low": "#f5f3f4",
+                        "surface-variant": "#e3e2e3",
+                        "secondary": "#5a5f63",
+                        "inverse-surface": "#303031",
+                        "surface-container-highest": "#e3e2e3",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#524600",
+                        "on-primary-container": "#e7ebff",
+                        "outline": "#737784",
+                        "on-secondary-fixed-variant": "#42474b",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#3366cc",
+                        "on-background": "#1b1c1d",
+                        "secondary-container": "#dfe3e8",
+                        "surface-container-high": "#e9e8e9",
+                        "on-primary-fixed-variant": "#00419d",
+                        "secondary-fixed-dim": "#c2c7cc",
+                        "on-secondary-fixed": "#171c20",
+                        "secondary-fixed": "#dfe3e8",
+                        "inverse-on-surface": "#f2f0f1",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#211b00",
+                        "surface-container": "#efedee",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "background": "#faf9fa",
+                        "on-tertiary-container": "#4a3f00",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#f9e37a",
+                        "surface-tint": "#2259bf",
+                        "surface": "#faf9fa",
+                        "tertiary-container": "#bfab49",
+                        "surface-dim": "#dbdadb",
+                        "inverse-primary": "#b1c5ff",
+                        "surface-bright": "#faf9fa",
+                        "primary": "#094cb2",
+                        "primary-fixed": "#d9e2ff",
+                        "on-error": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Noto Serif', serif; }
+        .font-label { font-family: 'Public_Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+<!-- Side Navigation Bar (Anchored Layout) -->
+<aside class="flex flex-col h-full py-6 px-4 border-r border-slate-200/15 dark:border-slate-800/15 bg-slate-50 dark:bg-slate-900 h-screen w-64 fixed left-0 top-0 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-xl font-black text-slate-900 dark:text-slate-50 font-label tracking-wide">TrustShield</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mt-1">Enterprise Privacy</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-label text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-label text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Leak Check</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-label text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="face_retouching_off">face_retouching_off</span>
+<span>Deepfake Analysis</span>
+</a>
+<a class="flex items-center space-x-3 bg-white dark:bg-slate-800 text-[#094cb2] dark:text-blue-300 rounded-lg px-4 py-3 shadow-sm font-label text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="font-semibold">Case Manager</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-label text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-6 border-t border-slate-200/50">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white rounded-xl py-3 px-4 mb-4 text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform font-label">
+                New Removal Case
+            </button>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-100 transition-all font-label text-xs uppercase tracking-tighter" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-100 transition-all font-label text-xs uppercase tracking-tighter" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>Audit Log</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center px-8 h-20 w-full fixed top-0 z-40 bg-white dark:bg-slate-950 pl-72">
+<div class="flex items-center">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50 leading-relaxed">Removal Center</h2>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search cases..." type="text"/>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User profile settings" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional male executive in a studio setting with clean lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA-fMfoWkI2f3iIHrZu4RQIpCrLa5yhocTJKxOW5SoniFB520OSSaIHz5qAVF3BEKzchWiWBAcXVKMRqJ9wiHzJ3aTApYGOgUTkRDesmVuNjk_jh8bc4bahVW_vVPJS0M2EOEa-5sNKDxj0wCfGRACAk9OK01z7bfXyYd0RSJYEArzbVAznZ8ylgTIkRodJHY0DpNagTkcLEM6-vmhm7tHywVWgp47heVnH07__jrIrTQ74XtyfcU7h6hHREeVz5E0BVuFuUijTPsi"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 min-h-screen bg-surface">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between"><div>
+<span class="text-primary font-headline text-xs font-black uppercase tracking-[0.2em]">Global Status</span>
+<h3 class="font-headline text-4xl mt-3 font-bold text-on-surface">92.4% Removal Rate</h3>
+<p class="text-on-surface-variant text-sm mt-4 font-body leading-relaxed max-w-sm italic">
+        Across all enterprise-grade requests, your digital footprint has been successfully redacted from 14 high-risk domains this month.
+    </p>
+</div>
+<div class="mt-10 flex items-end gap-3">
+<div class="h-10 w-2.5 bg-primary/20 rounded-t-sm"></div>
+<div class="h-16 w-2.5 bg-primary/40 rounded-t-sm"></div>
+<div class="h-28 w-2.5 bg-primary/60 rounded-t-sm"></div>
+<div class="h-20 w-2.5 bg-primary/80 rounded-t-sm"></div>
+<div class="h-32 w-2.5 bg-primary rounded-t-sm"></div>
+<div class="h-36 w-2.5 bg-primary rounded-t-sm"></div>
+<div class="h-24 w-2.5 bg-primary/70 rounded-t-sm"></div>
+<div class="h-14 w-2.5 bg-primary/30 rounded-t-sm"></div>
+</div></div>
+<div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="pending_actions">pending_actions</span>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Active Requests</p>
+<h4 class="text-4xl font-headline font-bold mt-2">12</h4>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border-l-4 border-tertiary">
+<span class="material-symbols-outlined text-tertiary mb-4" data-icon="task_alt">task_alt</span>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Completed</p>
+<h4 class="text-4xl font-headline font-bold mt-2">148</h4>
+</div>
+</div>
+<!-- Case Management Table Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="px-8 py-6 flex items-center justify-between border-b border-surface-variant/20">
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Active Deletion Requests</h3>
+<p class="text-on-surface-variant text-sm font-body">Manage and monitor pending PII removal cases.</p>
+</div>
+<div class="flex items-center space-x-3">
+<button class="bg-surface-container-high px-4 py-2 rounded-lg text-sm font-semibold flex items-center space-x-2 text-on-surface transition-all hover:bg-surface-dim">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span>Filter</span>
+</button>
+<button class="bg-surface-container-high px-4 py-2 rounded-lg text-sm font-semibold flex items-center space-x-2 text-on-surface transition-all hover:bg-surface-dim">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+<span>Export CSV</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-black">Platform</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-black">Target URL</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-black">Status</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-black">Last Update</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-black text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/30">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center space-x-3">
+<div class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="search_insights">search_insights</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">WhitePages</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="text-xs font-body text-primary underline truncate max-w-[200px] block">whitepages.com/user/john-doe-49...</span>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 font-label">
+                                        Under Review
+                                    </span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body">Oct 24, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center space-x-3">
+<div class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Spokeo</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="text-xs font-body text-primary underline truncate max-w-[200px] block">spokeo.com/identity/x928-kjsh...</span>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 font-label">
+                                        Submitted
+                                    </span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body">Oct 22, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center space-x-3">
+<div class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Intelius</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="text-xs font-body text-primary underline truncate max-w-[200px] block">intelius.com/p/search-res-77...</span>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 font-label">
+                                        Under Review
+                                    </span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body">Oct 20, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center space-x-3">
+<div class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">PeopleFinders</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="text-xs font-body text-primary underline truncate max-w-[200px] block">peoplefinders.com/profile/998...</span>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800 font-label">
+                                        Action Required
+                                    </span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body">Oct 19, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-8 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-xs text-on-surface-variant font-label">Showing 1-10 of 12 requests</p>
+<div class="flex space-x-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-lg">1</button>
+<button class="px-3 py-1 hover:bg-surface-container-high text-xs font-bold rounded-lg transition-colors">2</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Help / Insights Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2">
+<h4 class="font-headline text-lg font-bold mb-4 tracking-tight">Scholarly Guidance: Removal Protocols</h4>
+<div class="bg-white p-6 rounded-xl space-y-4 border border-surface-variant/20 shadow-sm">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="auto_stories">auto_stories</span>
+<div>
+<h5 class="font-headline font-semibold text-sm">Automated Takedown Compliance</h5>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                                    Our protocols leverage CCPA and GDPR mandates to ensure data brokers comply within 45 days. High-priority cases utilize legal escalations when standard opt-out forms are ignored.
+                                </p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="history_edu">history_edu</span>
+<div>
+<h5 class="font-headline font-semibold text-sm">Archival Removal Verification</h5>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                                    Once a URL returns a 404 error, we continue to monitor Google and Bing caches for up to 90 days to ensure the snippet is purged from search results completely.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-xl bg-primary text-white p-8 flex flex-col justify-between shadow-xl ring-1 ring-white/10">
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-headline text-xl font-bold">Privacy Health Score</h5>
+<p class="text-white/70 text-[10px] mt-1 font-label uppercase tracking-widest">Calculated Daily • Verified</p>
+</div>
+<span class="material-symbols-outlined text-white/50 text-xl">verified_user</span>
+</div>
+<div class="mt-8">
+<div class="flex justify-between items-end mb-2">
+<p class="text-4xl font-headline font-bold">84<span class="text-lg text-white/60 font-normal">/100</span></p>
+<span class="text-xs font-label uppercase tracking-tighter bg-white/10 px-2 py-0.5 rounded">High Integrity</span>
+</div>
+<div class="h-1.5 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-white w-4/5 shadow-[0_0_8px_rgba(255,255,255,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

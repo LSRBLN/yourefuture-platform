@@ -1,0 +1,15 @@
+{
+  "name": "@trustshield/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json --outDir dist",
+    "lint": "eslint src --ext .ts",
+    "test": "tsc --project tsconfig.json --outDir dist && node --test dist/**/*.test.js",
+    "typecheck": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist"
+  }
+}

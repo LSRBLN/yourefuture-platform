@@ -1,0 +1,22 @@
+{
+  "name": "@trustshield/worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc --project tsconfig.json --outDir dist",
+    "start": "node dist/main.js",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@trustshield/core": "workspace:*",
+    "@trustshield/db": "workspace:*",
+    "bullmq": "^5.71.1",
+    "ioredis": "^5.10.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3"
+  }
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield Forensic - Case Detail TS-RM-882-99</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#3366cc",
+                        "surface-container-high": "#e9e8e9",
+                        "on-tertiary-container": "#4a3f00",
+                        "inverse-on-surface": "#f2f0f1",
+                        "tertiary-fixed-dim": "#dcc661",
+                        "tertiary-container": "#bfab49",
+                        "secondary-fixed-dim": "#c2c7cc",
+                        "surface": "#faf9fa",
+                        "on-secondary-container": "#606569",
+                        "on-primary-container": "#e7ebff",
+                        "secondary-container": "#dfe3e8",
+                        "outline-variant": "#c3c6d5",
+                        "on-primary-fixed-variant": "#00419d",
+                        "inverse-surface": "#303031",
+                        "surface-tint": "#2259bf",
+                        "primary": "#094cb2",
+                        "surface-container-highest": "#e3e2e3",
+                        "on-secondary-fixed": "#171c20",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#6d5e00",
+                        "primary-fixed": "#d9e2ff",
+                        "surface-container-low": "#f5f3f4",
+                        "on-primary-fixed": "#001946",
+                        "on-tertiary-fixed-variant": "#524600",
+                        "on-tertiary-fixed": "#211b00",
+                        "inverse-primary": "#b1c5ff",
+                        "outline": "#737784",
+                        "surface-variant": "#e3e2e3",
+                        "surface-container": "#efedee",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "background": "#faf9fa",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf9fa",
+                        "secondary": "#5a5f63",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dbdadb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1d",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#f9e37a",
+                        "on-surface-variant": "#434653",
+                        "on-background": "#1b1c1d",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#dfe3e8",
+                        "on-secondary-fixed-variant": "#42474b"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #faf9fa; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-label { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation (Shared Component Integration) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col p-4 gap-2 border-r border-slate-100 dark:border-slate-800 z-50">
+<div class="mb-8 px-4">
+<h1 class="text-lg font-serif text-slate-900 dark:text-slate-50">TrustShield Forensic</h1>
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-500 mt-1">Analyst Portal</p>
+</div>
+<nav class="flex flex-col gap-2">
+<!-- Active State: Active Cases -->
+<a class="flex items-center gap-3 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-300 rounded-lg px-4 py-2 shadow-sm transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-sans text-sm font-medium">Active Cases</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-sans text-sm font-medium">Evidence Vault</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-sans text-sm font-medium">Audit Log</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-sans text-sm font-medium">Privacy Reports</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-sans text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+<div>
+<p class="text-xs font-bold">Analyst Profile</p>
+<p class="text-[10px] text-slate-500">Level 3 Access</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded shadow-lg hover:opacity-90 transition-opacity">
+                New Case
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar (Shared Component Integration) -->
+<header class="flex justify-between items-center px-8 py-4 w-full border-b border-slate-100 dark:border-slate-800 sticky top-0 bg-white/80 backdrop-blur-md z-40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400">arrow_back</span>
+<div>
+<h2 class="font-serif tracking-tight text-xl font-bold text-slate-900">Case TS-RM-882-99</h2>
+<p class="text-[10px] font-label text-slate-500">Last accessed: Oct 24, 2023 • 14:22 UTC</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span class="text-xs font-label font-bold text-on-surface-variant">Under Review</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="h-6 w-px bg-slate-200"></div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto grid grid-cols-12 gap-8">
+<!-- LEFT COLUMN: Case Details -->
+<div class="col-span-8 space-y-8">
+<!-- Target Information Bento -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-slate-500 mb-4">Platform Target</h3>
+<div class="flex items-center gap-4">
+<div class="p-3 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">public</span>
+</div>
+<div>
+<p class="font-serif text-lg font-bold">WhitePages.com</p>
+<p class="text-xs text-primary underline truncate max-w-[200px]">whitepages.com/user/john_doe_992</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-slate-500 mb-4">Discovered PII</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-tertiary/10 text-on-tertiary-container text-[10px] font-bold rounded">Full Name</span>
+<span class="px-2 py-1 bg-tertiary/10 text-on-tertiary-container text-[10px] font-bold rounded">Home Address</span>
+<span class="px-2 py-1 bg-tertiary/10 text-on-tertiary-container text-[10px] font-bold rounded">Relative List</span>
+<span class="px-2 py-1 bg-tertiary/10 text-on-tertiary-container text-[10px] font-bold rounded">Court Records</span>
+</div>
+</div>
+</section>
+<!-- Forensic Evidence Section -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-serif text-2xl font-bold">Forensic Evidence</h3>
+<button class="text-xs font-label text-primary font-bold hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span> Export Full Chain
+                        </button>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="col-span-2 relative aspect-video bg-slate-100 rounded-lg overflow-hidden group">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="screenshot of a digital profile page with redacted personal information on a white background, sharp forensic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyxgxMGtd3qrSJ30uJRcenYZleVy0K2kdB6E2hN6ixkJNoOAsT68UIqT9oIM4UAZ_07fWkS9q43WLyvMNmAGI-HjsJHSXuWCiv9PTgHkNb1vE4_JCEbOSHd--feujuOdxduhZGhDr3hchqZAqIgLM6uMBZRpOnOT9v4AiZ48EQdKw0JprNZOprbU-Y1fn2g2A_QVDAbtqxKraRH2o-5KuDqSYyQNQJ8s9sA0BZ3ZdtFdn_pm02_DtI9hsAYXoxkCXCHqe10mIEyfMK"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white text-on-surface px-4 py-2 rounded-full font-label text-xs font-bold shadow-xl">
+                                    View Full Resolution
+                                </button>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-low rounded-lg">
+<p class="font-label text-[10px] uppercase text-slate-400 mb-1">Hashing Algorithm</p>
+<p class="font-mono text-[10px] break-all">SHA-256: 8f3c7e92b1a5d6f...</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<p class="font-label text-[10px] uppercase text-slate-400 mb-1">Timestamp Anchor</p>
+<p class="text-xs font-medium">Oct 23, 2023 - 09:12:44.221</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-primary/20">
+<p class="font-label text-[10px] uppercase text-primary mb-1">Chain of Custody</p>
+<p class="text-xs italic">Verified by TrustShield Node #442</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Legal Basis Section -->
+<section class="bg-white p-8 rounded-xl shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="material-symbols-outlined text-9xl">gavel</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl font-bold mb-6">Legal Reasoning for Removal</h3>
+<div class="prose prose-slate max-w-none">
+<p class="font-serif text-lg italic text-slate-600 border-l-2 border-primary pl-6 mb-6">
+                                "The right to be forgotten is not an absolute right, but a balance between the protection of privacy and the freedom of information. However, when data is no longer necessary for the purpose it was collected, the individual’s right to erasure prevails."
+                            </p>
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
+<h4 class="font-label text-xs font-bold uppercase text-slate-900 mb-2">GDPR Article 17</h4>
+<p class="text-sm text-slate-600 leading-relaxed">
+                                        The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay.
+                                    </p>
+</div>
+<div>
+<h4 class="font-label text-xs font-bold uppercase text-slate-900 mb-2">Internal Assessment</h4>
+<p class="text-sm text-slate-600 leading-relaxed">
+                                        Subject's data is non-public by default and was aggregated without explicit consent for commercial resale. High probability of successful removal.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Sidebar Actions & Timeline -->
+<div class="col-span-4 space-y-8">
+<!-- Action Palette -->
+<section class="bg-surface-container-high p-6 rounded-xl space-y-3">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-slate-500 mb-4">Case Controls</h3>
+<button class="w-full flex items-center justify-between p-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg shadow-md hover:scale-[0.98] transition-transform">
+<span class="font-bold text-sm">Download Case Report</span>
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-white text-primary rounded-lg border border-primary/20 hover:bg-slate-50 transition-colors">
+<span class="font-bold text-sm">Contact Legal Counsel</span>
+<span class="material-symbols-outlined">support_agent</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-white text-on-surface-variant rounded-lg border border-outline-variant/30 hover:bg-slate-50 transition-colors">
+<span class="font-bold text-sm">Append Evidence</span>
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<div class="pt-4 mt-4 border-t border-slate-300/50">
+<button class="w-full py-2 text-xs font-bold text-error hover:underline flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">cancel</span> Discard Case Archive
+                        </button>
+</div>
+</section>
+<!-- Case Timeline -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<h3 class="font-serif text-xl font-bold mb-6">Action History</h3>
+<div class="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-slate-200 before:to-transparent">
+<!-- Event 1 -->
+<div class="relative flex items-start gap-6">
+<div class="absolute left-0 mt-1 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white z-10 ring-4 ring-surface">
+<span class="material-symbols-outlined text-sm">send</span>
+</div>
+<div class="ml-12">
+<time class="font-label text-[10px] text-slate-400">TODAY, 10:45 AM</time>
+<h4 class="text-sm font-bold text-slate-900">Follow-up Scheduled</h4>
+<p class="text-xs text-slate-500 mt-1">Automated escalation trigger set for T-48 hours if no response.</p>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="relative flex items-start gap-6">
+<div class="absolute left-0 mt-1 w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center z-10 ring-4 ring-surface">
+<span class="material-symbols-outlined text-sm">mark_email_read</span>
+</div>
+<div class="ml-12">
+<time class="font-label text-[10px] text-slate-400">OCT 24, 14:00 PM</time>
+<h4 class="text-sm font-bold text-slate-900">Platform Acknowledged</h4>
+<p class="text-xs text-slate-500 mt-1">WhitePages compliance team opened the request ticket #WP-9022.</p>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="relative flex items-start gap-6">
+<div class="absolute left-0 mt-1 w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center z-10 ring-4 ring-surface">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div class="ml-12">
+<time class="font-label text-[10px] text-slate-400">OCT 23, 09:12 AM</time>
+<h4 class="text-sm font-bold text-slate-900">Initial Request Sent</h4>
+<p class="text-xs text-slate-500 mt-1">GDPR Article 17 Notice served via TrustShield Secure Gateway.</p>
+</div>
+</div>
+<!-- Event 4 -->
+<div class="relative flex items-start gap-6">
+<div class="absolute left-0 mt-1 w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center z-10 ring-4 ring-surface">
+<span class="material-symbols-outlined text-sm">add_task</span>
+</div>
+<div class="ml-12">
+<time class="font-label text-[10px] text-slate-400">OCT 22, 16:30 PM</time>
+<h4 class="text-sm font-bold text-slate-900">Case Created</h4>
+<p class="text-xs text-slate-500 mt-1">Discovery engine flagged high-risk URL on WhitePages.</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-2 border-2 border-dotted border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-slate-50 transition-colors">
+                        View Full Audit Trail
+                    </button>
+</section>
+<!-- Scholarly Quote -->
+<section class="bg-primary/5 p-6 rounded-xl italic">
+<p class="text-xs text-primary leading-relaxed">
+                        "In the digital age, privacy is the ability to determine which pieces of information about ourselves are shared, and with whom. Without this control, there is no true autonomy."
+                    </p>
+<p class="text-[10px] font-bold text-primary mt-4">— Alexandria Data Privacy Principles, 2024</p>
+</section>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Restricted to Home/Dashboard, Suppressed on Detail as per mandate) -->
+</body></html>

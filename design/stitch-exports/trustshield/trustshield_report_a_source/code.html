@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Report a Source | TrustShield</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#094cb2",
+              "surface-tint": "#2259bf",
+              "on-secondary-container": "#606569",
+              "surface-container-low": "#f5f3f4",
+              "tertiary": "#6d5e00",
+              "on-background": "#1b1c1d",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#bfab49",
+              "outline-variant": "#c3c6d5",
+              "background": "#faf9fa",
+              "on-primary-container": "#e7ebff",
+              "on-secondary-fixed": "#171c20",
+              "on-tertiary-container": "#4a3f00",
+              "secondary-fixed": "#dfe3e8",
+              "on-primary-fixed": "#001946",
+              "on-tertiary-fixed": "#211b00",
+              "on-error-container": "#93000a",
+              "on-surface": "#1b1c1d",
+              "on-secondary": "#ffffff",
+              "surface": "#faf9fa",
+              "secondary": "#5a5f63",
+              "surface-container-highest": "#e3e2e3",
+              "on-surface-variant": "#434653",
+              "on-secondary-fixed-variant": "#42474b",
+              "on-primary": "#ffffff",
+              "surface-container": "#efedee",
+              "secondary-container": "#dfe3e8",
+              "outline": "#737784",
+              "inverse-primary": "#b1c5ff",
+              "tertiary-fixed": "#f9e37a",
+              "surface-bright": "#faf9fa",
+              "primary-fixed": "#d9e2ff",
+              "inverse-on-surface": "#f2f0f1",
+              "on-primary-fixed-variant": "#00419d",
+              "tertiary-fixed-dim": "#dcc661",
+              "inverse-surface": "#303031",
+              "surface-dim": "#dbdadb",
+              "surface-container-high": "#e9e8e9",
+              "primary-container": "#3366cc",
+              "on-error": "#ffffff",
+              "surface-variant": "#e3e2e3",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#524600",
+              "secondary-fixed-dim": "#c2c7cc",
+              "surface-container-lowest": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        label, .caption { font-family: 'Public Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-white dark:bg-slate-950 fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-3 max-w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">TrustShield</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors duration-200" href="#">Intelligence</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors duration-200" href="#">Networks</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors duration-200" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-slate-50 dark:bg-slate-900 px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search logs..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar (Suppressed on Mobile) -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col p-4 z-40 bg-slate-50 dark:bg-slate-900/50 border-r border-slate-200/50 dark:border-slate-800/50 pt-20">
+<div class="mb-8 px-4">
+<h2 class="text-lg font-serif italic text-slate-900 dark:text-white">TrustShield</h2>
+<p class="text-xs font-label uppercase tracking-widest text-slate-500 mt-1">Security Intelligence</p>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-sans text-sm font-medium tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+<span class="font-sans text-sm font-medium tracking-wide">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-sans text-sm font-medium tracking-wide">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-sans text-sm font-medium tracking-wide">Compliance</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-4">
+<button class="w-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium py-3 rounded-lg border border-blue-200/50 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="report">report</span>
+                Report a Source
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-12 px-6 md:px-12 lg:px-24">
+<div class="max-w-4xl mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-4xl md:text-5xl text-on-surface font-bold leading-tight mb-4">Report a Suspicious Source</h1>
+<p class="text-lg text-on-surface-variant font-body max-w-2xl leading-relaxed">
+                    If you have discovered potentially harmful content, a data leak, or a deepfake impersonation, provide the details below for forensic analysis.
+                </p>
+</header>
+<!-- Multi-Step Layout / Focused Form -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<!-- Form Section -->
+<div class="md:col-span-8 space-y-8">
+<form class="space-y-10">
+<!-- URL and Platform -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary" for="source-url">Source URL</label>
+<input class="w-full bg-surface-container-lowest border-none ring-1 ring-outline-variant/15 focus:ring-primary rounded-lg py-3 px-4 font-body transition-all" id="source-url" placeholder="https://..." type="url"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary" for="platform">Platform Name</label>
+<input class="w-full bg-surface-container-lowest border-none ring-1 ring-outline-variant/15 focus:ring-primary rounded-lg py-3 px-4 font-body transition-all" id="platform" placeholder="e.g. Twitter, Telegram" type="text"/>
+</div>
+</div>
+<!-- Content Type -->
+<div class="space-y-4">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary">Content Type</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="bg-surface-container-lowest ring-1 ring-outline-variant/30 hover:ring-primary py-4 px-2 rounded-lg text-sm font-medium flex flex-col items-center gap-2 transition-all group" type="button">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="database">database</span>
+<span>Leak</span>
+</button>
+<button class="bg-primary text-on-primary ring-1 ring-primary py-4 px-2 rounded-lg text-sm font-medium flex flex-col items-center gap-2 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="face_retouching_off">face_retouching_off</span>
+<span>Deepfake</span>
+</button>
+<button class="bg-surface-container-lowest ring-1 ring-outline-variant/30 hover:ring-primary py-4 px-2 rounded-lg text-sm font-medium flex flex-col items-center gap-2 transition-all group" type="button">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="person_search">person_search</span>
+<span>Personal Info</span>
+</button>
+<button class="bg-surface-container-lowest ring-1 ring-outline-variant/30 hover:ring-primary py-4 px-2 rounded-lg text-sm font-medium flex flex-col items-center gap-2 transition-all group" type="button">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="warning">warning</span>
+<span>Other</span>
+</button>
+</div>
+</div>
+<!-- Notes -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary" for="notes">Additional Context/Notes</label>
+<textarea class="w-full bg-surface-container-lowest border-none ring-1 ring-outline-variant/15 focus:ring-primary rounded-lg py-3 px-4 font-body transition-all" id="notes" placeholder="Describe the threat, participants, and timeline..." rows="4"></textarea>
+</div>
+<!-- Evidence Dropzone -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary">Evidence Upload (Optional)</label>
+<div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-10 flex flex-col items-center justify-center text-center bg-surface-container-low/30 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="upload_file">upload_file</span>
+</div>
+<p class="text-on-surface font-medium">Drag and drop forensic evidence</p>
+<p class="text-xs text-on-surface-variant mt-2">Maximum file size 50MB. Encrypted transmission enabled.</p>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-6">
+<button class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all flex items-center justify-center gap-3" type="submit">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                                Submit for Forensic Review
+                            </button>
+</div>
+</form>
+</div>
+<!-- Guidance Sidebar -->
+<div class="md:col-span-4 space-y-8">
+<div class="bg-surface-container p-6 rounded-2xl space-y-6">
+<div class="flex items-center gap-3 text-tertiary">
+<span class="material-symbols-outlined" data-icon="security" data-weight="fill" style="font-variation-settings: 'FILL' 1;">security</span>
+<h3 class="font-bold text-sm tracking-wide uppercase">Forensic Protocol</h3>
+</div>
+<ul class="space-y-4 text-sm text-on-surface-variant leading-relaxed">
+<li class="flex gap-3">
+<span class="text-primary font-bold">01.</span>
+<span>Metadata scrubbed upon ingestion for whistleblower protection.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">02.</span>
+<span>AI-driven content analysis for deepfake verification.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">03.</span>
+<span>Direct integration with regional legal task forces.</span>
+</li>
+</ul>
+</div>
+<div class="bg-surface-container-lowest ring-1 ring-outline-variant/10 rounded-2xl overflow-hidden shadow-sm">
+<div class="h-32 bg-slate-200 relative">
+<img alt="Cybersecurity analysis concept" class="w-full h-full object-cover grayscale opacity-60" data-alt="close-up of glowing blue computer hardware circuitry with abstract digital light beams and a futuristic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvx9uegIAVqLI8z3T8t4WImy-V9pWcRH5C5WaxOJa_xfs5YesKYB8N-p-N0xC7BU_TJy12_WsegSVT6rkwuCEnxDHDkSNbaBgVJbGo9yhkJ_9et9-B_pCQGZ-1cquRJsyNrLg8xxX4oOAAQKtQ919rXXftKhbIPXV4re_HNaeKwFcUlayb6KtYg6OUghoaVFBml_YDFLFTo04M3QSq0iqeNgLUemypA4tvYwtI_A8MJ1Gvtt1yCI3p_JF3xkK557dQgQO2kE1Rod6z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-on-surface mb-2">Anonymous Reporting</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                Your identity is secured through decentralized hashing. No log of your IP address is maintained during the report submission process.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="lg:ml-64 py-8 px-6 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex gap-6 items-center">
+<span class="text-xs font-label uppercase text-slate-400 tracking-tighter">System Status: Secure</span>
+<span class="text-xs font-label uppercase text-slate-400 tracking-tighter">Build: TS-2024-V2</span>
+</div>
+<div class="flex gap-4">
+<a class="text-xs font-label uppercase text-primary hover:underline" href="#">Privacy Charter</a>
+<a class="text-xs font-label uppercase text-primary hover:underline" href="#">Support Hub</a>
+</div>
+</footer>
+</body></html>

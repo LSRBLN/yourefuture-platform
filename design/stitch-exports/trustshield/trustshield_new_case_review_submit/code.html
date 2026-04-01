@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield | Case Wizard - Final Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@300;400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#4a3f00",
+              "tertiary": "#6d5e00",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b1c5ff",
+              "on-background": "#1b1c1d",
+              "on-secondary-fixed": "#171c20",
+              "on-error-container": "#93000a",
+              "primary": "#094cb2",
+              "primary-fixed": "#d9e2ff",
+              "surface-bright": "#faf9fa",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e9e8e9",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f9e37a",
+              "background": "#faf9fa",
+              "primary-container": "#3366cc",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed": "#211b00",
+              "surface-variant": "#e3e2e3",
+              "surface-container-highest": "#e3e2e3",
+              "secondary-container": "#dfe3e8",
+              "surface-tint": "#2259bf",
+              "on-error": "#ffffff",
+              "tertiary-container": "#bfab49",
+              "outline-variant": "#c3c6d5",
+              "secondary-fixed-dim": "#c2c7cc",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-surface-variant": "#434653",
+              "on-surface": "#1b1c1d",
+              "on-primary-fixed-variant": "#00419d",
+              "on-tertiary-fixed-variant": "#524600",
+              "tertiary-fixed-dim": "#dcc661",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#606569",
+              "surface-dim": "#dbdadb",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#303031",
+              "secondary-fixed": "#dfe3e8",
+              "outline": "#737784",
+              "on-primary-fixed": "#001946",
+              "surface": "#faf9fa",
+              "surface-container-low": "#f5f3f4",
+              "on-secondary-fixed-variant": "#42474b",
+              "secondary": "#5a5f63",
+              "on-primary-container": "#e7ebff",
+              "surface-container": "#efedee",
+              "inverse-on-surface": "#f2f0f1"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Noto Serif', serif; }
+      .label-text { font-family: 'Public Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none flex justify-between items-center px-8 h-16">
+<div class="text-2xl font-serif font-black tracking-tight text-slate-900 dark:text-white">TrustShield</div>
+<div class="hidden md:flex items-center gap-8">
+<span class="label-text text-sm font-semibold text-slate-500 dark:text-slate-400 cursor-pointer hover:text-blue-600 transition-colors">Dashboard</span>
+<span class="label-text text-sm font-semibold text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 cursor-pointer">Case Wizard</span>
+<span class="label-text text-sm font-semibold text-slate-500 dark:text-slate-400 cursor-pointer hover:text-blue-600 transition-colors">Reports</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-700 cursor-pointer" data-icon="shield">shield</span>
+<span class="material-symbols-outlined text-slate-700 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-700 cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-50 dark:bg-slate-900 border-r border-slate-200/50 dark:border-slate-800/50 flex flex-col py-6 hidden lg:flex">
+<div class="px-6 mb-8">
+<div class="text-xs font-bold uppercase tracking-widest text-tertiary mb-1 label-text">Case Wizard</div>
+<div class="text-sm text-slate-500 label-text">Archival Removal</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium label-text">Overview</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="description">description</span>
+<span class="text-sm font-medium label-text">Case Details</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="policy">policy</span>
+<span class="text-sm font-medium label-text">Evidence</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="gavel">gavel</span>
+<span class="text-sm font-medium label-text">Legal Review</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-300 font-semibold rounded-lg mx-2 cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+<span class="text-sm font-medium label-text">Submission</span>
+</div>
+</nav>
+<div class="mt-auto px-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-sm font-medium label-text">Settings</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span class="text-sm font-medium label-text">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 px-6 pb-12 min-h-screen max-w-7xl mx-auto">
+<!-- Progress Stepper Header -->
+<header class="mb-12">
+<h1 class="text-4xl font-headline font-bold text-on-surface mb-2">Review &amp; Submit</h1>
+<p class="text-on-surface-variant font-body text-lg max-w-2xl leading-relaxed">
+                Verification of the archival removal request dossier. Ensure all legal grounds and evidence are finalized before forensic submission.
+            </p>
+</header>
+<!-- Stepper Component -->
+<div class="mb-12 flex items-center gap-0 w-full overflow-hidden">
+<div class="flex flex-col items-center group flex-1">
+<div class="h-1 w-full bg-primary-container rounded-full mb-4"></div>
+<span class="label-text text-xs font-bold text-primary uppercase tracking-tighter">01 Identification</span>
+</div>
+<div class="flex flex-col items-center group flex-1">
+<div class="h-1 w-full bg-primary-container rounded-full mb-4 mx-2"></div>
+<span class="label-text text-xs font-bold text-primary uppercase tracking-tighter">02 Evidence</span>
+</div>
+<div class="flex flex-col items-center group flex-1">
+<div class="h-1 w-full bg-primary mb-4"></div>
+<span class="label-text text-xs font-bold text-primary uppercase tracking-tighter">03 Final Review</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Summary Details -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Bento Grid Sections -->
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border-outline-variant/15 border border-opacity-10 space-y-6">
+<h2 class="text-2xl font-headline font-semibold flex items-center gap-2 border-b border-surface-variant pb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="domain">domain</span>
+                        Case Metadata
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<span class="label-text text-[10px] uppercase font-bold text-slate-400 tracking-widest block mb-1">Target URL</span>
+<p class="font-body text-on-surface break-all font-medium">https://archive.public-records.org/profile/7721-john-smith-992</p>
+</div>
+<div>
+<span class="label-text text-[10px] uppercase font-bold text-slate-400 tracking-widest block mb-1">Hosting Platform</span>
+<p class="font-body text-on-surface font-medium">Public Records Archive (International)</p>
+</div>
+<div>
+<span class="label-text text-[10px] uppercase font-bold text-slate-400 tracking-widest block mb-1">Legal Basis</span>
+<p class="font-body text-on-surface font-medium">Right to be Forgotten (GDPR Art. 17)</p>
+</div>
+<div>
+<span class="label-text text-[10px] uppercase font-bold text-slate-400 tracking-widest block mb-1">Priority Level</span>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed rounded-full">
+<span class="w-2 h-2 bg-tertiary rounded-full"></span>
+<span class="label-text text-xs font-bold text-on-tertiary-fixed">High Priority</span>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border-outline-variant/15 border border-opacity-10">
+<h2 class="text-2xl font-headline font-semibold flex items-center gap-2 border-b border-surface-variant pb-4 mb-6">
+<span class="material-symbols-outlined text-tertiary" data-icon="fingerprint">fingerprint</span>
+                        PII Preview
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="aspect-video bg-surface-container-high rounded flex items-center justify-center relative group overflow-hidden">
+<img class="absolute inset-0 object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract deep blue digital pattern with soft light play and subtle noise texture, scholarly and technical feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiyNRrNZDlAjcMd1kD3Y_xa8eCxCf_uvwtjySVuyv_Ty43E4JShTv2BeusghVsli4S5jqjvFrnTqvilxuS1raIsAIR0zj8cNBv-KAvYXGiOC2WYDcwCUz9-WYPqnjttkM8WO1VoDhD2Y7Mrcn3PNFJ-5VnXUeo3Zclkyoz1aU07bQRjGVnyxISesF9VU0k6DogHKFuAX8IewncNvRFTy8u9AYAFjbziz_y6rMqAaBDfV152asEF7LG3PwAL8BOVS5qRnLj067GHwLW"/>
+<span class="material-symbols-outlined text-slate-400 z-10" data-icon="image">image</span>
+<div class="absolute bottom-2 left-2 z-10 bg-black/60 px-2 py-0.5 rounded">
+<span class="label-text text-[9px] text-white font-bold">Government ID</span>
+</div>
+</div>
+<div class="md:col-span-2 space-y-4">
+<div class="bg-surface-container p-4 rounded-lg">
+<p class="label-text text-xs text-slate-500 font-medium mb-1">Redacted Information (Digital Hash)</p>
+<p class="font-mono text-xs text-on-surface-variant leading-tight">SHA-256: 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069</p>
+</div>
+<div class="flex gap-4">
+<div class="flex-1">
+<span class="label-text text-[10px] font-bold text-slate-400 uppercase tracking-widest">Full Name</span>
+<p class="font-body font-medium">J*** S****</p>
+</div>
+<div class="flex-1">
+<span class="label-text text-[10px] font-bold text-slate-400 uppercase tracking-widest">Residence</span>
+<p class="font-body font-medium">B******, Germany</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Actions & Confirmation -->
+<div class="space-y-6">
+<div class="bg-white p-8 rounded-xl shadow-xl shadow-primary/5 border-t-4 border-primary sticky top-24">
+<h3 class="text-xl font-headline font-bold mb-6">Case Attestation</h3>
+<div class="space-y-4 mb-8">
+<label class="flex items-start gap-3 group cursor-pointer">
+<div class="relative flex items-center mt-1">
+<input class="peer h-5 w-5 rounded border-outline focus:ring-primary text-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute opacity-0 peer-checked:opacity-100 text-white text-sm pointer-events-none left-0.5" data-icon="check">check</span>
+</div>
+<span class="text-sm font-body text-on-surface leading-snug">
+                                I confirm that all submitted URLs and PII data are accurate and belong to me or my legally represented party.
+                            </span>
+</label>
+<label class="flex items-start gap-3 group cursor-pointer">
+<div class="relative flex items-center mt-1">
+<input class="peer h-5 w-5 rounded border-outline focus:ring-primary text-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute opacity-0 peer-checked:opacity-100 text-white text-sm pointer-events-none left-0.5" data-icon="check">check</span>
+</div>
+<span class="text-sm font-body text-on-surface leading-snug">
+                                I understand that this forensic review initiates a legal process with third-party archival entities.
+                            </span>
+</label>
+</div>
+<div class="space-y-3">
+<button class="w-full py-4 px-6 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+<span>Submit for Forensic Review</span>
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+</button>
+<button class="w-full py-4 px-6 bg-surface-container-high text-primary font-bold rounded-lg hover:bg-surface-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+<span>Back to Evidence</span>
+</button>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="label-text text-xs font-bold text-on-surface">Verified Secure</p>
+<p class="label-text text-[10px] text-slate-400">AES-256 Encrypted Dossier</p>
+</div>
+</div>
+</div>
+<!-- Summary Card -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/15">
+<h4 class="label-text text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-4">Wizard Statistics</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Time to Assemble</span>
+<span class="text-sm font-bold text-on-surface">14:02 min</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Data Volume</span>
+<span class="text-sm font-bold text-on-surface">4.2 MB</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Recipient Nodes</span>
+<span class="text-sm font-bold text-on-surface">3 Legal Entities</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer for mobile navigation only (hidden on desktop) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-surface-variant flex justify-around items-center h-16 px-4 z-50">
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold label-text">Overview</span>
+</div>
+<div class="flex flex-col items-center text-blue-700">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-[10px] font-bold label-text">Case</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+<span class="text-[10px] font-bold label-text">Evidence</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-bold label-text">Profile</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,11 @@
+node_modules
+.turbo
+dist
+.next
+.pnpm-store
+.env
+coverage
+*.log
+.DS_Store
+.roo/
+.roomodes

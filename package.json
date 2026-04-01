@@ -1,0 +1,25 @@
+{
+  "name": "trustshield",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.2.4",
+    "@types/node": "^22.14.0",
+    "eslint": "^9.23.0",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "typescript-eslint": "^8.46.1",
+    "typescript": "^5.8.3"
+  }
+}

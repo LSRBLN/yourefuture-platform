@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Logs | Alexandria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#c3c6d5",
+              "surface-tint": "#2259bf",
+              "primary": "#094cb2",
+              "on-primary-fixed-variant": "#00419d",
+              "inverse-surface": "#303031",
+              "tertiary": "#6d5e00",
+              "primary-fixed": "#d9e2ff",
+              "on-secondary": "#ffffff",
+              "surface-container-highest": "#e3e2e3",
+              "on-secondary-fixed": "#171c20",
+              "on-tertiary-fixed-variant": "#524600",
+              "on-primary-fixed": "#001946",
+              "surface-container-low": "#f5f3f4",
+              "primary-container": "#3366cc",
+              "secondary-fixed-dim": "#c2c7cc",
+              "tertiary-fixed-dim": "#dcc661",
+              "tertiary-container": "#bfab49",
+              "surface-container-high": "#e9e8e9",
+              "on-tertiary-container": "#4a3f00",
+              "inverse-on-surface": "#f2f0f1",
+              "on-secondary-container": "#606569",
+              "surface": "#faf9fa",
+              "secondary-container": "#dfe3e8",
+              "on-primary-container": "#e7ebff",
+              "tertiary-fixed": "#f9e37a",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-surface-variant": "#434653",
+              "on-background": "#1b1c1d",
+              "secondary-fixed": "#dfe3e8",
+              "on-secondary-fixed-variant": "#42474b",
+              "surface-variant": "#e3e2e3",
+              "surface-container": "#efedee",
+              "outline": "#737784",
+              "on-tertiary-fixed": "#211b00",
+              "inverse-primary": "#b1c5ff",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#b1c5ff",
+              "background": "#faf9fa",
+              "secondary": "#5a5f63",
+              "surface-bright": "#faf9fa",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdadb",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1d",
+              "on-error": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-header shadow-sm border-none h-16 px-8 flex justify-between items-center">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif font-bold tracking-tight text-slate-900">Alexandria</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-slate-500 font-label text-sm hover:text-slate-900 transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-slate-500 font-label text-sm hover:text-slate-900 transition-colors duration-200" href="#">Security</a>
+<a class="text-blue-700 font-label text-sm border-b-2 border-blue-700 pb-1" href="#">Audit Logs</a>
+<a class="text-slate-500 font-label text-sm hover:text-slate-900 transition-colors duration-200" href="#">Compliance</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border-none rounded-lg text-sm focus:ring-1 focus:ring-primary w-64 font-label" placeholder="Search archives..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover" data-alt="Professional headshot of a middle-aged security administrator in a minimalist gray studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCumh5UBJpJ4vfTs4PU181gxQibCTwAZ769r9WopMSXZVMhGVcjcvvRT4jykgaia9xYUBguBpM3sR-WzLe3fdRMw34YgNZK7BryZCCQwoJst3_upO3KHfwv6Jy2KICd3nKfllob4JXz903Mfa7-ADEvBqWq2sSk1xjKL6U5LKbrRyDUAQOsIMEWVP6spXaSNrHmJa7hhLJ_-HdjnUE6I7b6iqXhoe06iYTT31n2mSoVQ7oZxmX1Vs4tD2ei-f0xEC0AjF8M7rKcHXT"/>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on small screens) -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 pt-20 flex-col border-r border-slate-100 bg-slate-50">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<div>
+<p class="font-serif italic text-lg leading-tight">Security Console</p>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-label">Admin Level 4</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 font-label text-sm hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">analytics</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 font-bold bg-blue-50/50 font-label text-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+                Event Logs
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 font-label text-sm hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">shield_person</span>
+                Access Control
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 font-label text-sm hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">vpn_key</span>
+                Key Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 font-label text-sm hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">description</span>
+                Reports
+            </a>
+</nav>
+<div class="p-4 border-t border-slate-200/50">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white py-2.5 rounded-lg font-label text-sm font-medium shadow-sm hover:shadow-md transition-all active:scale-95">
+                Export Logs
+            </button>
+</div>
+<footer class="p-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 font-label text-xs hover:text-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-base">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 font-label text-xs hover:text-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-base">menu_book</span>
+                Documentation
+            </a>
+</footer>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 pb-12 px-8">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+<div>
+<nav class="flex gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-400 font-label mb-3">
+<span>Governance</span>
+<span>/</span>
+<span class="text-primary">Forensics</span>
+</nav>
+<h1 class="text-5xl font-headline font-bold text-on-surface leading-tight">Audit Logs</h1>
+<p class="text-slate-500 mt-2 font-body max-w-xl">A comprehensive ledger of every security event, data movement, and administrative action within the TrustShield ecosystem.</p>
+</div>
+<!-- Audit Summary Bento Mini-Grid -->
+<div class="grid grid-cols-2 gap-3 shrink-0">
+<div class="bg-surface-container-low p-4 rounded-xl border-none">
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-1">Total Events</p>
+<p class="text-2xl font-headline font-bold">14,282</p>
+<div class="flex items-center gap-1 text-[10px] text-green-600 font-label mt-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12% this week</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border-none">
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-500 mb-1">Critical Alerts</p>
+<p class="text-2xl font-headline font-bold text-error">03</p>
+<div class="flex items-center gap-1 text-[10px] text-slate-400 font-label mt-1">
+<span class="material-symbols-outlined text-sm">history</span>
+<span>Last 24 hours</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-white/40 backdrop-blur-md p-4 rounded-2xl border-none shadow-sm mb-8 flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-1.5 min-w-[200px]">
+<label class="text-[10px] font-label uppercase tracking-wider text-slate-500 px-1">Date Range</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">calendar_today</span>
+<select class="pl-9 pr-8 py-2 w-full bg-white border-none rounded-lg text-sm font-label focus:ring-1 focus:ring-primary appearance-none">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Custom Range</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 min-w-[160px]">
+<label class="text-[10px] font-label uppercase tracking-wider text-slate-500 px-1">Event Type</label>
+<select class="px-4 py-2 w-full bg-white border-none rounded-lg text-sm font-label focus:ring-1 focus:ring-primary">
+<option>All Events</option>
+<option>Security</option>
+<option>Analysis</option>
+<option>Removal</option>
+<option>Account</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5 min-w-[160px]">
+<label class="text-[10px] font-label uppercase tracking-wider text-slate-500 px-1">Severity</label>
+<select class="px-4 py-2 w-full bg-white border-none rounded-lg text-sm font-label focus:ring-1 focus:ring-primary">
+<option>All Severities</option>
+<option>Critical</option>
+<option>Warning</option>
+<option>Info</option>
+</select>
+</div>
+<div class="ml-auto self-end pb-0.5">
+<button class="flex items-center gap-2 px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded-lg font-label text-sm text-slate-700 font-medium">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Advanced Filters
+                    </button>
+</div>
+</div>
+<!-- Log Table Container -->
+<div class="bg-white rounded-3xl overflow-hidden shadow-sm border-none">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 border-b border-slate-100">
+<th class="py-5 px-6 font-label text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Timestamp</th>
+<th class="py-5 px-6 font-label text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Event Name</th>
+<th class="py-5 px-6 font-label text-[10px] uppercase tracking-widest text-slate-400 font-semibold">User/Actor</th>
+<th class="py-5 px-6 font-label text-[10px] uppercase tracking-widest text-slate-400 font-semibold text-center">Severity</th>
+<th class="py-5 px-6 font-label text-[10px] uppercase tracking-widest text-slate-400 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Oct 24, 2023</span>
+<span class="text-xs text-slate-400 tabular-nums">14:22:08 UTC</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-600 bg-blue-50 p-1.5 rounded-lg text-lg">shield_lock</span>
+<span class="text-sm font-headline font-semibold text-slate-800 tracking-tight">Two-Factor Authentication Enabled</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-600">JS</div>
+<span class="text-sm text-slate-600 font-label">Julian S. (Admin)</span>
+</div>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-100">Info</span>
+</td>
+<td class="py-5 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Oct 24, 2023</span>
+<span class="text-xs text-slate-400 tabular-nums">13:45:12 UTC</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600 bg-amber-50 p-1.5 rounded-lg text-lg">warning</span>
+<span class="text-sm font-headline font-semibold text-slate-800 tracking-tight">Failed Login Attempt</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-2">
+<span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">192.168.1.44</span>
+</div>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-100">Warning</span>
+</td>
+<td class="py-5 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Oct 24, 2023</span>
+<span class="text-xs text-slate-400 tabular-nums">11:10:55 UTC</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-1.5 rounded-lg text-lg">search_check</span>
+<span class="text-sm font-headline font-semibold text-slate-800 tracking-tight">Leak Check Completed</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-600 font-label italic">System Task</span>
+</div>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-100">Info</span>
+</td>
+<td class="py-5 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Oct 23, 2023</span>
+<span class="text-xs text-slate-400 tabular-nums">23:02:18 UTC</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error bg-error-container/20 p-1.5 rounded-lg text-lg">policy</span>
+<span class="text-sm font-headline font-semibold text-slate-800 tracking-tight">Removal Request Submitted</span>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-600">MR</div>
+<span class="text-sm text-slate-600 font-label">M. Rodriguez</span>
+</div>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-error-container/30 text-error border border-error/10">Critical</span>
+</td>
+<td class="py-5 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="p-6 bg-slate-50/30 flex items-center justify-between border-t border-slate-100">
+<p class="text-xs font-label text-slate-400 italic">Showing 1 to 10 of 14,282 archival entries</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-white transition-all">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-600 text-xs font-medium hover:bg-white">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-600 text-xs font-medium hover:bg-white">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-white transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Forensic Integrity Note -->
+<div class="mt-12 flex flex-col items-center">
+<div class="max-w-2xl text-center space-y-4">
+<div class="w-12 h-1 bg-tertiary-container mx-auto rounded-full opacity-30"></div>
+<blockquote class="font-headline italic text-slate-500 text-lg leading-relaxed">
+                        "In the realm of digital sovereignty, the audit log is not merely a list—it is the fossil record of our collective integrity. It speaks when the system is silent."
+                    </blockquote>
+<p class="font-label text-[10px] uppercase tracking-[0.3em] text-slate-400">
+                        Forensic Data Integrity Certification <span class="text-tertiary ml-2">●</span> Verified 2023
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full bg-white md:hidden border-none shadow-[0_-4px_12px_rgba(0,0,0,0.05)] h-16 flex justify-around items-center px-4">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[9px] font-label">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="text-[9px] font-label">Logs</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="text-[9px] font-label">Access</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[9px] font-label">Profile</span>
+</button>
+</nav>
+</body></html>

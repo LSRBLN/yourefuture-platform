@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public_Sans:wght@400;600;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#dcc661",
+              "on-primary-fixed": "#001946",
+              "tertiary": "#6d5e00",
+              "on-surface": "#1b1c1d",
+              "on-secondary-container": "#606569",
+              "outline-variant": "#c3c6d5",
+              "on-surface-variant": "#434653",
+              "surface-container-low": "#f5f3f4",
+              "surface-variant": "#e3e2e3",
+              "secondary": "#5a5f63",
+              "inverse-surface": "#303031",
+              "surface-container-highest": "#e3e2e3",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#524600",
+              "on-primary-container": "#e7ebff",
+              "outline": "#737784",
+              "on-secondary-fixed-variant": "#42474b",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#3366cc",
+              "on-background": "#1b1c1d",
+              "secondary-container": "#dfe3e8",
+              "surface-container-high": "#e9e8e9",
+              "on-primary-fixed-variant": "#00419d",
+              "secondary-fixed-dim": "#c2c7cc",
+              "on-secondary-fixed": "#171c20",
+              "secondary-fixed": "#dfe3e8",
+              "inverse-on-surface": "#f2f0f1",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed": "#211b00",
+              "surface-container": "#efedee",
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#b1c5ff",
+              "background": "#faf9fa",
+              "on-tertiary-container": "#4a3f00",
+              "on-primary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#f9e37a",
+              "surface-tint": "#2259bf",
+              "surface": "#faf9fa",
+              "tertiary-container": "#bfab49",
+              "surface-dim": "#dbdadb",
+              "inverse-primary": "#b1c5ff",
+              "surface-bright": "#faf9fa",
+              "primary": "#094cb2",
+              "primary-fixed": "#d9e2ff",
+              "on-error": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-8 h-20 w-full fixed top-0 z-50 bg-white dark:bg-slate-950 border-b border-outline-variant/20">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50 font-headline">TrustShield</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary transition-colors font-label" href="#">Dashboard</a>
+<a class="text-primary dark:text-blue-400 font-semibold border-b-2 border-primary font-label" href="#">Leak Check</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary transition-colors font-label" href="#">Analysis</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User profile settings" class="w-full h-full object-cover" data-alt="Professional headshot of a corporate executive in a dark suit with a clean neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKzeyVozhD95eqdlHRTWzm69duiuX51DIEYbwjMOpXTtHbw7KCNC_2EM-CnZ2uHTs7z0isueZE1HEzCwL69KNrz63vRy8tyCjys0qTny5ZlpoGBK-wmiFKZ-ar4O-4p_BmMAcHsyHzINPn7TZWjBA1kMnjiWYjmmd-HbQv82q5IMR2lEoOusMMr389Iw-Vu_z8vCSA2ijC30tD4VXpsrG_c-7oXpylndyLi_dCAqWxoKaBxtKToaMS06-RvQJpgsqTk2ZZMGQ0VmE6"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 pt-24 py-6 px-4 border-r border-outline-variant/20 bg-slate-50 dark:bg-slate-900 z-40">
+<div class="flex flex-col space-y-1 mb-auto">
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 bg-white dark:bg-slate-800 text-primary dark:text-blue-300 rounded-lg px-4 py-3 shadow-sm font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Leak Check</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="face_retouching_off">face_retouching_off</span>
+<span>Deepfake Analysis</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span>Case Manager</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+<div class="pt-6 border-t border-outline-variant/30">
+<button class="w-full bg-primary text-white py-3 rounded-lg font-bold mb-6 shadow-md hover:bg-primary/90 transition-all font-label">
+                New Removal Case
+            </button>
+<div class="space-y-1">
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-all font-label text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Audit Log</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 px-8 pb-12">
+<div class="max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-4xl font-headline font-bold text-on-surface mb-2 tracking-tight">Leak Check Dashboard</h1>
+<p class="text-on-surface-variant font-body">Comprehensive audit for <span class="font-semibold text-primary">m.thompson@enterprise.com</span>. Last updated 14 minutes ago.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Refined Risk Indicator Card -->
+<div class="md:col-span-5 bg-white border border-outline-variant/30 rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden shadow-sm">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-6">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-label font-bold uppercase tracking-[0.2em] text-error">Current Security Status</span>
+</div>
+<h2 class="text-6xl font-headline font-bold text-on-surface mb-4">Critical</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-8 font-body max-w-sm">
+                            Identity theft risk is currently <span class="text-on-surface font-semibold underline decoration-error/30 underline-offset-4">elevated</span>. High-priority exposures detected in 3 major database breaches.
+                        </p>
+</div>
+<div class="flex items-center justify-between relative z-10 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="flex gap-1.5">
+<div class="w-6 h-1.5 rounded-full bg-surface-container-high"></div>
+<div class="w-6 h-1.5 rounded-full bg-surface-container-high"></div>
+<div class="w-6 h-1.5 rounded-full bg-surface-container-high"></div>
+<div class="w-10 h-1.5 rounded-full bg-error shadow-[0_0_8px_rgba(186,26,26,0.4)]"></div>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant font-bold">LVL 4/4</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-error text-white">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="priority_high">priority_high</span>
+<span class="text-[10px] font-label font-black tracking-wider uppercase">Action Required</span>
+</div>
+</div>
+<!-- Subtle Sophisticated Background Element -->
+<div class="absolute -right-12 -top-12 opacity-[0.03] pointer-events-none select-none">
+<span class="material-symbols-outlined text-[240px] font-thin" data-icon="shield_with_house">shield_with_house</span>
+</div>
+</div>
+<!-- Enhanced Exposure Breakdown -->
+<div class="md:col-span-7 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-8 shadow-sm">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface">Data Exposure Clusters</h3>
+<p class="text-sm text-on-surface-variant font-body mt-1">Categorized compromised information</p>
+</div>
+<button class="flex items-center gap-2 text-primary font-label text-xs font-bold hover:underline group">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+                            Download Audit Report
+                        </button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group cursor-default">
+<div class="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center mb-4 transition-all group-hover:bg-primary/5">
+<span class="material-symbols-outlined text-primary" data-icon="lock">lock</span>
+</div>
+<div class="text-3xl font-headline font-bold text-on-surface">12</div>
+<div class="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant mt-1">Passwords</div>
+</div>
+<div class="group cursor-default">
+<div class="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center mb-4 transition-all group-hover:bg-primary/5">
+<span class="material-symbols-outlined text-primary" data-icon="alternate_email">alternate_email</span>
+</div>
+<div class="text-3xl font-headline font-bold text-on-surface">04</div>
+<div class="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant mt-1">Email Aliases</div>
+</div>
+<div class="group cursor-default">
+<div class="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center mb-4 transition-all group-hover:bg-error/5">
+<span class="material-symbols-outlined text-error" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="text-3xl font-headline font-bold text-on-surface">02</div>
+<div class="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant mt-1">Financial</div>
+</div>
+<div class="group cursor-default">
+<div class="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center mb-4 transition-all group-hover:bg-primary/5">
+<span class="material-symbols-outlined text-primary" data-icon="share_location">share_location</span>
+</div>
+<div class="text-3xl font-headline font-bold text-on-surface">08</div>
+<div class="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant mt-1">Geo-Locations</div>
+</div>
+</div>
+</div>
+<!-- Breached Services Table -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm">
+<div class="p-8 border-b border-outline-variant/10 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-headline font-bold">Documented Breaches</h3>
+<p class="text-sm text-on-surface-variant font-body">Verified database leaks involving your credentials</p>
+</div>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[10px] font-label font-bold text-on-surface-variant">3 SOURCES</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-high/20">
+<tr>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">Service / Source</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant text-center">Date</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant text-center">Severity</th>
+<th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">Impact Scope</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-white text-[11px] font-bold shadow-sm">AD</div>
+<div>
+<div class="font-bold text-on-surface text-sm">Adobe Creative Cloud</div>
+<div class="text-xs text-on-surface-variant">Massive Database Leak</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body text-center">Oct 2023</td>
+<td class="px-8 py-6 text-center">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-error mr-2"></span>
+<span class="text-[10px] font-bold uppercase text-on-surface">Critical</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] text-on-surface-variant font-medium">Passwords</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] text-on-surface-variant font-medium">Emails</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[11px] font-bold shadow-sm">LK</div>
+<div>
+<div class="font-bold text-on-surface text-sm">LinkedIn Recruiter</div>
+<div class="text-xs text-on-surface-variant">Scraping Collection #4</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body text-center">Jan 2024</td>
+<td class="px-8 py-6 text-center">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-tertiary-container mr-2"></span>
+<span class="text-[10px] font-bold uppercase text-on-surface">Medium</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] text-on-surface-variant font-medium">Work Bio</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white text-[11px] font-bold shadow-sm">DB</div>
+<div>
+<div class="font-bold text-on-surface text-sm">Dropbox Inc.</div>
+<div class="text-xs text-on-surface-variant">Internal Credential Stuffing</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-body text-center">Feb 2024</td>
+<td class="px-8 py-6 text-center">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-error mr-2"></span>
+<span class="text-[10px] font-bold uppercase text-on-surface">Critical</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] text-on-surface-variant font-medium">Login Tokens</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Immediate Actions Card -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="bg-primary text-white rounded-2xl p-8 shadow-xl shadow-primary/15 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-xl font-headline font-bold mb-6">Security Directives</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-white/10 p-4 rounded-xl hover:bg-white/15 transition-all cursor-pointer border border-white/5">
+<span class="material-symbols-outlined text-white/90" data-icon="sync_lock">sync_lock</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-wide">Rotate Master Credentials</p>
+<p class="text-[10px] opacity-70 mt-0.5">Urgent for Adobe &amp; Dropbox</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white/10 p-4 rounded-xl hover:bg-white/15 transition-all cursor-pointer border border-white/5">
+<span class="material-symbols-outlined text-white/90" data-icon="key">key</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-wide">Hardware MFA</p>
+<p class="text-[10px] opacity-70 mt-0.5">Activate physical security keys</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white/10 p-4 rounded-xl hover:bg-white/15 transition-all cursor-pointer border border-white/5">
+<span class="material-symbols-outlined text-white/90" data-icon="delete_forever">delete_forever</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-wide">Purge Broker Data</p>
+<p class="text-[10px] opacity-70 mt-0.5">Start erasure from 14 entities</p>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-all duration-700"></div>
+</div>
+<!-- Archival Status Card -->
+<div class="bg-surface-container-high/40 p-8 rounded-2xl border border-outline-variant/10">
+<div class="flex items-center gap-2 text-primary/60 mb-6">
+<span class="material-symbols-outlined text-sm" data-icon="history_edu">history_edu</span>
+<span class="text-[10px] font-label font-bold uppercase tracking-[0.2em]">Record #772-B</span>
+</div>
+<p class="font-headline text-on-surface italic text-base leading-relaxed mb-6">
+                            "The digital footprint is a persistent ledger. Effective stewardship requires proactive curation and a resilient shield."
+                        </p>
+<div class="flex items-center gap-4">
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+<span class="text-[10px] text-on-surface-variant font-label font-bold">EST. 2024</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-10 right-10 bg-slate-900 text-white w-14 h-14 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-50 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+</body></html>

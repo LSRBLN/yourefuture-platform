@@ -1,0 +1,12 @@
+import type { AssetRecord, CheckRecord, ContentMatchRecord, ProviderRecord, RemovalCaseRecord, ReviewQueueItem, SourceRecord, SupportQueueItem, SupportRequestRecord, UnifiedSearchRecord, WorkflowRecord } from './trustshield-records.js';
+export declare const mockProviders: ProviderRecord[];
+export declare const mockChecks: CheckRecord[];
+export declare const mockAssets: AssetRecord[];
+export declare const mockSources: SourceRecord[];
+export declare const mockContentMatches: ContentMatchRecord[];
+export declare const mockWorkflows: WorkflowRecord[];
+export declare const mockSupportRequests: SupportRequestRecord[];
+export declare const mockReviewQueue: ReviewQueueItem[];
+export declare const mockUnifiedSearchRecords: UnifiedSearchRecord[];
+export declare const mockSupportQueue: SupportQueueItem[];
+export declare const mockRemovalCases: RemovalCaseRecord[];

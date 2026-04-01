@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": false,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@trustshield/ui": ["packages/ui/src/index.ts"],
+      "@trustshield/ui/*": ["packages/ui/src/*"],
+      "@trustshield/core": ["packages/core/src/index.ts"],
+      "@trustshield/core/*": ["packages/core/src/*"],
+      "@trustshield/db": ["packages/db/src/index.ts"],
+      "@trustshield/db/*": ["packages/db/src/*"],
+      "@trustshield/validation": ["packages/validation/src/index.ts"],
+      "@trustshield/validation/*": ["packages/validation/src/*"],
+      "@trustshield/config/*": ["packages/config/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".next"]
+}
