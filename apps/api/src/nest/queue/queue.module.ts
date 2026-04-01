@@ -22,6 +22,19 @@ function createQueue(queueName: string, connection: IORedis, prefix: string) {
   return new Queue(queueName, {
     connection,
     prefix,
+    defaultJobOptions: {
+      // Standard retry with exponential backoff
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 2000, // 2s initial delay
+      },
+      // Remove jobs after completion to prevent memory bloat
+      removeOnComplete: {
+        age: 3600, // Keep for 1 hour
+      },
+      removeOnFail: false, // Keep failed jobs for inspection
+    },
   });
 }
 
