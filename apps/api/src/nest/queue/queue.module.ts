@@ -47,16 +47,31 @@ function createQueueProvider(queueName: string, token: symbol) {
   providers: [
     {
       provide: BULLMQ_CONNECTION,
-      useFactory: () => {
+      useFactory: async () => {
         if (isQueueRuntimeDisabled()) {
           return null;
         }
 
         const runtime = createBullmqRuntimeConfig();
-        return new IORedis(runtime.connectionUrl, {
+        const connection = new IORedis(runtime.connectionUrl, {
           maxRetriesPerRequest: null,
           lazyConnect: true,
         });
+
+        // Health check: ensure Redis is reachable on startup
+        try {
+          await connection.ping();
+        } catch (error) {
+          const message = error instanceof Error ? error.message : 'Unknown Redis error';
+          console.error(JSON.stringify({ 
+            status: 'error', 
+            message: `Redis health check failed on startup: ${message}`,
+            context: 'queue-module-bootstrap'
+          }));
+          throw new Error(`Redis initialization failed: ${message}`);
+        }
+
+        return connection;
       },
     },
     createQueueProvider(workerJobCatalog['asset.scan'].queue, ASSETS_QUEUE),

@@ -127,7 +127,19 @@ export const workerProcessors: Record<WorkerJobName, JobProcessor> = {
   async 'removal.submit'(job) {
     const envelope = requireValidEnvelope(job, 'removal.submit');
     const payload = envelope.payload as RemovalSubmitJobPayload;
-    await workerPersistence.markRemovalSubmitted(payload.removalCaseId);
+    
+    try {
+      await workerPersistence.markRemovalSubmitted(payload.removalCaseId);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown persistence error';
+      console.error(JSON.stringify({
+        status: 'error',
+        job: 'removal.submit',
+        removalCaseId: payload.removalCaseId,
+        message: `Failed to mark removal as submitted: ${message}`,
+      }));
+      throw error;
+    }
 
     return createResult(job, 'removal.submit', 'validated_removal_submission_payload', {
       removalCaseId: payload.removalCaseId,

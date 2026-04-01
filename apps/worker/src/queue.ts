@@ -24,10 +24,22 @@ export function createWorkerConnection() {
 
   const runtime = createBullmqRuntimeConfig();
 
-  return new IORedis(runtime.connectionUrl, {
+  const connection = new IORedis(runtime.connectionUrl, {
     maxRetriesPerRequest: null,
     lazyConnect: true,
   });
+
+  // Health check: validate Redis connectivity on connection creation
+  connection.on('error', (error) => {
+    const message = error instanceof Error ? error.message : 'Unknown Redis error';
+    console.error(JSON.stringify({ 
+      status: 'error', 
+      message: `Redis connection error: ${message}`,
+      context: 'worker-queue-connection'
+    }));
+  });
+
+  return connection;
 }
 
 export function createQueueWorkers() {
