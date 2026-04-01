@@ -1,4 +1,4 @@
-import { createHmac } from 'node:crypto';
+import { createHmac, createHash } from 'node:crypto';
 
 /**
  * Secure storage configuration supporting both local MinIO and AWS S3.
@@ -63,6 +63,83 @@ function createSignature(secret: string, value: string) {
   return createHmac('sha256', secret).update(value).digest('hex');
 }
 
+/**
+ * AWS SigV4 signing for S3 presigned URLs
+ * Implements AWS Signature Version 4
+ */
+function createS3SigV4Signature(input: {
+  method: string;
+  bucket: string;
+  objectKey: string;
+  region: string;
+  keyId: string;
+  secretKey: string;
+  expiresInSeconds: number;
+  contentType?: string;
+}): {
+  signature: string;
+  amzDate: string;
+  datestamp: string;
+  credentialScope: string;
+} {
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]/g, '').replace(/\.\d{3}/, '');
+  const datestamp = amzDate.slice(0, 8);
+  const expiresInStr = input.expiresInSeconds.toString();
+
+  const credentialScope = `${datestamp}/${input.region}/s3/aws4_request`;
+  const algorithm = 'AWS4-HMAC-SHA256';
+
+  const canonicalHeaders = [
+    `host:${input.bucket}.s3.${input.region}.amazonaws.com`,
+    '',
+  ].join('\n');
+
+  const signedHeaders = 'host';
+
+  const canonicalQueryString = [
+    `X-Amz-Algorithm=${algorithm}`,
+    `X-Amz-Credential=${encodeURIComponent(`${input.keyId}/${credentialScope}`)}`,
+    `X-Amz-Date=${amzDate}`,
+    `X-Amz-Expires=${expiresInStr}`,
+    `X-Amz-SignedHeaders=${signedHeaders}`,
+  ]
+    .sort()
+    .join('&');
+
+  const payloadHash = createHash('sha256').update('').digest('hex');
+
+  const canonicalRequest = [
+    input.method,
+    `/${input.objectKey}`,
+    canonicalQueryString,
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash,
+  ].join('\n');
+
+  const stringToSign = [
+    algorithm,
+    amzDate,
+    credentialScope,
+    createHash('sha256').update(canonicalRequest).digest('hex'),
+  ].join('\n');
+
+  const kSecret = `AWS4${input.secretKey}`;
+  const kDate = createHmac('sha256', kSecret).update(datestamp).digest();
+  const kRegion = createHmac('sha256', kDate).update(input.region).digest();
+  const kService = createHmac('sha256', kRegion).update('s3').digest();
+  const kSigning = createHmac('sha256', kService).update('aws4_request').digest();
+  const signature = createHmac('sha256', kSigning).update(stringToSign).digest('hex');
+
+  return {
+    signature,
+    amzDate,
+    datestamp,
+    credentialScope,
+  };
+}
+
 export class SecureAssetStorageService {
   constructor(private readonly config = createSecureStorageRuntimeConfig()) {}
 
@@ -72,10 +149,22 @@ export class SecureAssetStorageService {
     sha256?: string;
     fileSizeBytes?: number;
   }): SecureStorageUploadDescriptor {
+    if (this.config.useS3Sigv4 && this.config.awsRegion && this.config.awsKeyId && this.config.awsSecretKey) {
+      return this.createS3SigV4UploadDescriptor('quarantine', input);
+    }
+
+    return this.createMinioUploadDescriptor('quarantine', input);
+  }
+
+  private createMinioUploadDescriptor(
+    scope: 'quarantine' | 'private',
+    input: { objectKey: string; mimeType?: string; sha256?: string; fileSizeBytes?: number },
+  ): SecureStorageUploadDescriptor {
     const expiresAt = new Date(Date.now() + this.config.ttlSeconds * 1000).toISOString();
+    const bucket = scope === 'quarantine' ? this.config.quarantineBucket : this.config.privateBucket;
     const signaturePayload = [
       'PUT',
-      this.config.quarantineBucket,
+      bucket,
       input.objectKey,
       expiresAt,
       input.mimeType ?? '',
@@ -83,7 +172,7 @@ export class SecureAssetStorageService {
       `${input.fileSizeBytes ?? ''}`,
     ].join('\n');
     const signature = createSignature(this.config.presignSecret, signaturePayload);
-    const uploadUrl = new URL(`${this.config.endpoint}/${this.config.quarantineBucket}/${input.objectKey}`);
+    const uploadUrl = new URL(`${this.config.endpoint}/${bucket}/${input.objectKey}`);
 
     uploadUrl.searchParams.set('expires', expiresAt);
     uploadUrl.searchParams.set('signature', signature);
@@ -92,13 +181,56 @@ export class SecureAssetStorageService {
       method: 'PUT',
       uploadUrl: uploadUrl.toString(),
       expiresAt,
-      bucket: this.config.quarantineBucket,
+      bucket,
       objectKey: input.objectKey,
       headers: {
         'content-type': input.mimeType ?? 'application/octet-stream',
         'x-trustshield-upload-signature': signature,
         ...(input.sha256 ? { 'x-trustshield-sha256': input.sha256 } : {}),
         ...(typeof input.fileSizeBytes === 'number' ? { 'content-length': `${input.fileSizeBytes}` } : {}),
+      },
+    };
+  }
+
+  private createS3SigV4UploadDescriptor(
+    scope: 'quarantine' | 'private',
+    input: { objectKey: string; mimeType?: string; sha256?: string; fileSizeBytes?: number },
+  ): SecureStorageUploadDescriptor {
+    if (!this.config.awsRegion || !this.config.awsKeyId || !this.config.awsSecretKey) {
+      throw new Error('AWS configuration incomplete for S3 SigV4');
+    }
+
+    const bucket = scope === 'quarantine' ? this.config.quarantineBucket : this.config.privateBucket;
+    const sig4 = createS3SigV4Signature({
+      method: 'PUT',
+      bucket,
+      objectKey: input.objectKey,
+      region: this.config.awsRegion,
+      keyId: this.config.awsKeyId,
+      secretKey: this.config.awsSecretKey,
+      expiresInSeconds: this.config.ttlSeconds,
+      contentType: input.mimeType,
+    });
+
+    const uploadUrl = new URL(`https://${bucket}.s3.${this.config.awsRegion}.amazonaws.com/${input.objectKey}`);
+    uploadUrl.searchParams.set('X-Amz-Algorithm', 'AWS4-HMAC-SHA256');
+    uploadUrl.searchParams.set('X-Amz-Credential', `${this.config.awsKeyId}/${sig4.credentialScope}`);
+    uploadUrl.searchParams.set('X-Amz-Date', sig4.amzDate);
+    uploadUrl.searchParams.set('X-Amz-Expires', this.config.ttlSeconds.toString());
+    uploadUrl.searchParams.set('X-Amz-SignedHeaders', 'host');
+    uploadUrl.searchParams.set('X-Amz-Signature', sig4.signature);
+
+    const expiresAt = new Date(Date.now() + this.config.ttlSeconds * 1000).toISOString();
+
+    return {
+      method: 'PUT',
+      uploadUrl: uploadUrl.toString(),
+      expiresAt,
+      bucket,
+      objectKey: input.objectKey,
+      headers: {
+        'content-type': input.mimeType ?? 'application/octet-stream',
+        ...(input.sha256 ? { 'x-amz-checksum-sha256': input.sha256 } : {}),
       },
     };
   }
