@@ -41,7 +41,7 @@ function signRs256Jwt(payload: Record<string, unknown>, privateKey: Parameters<t
 }
 
 async function invoke(path: string, method: string, body?: unknown, headers?: Record<string, string>) {
-  const app = createApiApp();
+  const app = createApiApp({ seedDemoData: true });
   return invokeWithApp(app, path, method, body, headers);
 }
 
@@ -78,7 +78,7 @@ async function invokeWithApp(
 }
 
 function createInvoker() {
-  const app = createApiApp();
+  const app = createApiApp({ seedDemoData: true });
 
   return {
     invoke: (path: string, method: string, body?: unknown, headers?: Record<string, string>) =>
@@ -87,7 +87,7 @@ function createInvoker() {
 }
 
 async function invokeWithRawBody(path: string, method: string, rawBody: string, headers?: Record<string, string>) {
-  const app = createApiApp();
+  const app = createApiApp({ seedDemoData: true });
   let responseBody = '';
   let statusCode = 0;
   const response = {

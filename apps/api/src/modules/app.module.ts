@@ -69,9 +69,9 @@ async function readJsonBody(request: IncomingMessage) {
   }
 }
 
-export function createApiApp() {
+export function createApiApp(options?: { seedDemoData?: boolean }) {
   const manifest = createAppManifest('api');
-  const store = createTrustshieldStore({ seedDemoData: true });
+  const store = createTrustshieldStore({ seedDemoData: options?.seedDemoData ?? false });
   const rateLimitEntries = new Map<string, { count: number; windowStartedAt: number }>();
 
   const checksService = new ChecksService(store);
