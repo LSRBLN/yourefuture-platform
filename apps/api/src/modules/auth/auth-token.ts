@@ -406,6 +406,8 @@ export function signAccessToken(payload: {
   scopes: ApiScopeToken[];
   tenantId?: string;
 }) {
+  // Access tokens valid for 15 minutes
+  // Must be refreshed via /api/v1/auth/refresh endpoint using refresh_token
   return signToken('access', payload, 15 * 60);
 }
 
@@ -416,6 +418,9 @@ export function signRefreshToken(payload: {
   scopes: ApiScopeToken[];
   tenantId?: string;
 }) {
+  // Refresh tokens valid for 7 days
+  // Used only at /api/v1/auth/refresh to obtain new access_token
+  // Never sent to backend APIs; kept client-side in secure storage
   return signToken('refresh', payload, 7 * 24 * 60 * 60);
 }
 
