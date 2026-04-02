@@ -1,134 +1,168 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-
 export default function HomePage() {
-  const t = useTranslations();
+  const rows = [
+    { icon: '🌐', name: 'public-data-aggregator.io', found: 'Found: Today, 06:16 AM', status: 'HIGH RISK', cls: 'bg-[#3b0a0a] text-[#f87171]' },
+    { icon: '↗', name: 'social-lookup-service.net', found: 'Found: Yesterday, 11:20 PM', status: 'PENDING', cls: 'bg-[#451a03] text-[#fb923c]' },
+    { icon: '🗃', name: 'archives-database.com', found: 'Found: 2 days ago', status: 'VERIFIED', cls: 'bg-[#052e16] text-[#4ade80]' },
+  ];
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-surface/95 backdrop-blur-lg border-b border-outline-variant/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">🛡️</span>
-            <span className="text-2xl font-serif font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              TrustShield
-            </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <LanguageSwitcher />
-            <Link
-              href="/profile"
-              className="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium"
-            >
-              {t('nav.profile')}
-            </Link>
-            <Link
-              href="/auth/login"
-              className="px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-1"
-            >
-              {t('nav.login')}
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="flex flex-col h-full bg-[#0d0f14]">
+      {/* Page Header */}
+      <div className="px-8 py-5 border-b border-[#1e2235] flex-shrink-0">
+        <h1 className="text-xl font-semibold text-white">Dashboard</h1>
+      </div>
 
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-32">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold leading-tight text-on-surface">
-              {t('home.title')}
-            </h1>
-            <p className="text-lg text-on-surface-variant leading-relaxed max-w-md">
-              {t('home.description')}
+      {/* Content */}
+      <div className="flex flex-1 gap-5 p-5 overflow-auto min-h-0">
+
+        {/* Left Main Column */}
+        <div className="flex-1 flex flex-col gap-5 min-w-0">
+
+          {/* System Integrity Card */}
+          <div className="bg-[#161820] rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-white mb-2">System Integrity Status</h2>
+            <p className="text-[#8b90a0] text-sm leading-relaxed max-w-lg mb-5">
+              Welcome back to the Vault. Your digital footprint is being monitored in real-time.
+              All automated removal scripts are currently operational and executing within expected latency.
             </p>
-            <div className="flex gap-4 pt-4">
-              <Link
-                href="/osint"
-                className="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-2"
-              >
-                {t('home.cta')} →
-              </Link>
-              <Link
-                href="/auth/login"
-                className="px-8 py-3 bg-surface-container-high text-primary rounded-md font-medium hover:bg-surface-container-highest transition-colors shadow-elevation-1"
-              >
-                {t('nav.login')}
-              </Link>
-            </div>
+            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#22c55e]/40 text-[#22c55e] text-xs font-semibold tracking-wide hover:bg-[#22c55e]/10 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse inline-block" />
+              LIVE PROTECTION ACTIVE
+            </button>
           </div>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur-3xl opacity-60"></div>
-            <div className="relative bg-surface-container-high/60 backdrop-blur-md rounded-lg p-12 shadow-elevation-3">
-              <div className="space-y-4">
-                <div className="h-3 bg-surface-container-highest rounded-full w-3/4"></div>
-                <div className="h-3 bg-surface-container-highest rounded-full w-1/2"></div>
-                <div className="h-12 bg-primary/20 rounded-md mt-8"></div>
-                <div className="h-3 bg-surface-container-highest rounded-full w-2/3"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Features */}
-      <section className="bg-surface-container border-t border-outline-variant/20">
-        <div className="max-w-7xl mx-auto px-6 py-32">
-          <h2 className="text-5xl font-serif font-bold text-on-surface mb-20 text-center">
-            {t('home.features')}
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { emoji: '🔍', title: 'Multi-Source Search', desc: 'Search across 10+ OSINT sources in seconds' },
-              { emoji: '⚠️', title: 'Breach Detection', desc: 'Detect compromised data in 500M+ records' },
-              { emoji: '⚡', title: 'Fast Results', desc: 'Results in under 100ms with caching' },
-              { emoji: '📊', title: 'Analytics', desc: 'Visualize patterns and relationships' },
-              { emoji: '🔐', title: 'Privacy First', desc: 'Self-hosted, no data collection' },
-              { emoji: '🏢', title: 'Enterprise Ready', desc: 'Batch operations and API access' },
-            ].map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-surface-container-high/60 rounded-lg p-8 hover:bg-surface-container-highest/80 transition-colors shadow-elevation-1 group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{feature.emoji}</div>
-                <h3 className="text-lg font-serif font-semibold text-on-surface mb-3">{feature.title}</h3>
-                <p className="text-on-surface-variant leading-relaxed">{feature.desc}</p>
+          {/* Stats Row */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-[#161820] rounded-xl p-5">
+              <p className="text-[#8b90a0] text-xs uppercase tracking-wider mb-2">Overall Risk</p>
+              <p className="text-white text-2xl font-bold mb-1">Secure</p>
+              <p className="text-[#5a5f70] text-xs">3 high-risk vulnerabilities found</p>
+            </div>
+            <div className="bg-[#161820] rounded-xl p-5">
+              <p className="text-[#8b90a0] text-xs uppercase tracking-wider mb-2">Scans Done Today</p>
+              <p className="text-white text-2xl font-bold mb-1">14</p>
+              <p className="text-[#5a5f70] text-xs">Last scan: 12m ago</p>
+            </div>
+          </div>
+
+          {/* Review Queue */}
+          <div className="bg-[#161820] rounded-xl flex-1">
+            <div className="px-6 py-4 flex items-center justify-between border-b border-[#1e2235]">
+              <div>
+                <h3 className="text-white font-semibold">Review Queue</h3>
+                <p className="text-[#5a5f70] text-xs mt-0.5">Found instances awaiting verification or automatic removal.</p>
+              </div>
+              <button className="text-xs text-[#8b90a0] hover:text-white font-semibold tracking-wider uppercase transition-colors">
+                View All Activity
+              </button>
+            </div>
+            <div className="px-6 py-3 grid grid-cols-[1fr_130px_110px] gap-4">
+              <span className="text-[#5a5f70] text-xs uppercase tracking-wider">Source / URL</span>
+              <span className="text-[#5a5f70] text-xs uppercase tracking-wider">Status</span>
+              <span className="text-[#5a5f70] text-xs uppercase tracking-wider">Action</span>
+            </div>
+            {rows.map((row, i) => (
+              <div key={i} className="px-6 py-4 grid grid-cols-[1fr_130px_110px] gap-4 items-center hover:bg-[#1c1f29] transition-colors border-t border-[#1e2235]/40">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#1c1f29] flex items-center justify-center text-sm flex-shrink-0">
+                    {row.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[#c8cad4] text-sm font-medium truncate">{row.name}</p>
+                    <p className="text-[#5a5f70] text-xs">{row.found}</p>
+                  </div>
+                </div>
+                <div>
+                  <span className={`inline-block px-2.5 py-1 rounded text-xs font-bold tracking-wide ${row.cls}`}>
+                    {row.status}
+                  </span>
+                </div>
+                <div>
+                  <button className="text-xs text-[#8b90a0] hover:text-white font-semibold uppercase tracking-wide transition-colors">
+                    View Details
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-6 py-32 text-center">
-        <h2 className="text-5xl font-serif font-bold text-on-surface mb-8">{t('home.cta')}</h2>
-        <p className="text-lg text-on-surface-variant mb-12 leading-relaxed">
-          Get instant access to powerful OSINT tools.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/auth/register"
-            className="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-2"
-          >
-            {t('auth.register')}
-          </Link>
-          <Link
-            href="/auth/login"
-            className="px-8 py-3 bg-surface-container-high text-primary rounded-md font-medium hover:bg-surface-container-highest transition-colors shadow-elevation-1"
-          >
-            {t('auth.login')}
-          </Link>
+        {/* Right Column */}
+        <div className="w-[210px] flex-shrink-0 flex flex-col gap-4">
+
+          {/* Quick Actions */}
+          <div className="bg-[#161820] rounded-xl p-4">
+            <h3 className="text-white font-semibold text-sm mb-3">Quick Actions</h3>
+            <div className="space-y-2">
+              {[
+                { label: 'Start New Check', icon: '→' },
+                { label: 'Report Manual Finding', icon: '+' },
+                { label: 'Contact Specialist', icon: '↗' },
+              ].map((btn) => (
+                <button
+                  key={btn.label}
+                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-[#1c1f29] hover:bg-[#242836] text-[#8b90a0] hover:text-white text-xs font-semibold uppercase tracking-wide transition-all"
+                >
+                  <span>{btn.label}</span>
+                  <span className="w-5 h-5 rounded bg-[#242836] flex items-center justify-center text-xs">{btn.icon}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Privacy Shield */}
+          <div className="bg-[#161820] rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-7 h-7 rounded-lg bg-[#052e16] flex items-center justify-center flex-shrink-0">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#22c55e" />
+                </svg>
+              </div>
+              <span className="text-white text-sm font-semibold">Privacy Shield</span>
+            </div>
+            <p className="text-[#5a5f70] text-xs leading-relaxed mb-3">
+              Our Zero-Knowledge architecture ensures that not even Trustshield employees can view your specific PII data. All reports are encrypted with your private key.
+            </p>
+            <button className="text-xs text-[#3b82f6] hover:text-[#60a5fa] font-semibold uppercase tracking-wide transition-colors">
+              Read Retention Policy
+            </button>
+          </div>
+
+          {/* Removal Progress */}
+          <div className="bg-[#161820] rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-4">
+              <h3 className="text-white font-semibold text-sm">Removal Progress</h3>
+              <span className="px-2 py-0.5 rounded bg-[#1a2035] text-[#3b82f6] text-xs font-bold">3 Active</span>
+            </div>
+            <div className="space-y-4">
+              {[
+                { label: 'CASE #8821 - DMCA REQUEST', pct: 75 },
+                { label: 'CASE #8819 - OPT-OUT SCRIPT', pct: 30 },
+              ].map((item) => (
+                <div key={item.label}>
+                  <div className="flex justify-between items-center mb-1.5">
+                    <p className="text-[#8b90a0] text-[10px] uppercase tracking-wide font-semibold">{item.label}</p>
+                    <p className="text-[#5a5f70] text-[10px]">{item.pct}%</p>
+                  </div>
+                  <div className="h-1 bg-[#1c1f29] rounded-full overflow-hidden">
+                    <div className="h-full bg-[#3b82f6] rounded-full" style={{ width: `${item.pct}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-surface-container border-t border-outline-variant/20 py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center text-on-surface-variant text-sm">
-          <p>© 2026 TrustShield. All rights reserved.</p>
+      <footer className="px-6 py-3 border-t border-[#1e2235] flex items-center justify-between text-[#5a5f70] text-[10px] uppercase tracking-widest flex-shrink-0">
+        <span>2026 YoureFuture - TrustShield. All rights reserved.</span>
+        <div className="flex gap-6">
+          <button className="hover:text-[#8b90a0] transition-colors">Terms</button>
+          <button className="hover:text-[#8b90a0] transition-colors">Privacy</button>
+          <button className="hover:text-[#8b90a0] transition-colors">Data Retention Policy</button>
         </div>
       </footer>
     </div>

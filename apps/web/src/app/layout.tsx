@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable}`}>
-      <body className="min-h-screen bg-surface font-sans text-on-surface antialiased">
+    <html className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable} h-full`}>
+      <body className="h-full bg-[#0d0f14] font-sans text-[#e8eaf0] antialiased overflow-hidden">
         <QueryProvider>
           {children}
         </QueryProvider>

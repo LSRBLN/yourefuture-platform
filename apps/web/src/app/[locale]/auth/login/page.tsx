@@ -48,27 +48,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-md">
-        <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-2">
-          {/* Header */}
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-serif font-bold text-on-surface mb-2">{t('auth.loginTitle')}</h1>
-            <p className="text-on-surface-variant">{t('auth.loginDescription')}</p>
+    <div className="min-h-screen bg-[#0d0f14] flex items-center justify-center px-6 py-12">
+      <div className="w-full max-w-sm">
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-10 h-10 rounded-xl bg-[#1a2035] flex items-center justify-center mb-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6l-8-4z" fill="#3b82f6" />
+            </svg>
           </div>
+          <h1 className="text-xl font-bold text-white mb-1">{t('auth.loginTitle')}</h1>
+          <p className="text-[#8b90a0] text-sm">{t('auth.loginDescription')}</p>
+        </div>
 
-          {/* Error Message */}
+        <div className="bg-[#161820] rounded-xl p-6">
           {error && (
-            <div className="mb-6 p-4 bg-error-container/50 rounded-md">
-              <p className="text-red-700 text-sm">{error}</p>
+            <div className="mb-5 p-3 bg-[#3b0a0a] rounded-lg">
+              <p className="text-[#f87171] text-sm">{error}</p>
             </div>
           )}
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-on-surface mb-2">
+              <label className="block text-xs font-semibold text-[#8b90a0] uppercase tracking-wider mb-2">
                 {t('auth.email')}
               </label>
               <input
@@ -76,14 +78,13 @@ export default function LoginPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full px-4 py-2.5 bg-[#1c1f29] border border-[#2d3244] rounded-lg text-[#e8eaf0] placeholder-[#5a5f70] focus:outline-none focus:border-[#3b82f6]/60 transition-colors text-sm"
                 placeholder="name@example.com"
               />
             </div>
 
-            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-on-surface mb-2">
+              <label className="block text-xs font-semibold text-[#8b90a0] uppercase tracking-wider mb-2">
                 {t('auth.password')}
               </label>
               <input
@@ -91,36 +92,27 @@ export default function LoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full px-4 py-2.5 bg-[#1c1f29] border border-[#2d3244] rounded-lg text-[#e8eaf0] placeholder-[#5a5f70] focus:outline-none focus:border-[#3b82f6]/60 transition-colors text-sm"
                 placeholder="••••••••"
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-8 px-4 py-3 bg-primary hover:bg-primary/90 disabled:bg-on-surface/20 text-white rounded-md font-medium transition-colors shadow-elevation-2 disabled:shadow-elevation-0"
+              className="w-full mt-2 px-4 py-2.5 bg-[#3b82f6] hover:bg-[#2563eb] disabled:bg-[#1c1f29] text-white disabled:text-[#5a5f70] rounded-lg font-semibold text-sm transition-colors"
             >
               {loading ? t('auth.loadingSubmit') : t('auth.login')}
             </button>
           </form>
 
-          {/* Links */}
-          <div className="mt-4 flex justify-between text-sm">
-            <Link href="/auth/forgot-password" className="text-primary hover:text-primary/80 font-medium">
+          <div className="mt-4 flex justify-between text-xs">
+            <Link href="/auth/forgot-password" className="text-[#3b82f6] hover:text-[#60a5fa] font-medium transition-colors">
               {t('auth.forgotPassword')}
             </Link>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-6 text-center">
-            <p className="text-on-surface-variant text-sm">
-              {t('auth.noAccount')}{' '}
-              <Link href="/auth/register" className="text-primary hover:text-primary/80 font-medium">
-                {t('auth.register')}
-              </Link>
-            </p>
+            <Link href="/auth/register" className="text-[#3b82f6] hover:text-[#60a5fa] font-medium transition-colors">
+              {t('auth.register')}
+            </Link>
           </div>
         </div>
       </div>

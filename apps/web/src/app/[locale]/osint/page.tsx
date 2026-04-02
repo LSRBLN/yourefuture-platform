@@ -18,57 +18,44 @@ export default function OSINTPage() {
   const t = useTranslations();
 
   return (
-    <div className="min-h-screen bg-surface">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-surface/95 backdrop-blur-lg border-b border-outline-variant/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="p-2 hover:bg-surface-container rounded-md transition-colors text-xl text-on-surface">
-              ←
-            </Link>
-            <div>
-              <h1 className="text-2xl font-serif font-bold text-on-surface">{t('osint.dashboard')}</h1>
-              <p className="text-sm text-on-surface-variant">{t('nav.osint')}</p>
-            </div>
-          </div>
-          <button className="p-2 hover:bg-surface-container rounded-md transition-colors text-2xl">
-            ?️
-          </button>
+    <div className="flex flex-col h-full bg-[#0d0f14]">
+      <div className="px-8 py-5 border-b border-[#1e2235] flex items-center justify-between flex-shrink-0">
+        <div>
+          <h1 className="text-xl font-semibold text-white">{t('osint.dashboard')}</h1>
+          <p className="text-[#8b90a0] text-xs mt-0.5">{t('nav.osint')}</p>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Info Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-surface-container-high/60 rounded-lg p-6 backdrop-blur-md shadow-elevation-1">
-            <p className="text-on-surface-variant text-sm font-medium">{t('osint.searchTypes')}</p>
-            <p className="text-on-surface font-semibold mt-3">{t('osint.username')} • {t('osint.email')} • {t('osint.phone')} • {t('osint.domain')} • {t('osint.image')}</p>
+      <div className="flex-1 overflow-auto p-6">
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="bg-[#161820] rounded-xl p-4">
+            <p className="text-[#8b90a0] text-xs uppercase tracking-wider mb-2">{t('osint.searchTypes')}</p>
+            <p className="text-[#c8cad4] text-sm font-medium">{t('osint.username')} · {t('osint.email')} · {t('osint.phone')} · {t('osint.domain')}</p>
           </div>
-          <div className="bg-surface-container-high/60 rounded-lg p-6 backdrop-blur-md shadow-elevation-1">
-            <p className="text-on-surface-variant text-sm font-medium">{t('osint.integratedSources')}</p>
-            <p className="text-on-surface font-semibold mt-3">10+ OSINT Tools & Databases</p>
+          <div className="bg-[#161820] rounded-xl p-4">
+            <p className="text-[#8b90a0] text-xs uppercase tracking-wider mb-2">{t('osint.integratedSources')}</p>
+            <p className="text-white text-2xl font-bold">10+</p>
+            <p className="text-[#5a5f70] text-xs">OSINT Tools & Databases</p>
           </div>
-          <div className="bg-surface-container-high/60 rounded-lg p-6 backdrop-blur-md shadow-elevation-1">
-            <p className="text-on-surface-variant text-sm font-medium">{t('osint.responseTime')}</p>
-            <p className="text-on-surface font-semibold mt-3">&lt; 100ms Average</p>
+          <div className="bg-[#161820] rounded-xl p-4">
+            <p className="text-[#8b90a0] text-xs uppercase tracking-wider mb-2">{t('osint.responseTime')}</p>
+            <p className="text-white text-2xl font-bold">&lt;100ms</p>
+            <p className="text-[#5a5f70] text-xs">Average response time</p>
           </div>
         </div>
 
-        {/* Dashboard Component */}
         <Suspense fallback={<DashboardSkeleton />}>
           <SyncfusionOSINTDashboard />
         </Suspense>
 
-        {/* Tips Section */}
-        <div className="mt-12 bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-          <h3 className="text-on-surface font-serif font-bold text-lg mb-6">💡 {t('osint.tips')}</h3>
-          <ul className="space-y-3 text-on-surface-variant text-sm">
-            <li>• <strong className="text-on-surface">Multi-Source:</strong> {t('osint.search')} will query all 10+ sources simultaneously</li>
-            <li>• <strong className="text-on-surface">Export:</strong> Use the export buttons to save results as Excel or PDF</li>
-            <li>• <strong className="text-on-surface">Filtering:</strong> Click column headers to sort and filter results</li>
-            <li>• <strong className="text-on-surface">Analytics:</strong> Check the Analytics tab for trend analysis and visualizations</li>
-            <li>• <strong className="text-on-surface">Batch:</strong> Upload multiple items for batch processing</li>
+        <div className="mt-6 bg-[#161820] rounded-xl p-5">
+          <h3 className="text-white font-semibold text-sm mb-4">Tips</h3>
+          <ul className="space-y-2 text-[#8b90a0] text-xs">
+            <li><span className="text-[#c8cad4] font-semibold">Multi-Source:</span> Queries all 10+ sources simultaneously</li>
+            <li><span className="text-[#c8cad4] font-semibold">Export:</span> Save results as Excel or PDF</li>
+            <li><span className="text-[#c8cad4] font-semibold">Filtering:</span> Click column headers to sort and filter</li>
+            <li><span className="text-[#c8cad4] font-semibold">Analytics:</span> Check the Analytics tab for trend analysis</li>
+            <li><span className="text-[#c8cad4] font-semibold">Batch:</span> Upload multiple items for batch processing</li>
           </ul>
         </div>
       </div>

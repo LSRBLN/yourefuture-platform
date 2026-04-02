@@ -1,4 +1,5 @@
 'use client';
+// Dark-theme compact language switcher
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
@@ -18,27 +19,20 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex gap-1 p-1 bg-surface-container-high/40 rounded-md shadow-elevation-1">
-      <button
-        onClick={() => handleLanguageChange('de')}
-        className={`px-4 py-1.5 rounded text-sm font-medium transition-all ${
-          locale === 'de'
-            ? 'bg-primary text-white shadow-elevation-1'
-            : 'text-on-surface-variant hover:text-on-surface'
-        }`}
-      >
-        DE
-      </button>
-      <button
-        onClick={() => handleLanguageChange('en')}
-        className={`px-4 py-1.5 rounded text-sm font-medium transition-all ${
-          locale === 'en'
-            ? 'bg-primary text-white shadow-elevation-1'
-            : 'text-on-surface-variant hover:text-on-surface'
-        }`}
-      >
-        EN
-      </button>
+    <div className="flex gap-0.5 p-0.5 bg-[#1c1f29] rounded-lg">
+      {['de', 'en'].map((l) => (
+        <button
+          key={l}
+          onClick={() => handleLanguageChange(l)}
+          className={`px-3 py-1 rounded-md text-xs font-semibold uppercase tracking-wider transition-all ${
+            locale === l
+              ? 'bg-[#242836] text-white'
+              : 'text-[#5a5f70] hover:text-[#8b90a0]'
+          }`}
+        >
+          {l}
+        </button>
+      ))}
     </div>
   );
 }

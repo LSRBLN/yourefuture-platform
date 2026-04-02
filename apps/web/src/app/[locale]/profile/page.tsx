@@ -120,182 +120,107 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center">
-        <p className="text-on-surface">{t('common.loading')}</p>
+      <div className="flex h-full items-center justify-center bg-[#0d0f14]">
+        <div className="w-6 h-6 border-2 border-[#3b82f6] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center">
-        <p className="text-red-600">{error}</p>
+      <div className="flex h-full items-center justify-center bg-[#0d0f14]">
+        <p className="text-[#f87171] text-sm">{error}</p>
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-surface">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-surface/95 backdrop-blur-lg border-b border-outline-variant/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="text-on-surface-variant hover:text-on-surface transition-colors font-medium">
-              ← {t('nav.home')}
-            </Link>
-            <h1 className="text-2xl font-serif font-bold text-on-surface">{t('profile.title')}</h1>
-          </div>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors font-medium"
-          >
-            {t('common.logout')}
-          </button>
-        </div>
-      </header>
+  const inputCls = 'w-full px-4 py-2.5 bg-[#1c1f29] border border-[#2d3244] rounded-lg text-[#e8eaf0] placeholder-[#5a5f70] focus:outline-none focus:border-[#3b82f6]/60 transition-colors text-sm';
+  const labelCls = 'block text-xs font-semibold text-[#8b90a0] uppercase tracking-wider mb-2';
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+  return (
+    <div className="flex flex-col h-full bg-[#0d0f14]">
+      <div className="px-8 py-5 border-b border-[#1e2235] flex items-center justify-between flex-shrink-0">
+        <h1 className="text-xl font-semibold text-white">{t('profile.title')}</h1>
+        <button
+          onClick={handleLogout}
+          className="px-4 py-1.5 rounded-lg bg-[#1c1f29] hover:bg-[#242836] text-[#8b90a0] hover:text-white text-xs font-semibold uppercase tracking-wide transition-colors"
+        >
+          {t('common.logout')}
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-auto p-6">
         {error && (
-          <div className="mb-6 p-4 bg-error-container/50 rounded-md">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="mb-5 p-3 bg-[#3b0a0a] rounded-lg">
+            <p className="text-[#f87171] text-sm">{error}</p>
           </div>
         )}
 
         {/* Tabs */}
-        <div className="mb-8 flex gap-8 border-b border-outline-variant/20">
-          <button
-            onClick={() => setActiveTab('profile')}
-            className={`pb-3 font-medium transition-colors relative ${
-              activeTab === 'profile'
-                ? 'text-primary'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {t('profile.personalInfo')}
-            {activeTab === 'profile' && (
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full"></div>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab('images')}
-            className={`pb-3 font-medium transition-colors relative ${
-              activeTab === 'images'
-                ? 'text-primary'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {t('profile.myImages')}
-            {activeTab === 'images' && (
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full"></div>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`pb-3 font-medium transition-colors relative ${
-              activeTab === 'settings'
-                ? 'text-primary'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {t('profile.settings')}
-            {activeTab === 'settings' && (
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full"></div>
-            )}
-          </button>
+        <div className="flex gap-1 mb-6 bg-[#161820] rounded-xl p-1 w-fit">
+          {[{id:'profile',label:t('profile.personalInfo')},{id:'images',label:t('profile.myImages')},{id:'settings',label:t('profile.settings')}].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide transition-all ${
+                activeTab === tab.id
+                  ? 'bg-[#1c1f29] text-white'
+                  : 'text-[#8b90a0] hover:text-[#c8cad4]'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* Profile Tab */}
         {activeTab === 'profile' && (
-          <div className="space-y-8">
-            <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-              <h2 className="text-2xl font-serif font-bold text-on-surface mb-8">{t('profile.personalInfo')}</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('auth.email')}
-                  </label>
-                  <input
-                    type="email"
-                    value={user.email}
-                    disabled
-                    className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface-variant cursor-not-allowed"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('auth.firstName')}
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue={user.firstName || ''}
-                    className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('auth.lastName')}
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue={user.lastName || ''}
-                    className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('profile.bio')}
-                  </label>
-                  <textarea
-                    defaultValue={user.bio || ''}
-                    className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    rows={3}
-                  />
-                </div>
+          <div className="bg-[#161820] rounded-xl p-6 max-w-2xl">
+            <h2 className="text-base font-semibold text-white mb-5">{t('profile.personalInfo')}</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <label className={labelCls}>{t('auth.email')}</label>
+                <input type="email" value={user.email} disabled className={inputCls + ' opacity-50 cursor-not-allowed'} />
               </div>
-              <button className="mt-8 px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-2">
-                {t('common.save')}
-              </button>
+              <div>
+                <label className={labelCls}>{t('auth.firstName')}</label>
+                <input type="text" defaultValue={user.firstName || ''} className={inputCls} />
+              </div>
+              <div>
+                <label className={labelCls}>{t('auth.lastName')}</label>
+                <input type="text" defaultValue={user.lastName || ''} className={inputCls} />
+              </div>
+              <div className="md:col-span-2">
+                <label className={labelCls}>{t('profile.bio')}</label>
+                <textarea defaultValue={user.bio || ''} className={inputCls} rows={3} />
+              </div>
             </div>
+            <button className="mt-5 px-6 py-2.5 bg-[#3b82f6] hover:bg-[#2563eb] text-white rounded-lg text-sm font-semibold transition-colors">
+              {t('common.save')}
+            </button>
           </div>
         )}
 
-        {/* Images Tab */}
         {activeTab === 'images' && (
-          <div className="space-y-8">
-            <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-              <h2 className="text-2xl font-serif font-bold text-on-surface mb-8">{t('profile.uploadNew')}</h2>
+          <div className="space-y-5 max-w-2xl">
+            <div className="bg-[#161820] rounded-xl p-6">
+              <h2 className="text-base font-semibold text-white mb-4">{t('profile.uploadNew')}</h2>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
                 disabled={uploading}
-                className="block w-full text-sm text-on-surface-variant
-                  file:mr-4 file:py-2.5 file:px-4
-                  file:rounded-md file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-primary file:text-white
-                  hover:file:bg-primary/90
-                  file:cursor-pointer file:transition-colors"
+                className="block w-full text-sm text-[#8b90a0] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#3b82f6] file:text-white hover:file:bg-[#2563eb] file:cursor-pointer file:transition-colors"
               />
             </div>
-
             {images.length > 0 && (
-              <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-                <h2 className="text-2xl font-serif font-bold text-on-surface mb-8">{t('profile.uploadedImages')}</h2>
-                <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-[#161820] rounded-xl p-6">
+                <h2 className="text-base font-semibold text-white mb-4">{t('profile.uploadedImages')}</h2>
+                <div className="grid grid-cols-3 gap-4">
                   {images.map((img) => (
-                    <div key={img.id} className="relative group overflow-hidden rounded-lg shadow-elevation-1">
-                      <img
-                        src={img.imageUrl}
-                        alt={img.filename}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-                        <button
-                          onClick={() => handleDeleteImage(img.id)}
-                          className="px-4 py-2 bg-red-600/90 hover:bg-red-700 text-white rounded-md text-sm font-medium transition-colors"
-                        >
+                    <div key={img.id} className="relative group overflow-hidden rounded-lg">
+                      <img src={img.imageUrl} alt={img.filename} className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button onClick={() => handleDeleteImage(img.id)} className="px-3 py-1.5 bg-[#b91c1c] hover:bg-[#991b1b] text-white rounded-lg text-xs font-semibold transition-colors">
                           {t('profile.deleteImage')}
                         </button>
                       </div>
@@ -307,36 +232,30 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Settings Tab */}
         {activeTab === 'settings' && (
-          <div className="space-y-8">
-            <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-              <h2 className="text-2xl font-serif font-bold text-on-surface mb-8">{t('profile.settings')}</h2>
-              <div className="space-y-6">
+          <div className="space-y-5 max-w-2xl">
+            <div className="bg-[#161820] rounded-xl p-6">
+              <h2 className="text-base font-semibold text-white mb-5">{t('profile.settings')}</h2>
+              <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('profile.language')}
-                  </label>
-                  <select className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                  <label className={labelCls}>{t('profile.language')}</label>
+                  <select className={inputCls}>
                     <option value="de">Deutsch</option>
                     <option value="en">English</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-on-surface mb-3">
-                    {t('profile.theme')}
-                  </label>
-                  <select className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                  <label className={labelCls}>{t('profile.theme')}</label>
+                  <select className={inputCls}>
                     <option value="dark">Dark</option>
                     <option value="light">Light</option>
                   </select>
                 </div>
               </div>
             </div>
-
-            <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-1">
-              <h2 className="text-2xl font-serif font-bold text-on-surface mb-8">{t('profile.security')}</h2>
-              <button className="px-8 py-3 bg-surface-container rounded-md text-primary hover:bg-surface-container-highest font-medium transition-colors shadow-elevation-1">
+            <div className="bg-[#161820] rounded-xl p-6">
+              <h2 className="text-base font-semibold text-white mb-4">{t('profile.security')}</h2>
+              <button className="px-6 py-2.5 bg-[#1c1f29] hover:bg-[#242836] text-[#3b82f6] rounded-lg text-sm font-semibold transition-colors">
                 {t('profile.changePassword')}
               </button>
             </div>
