@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import { Inter, Noto_Serif, Public_Sans } from 'next/font/google';
 import '@trustshield/ui/styles.css';
-// Syncfusion Material Theme - Bootstrap 5 variant for modern look
 import '@syncfusion/ej2-base/styles/bootstrap5.css';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { initSyncfusionLicense } from '@/lib/syncfusion-license';
@@ -25,19 +23,18 @@ const publicSans = Public_Sans({
   display: 'swap',
 });
 
-// Initialize Syncfusion license at build time
 if (typeof window === 'undefined') {
   initSyncfusionLicense();
 }
 
 export const metadata: Metadata = {
-  title: 'TrustShield Web',
-  description: 'TrustShield editorial public experience bootstrap',
+  title: 'TrustShield',
+  description: 'Professional OSINT Intelligence Platform',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable}`}>
+    <html className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable}`}>
       <body className="min-h-screen bg-slate-900 font-sans text-slate-900 antialiased">
         <QueryProvider>
           {children}
