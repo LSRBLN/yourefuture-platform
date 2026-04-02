@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { SyncfusionOSINTDashboard } from '@/components/osint/SyncfusionOSINTDashboard';
-import { ArrowLeft, HelpCircle } from 'lucide-react';
 
 function DashboardSkeleton() {
   return (
@@ -21,16 +20,16 @@ export default function OSINTPage() {
       <div className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <Link href="/" className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
-              <ArrowLeft className="w-6 h-6 text-slate-300" />
+            <Link href="/" className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-xl">
+              ←
             </Link>
             <div>
               <h1 className="text-2xl font-bold text-white">OSINT Dashboard</h1>
               <p className="text-sm text-slate-400">Search & Intelligence Platform</p>
             </div>
           </div>
-          <button className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
-            <HelpCircle className="w-6 h-6 text-slate-300" />
+          <button className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-2xl">
+            ?️
           </button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Shield, Zap, Target, BarChart3, Lock, Search } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -10,7 +9,7 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Shield className="w-8 h-8 text-blue-400" />
+            <span className="text-2xl">🛡️</span>
             <span className="text-xl font-bold text-white">TrustShield</span>
           </div>
           <Link
@@ -35,9 +34,9 @@ export default function HomePage() {
             <div className="flex gap-4">
               <Link
                 href="/osint"
-                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold flex items-center gap-2 transition-colors"
+                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
               >
-                Start Searching <ArrowRight className="w-5 h-5" />
+                Start Searching →
               </Link>
               <button className="px-8 py-3 border border-slate-600 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors">
                 Learn More
@@ -69,42 +68,42 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <Search className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">🔍</div>
               <h3 className="text-xl font-bold text-white mb-2">Multi-Source Search</h3>
               <p className="text-slate-300">Search across username, email, phone, domain, and reverse image search in one query.</p>
             </div>
 
             {/* Feature 2 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <Target className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">⚠️</div>
               <h3 className="text-xl font-bold text-white mb-2">Breach Detection</h3>
               <p className="text-slate-300">Real-time integration with breach databases. Know if emails are compromised instantly.</p>
             </div>
 
             {/* Feature 3 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <Zap className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-xl font-bold text-white mb-2">Fast Results</h3>
               <p className="text-slate-300">Optimized search algorithms return results in milliseconds.</p>
             </div>
 
             {/* Feature 4 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <BarChart3 className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">📊</div>
               <h3 className="text-xl font-bold text-white mb-2">Advanced Analytics</h3>
               <p className="text-slate-300">Visualize trends, sources, and patterns with interactive charts.</p>
             </div>
 
             {/* Feature 5 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <Lock className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">🔐</div>
               <h3 className="text-xl font-bold text-white mb-2">Privacy First</h3>
               <p className="text-slate-300">Self-hosted infrastructure. Your data stays with you, always encrypted.</p>
             </div>
 
             {/* Feature 6 */}
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-              <Shield className="w-10 h-10 text-blue-400 mb-4" />
+              <div className="text-4xl mb-4">🏢</div>
               <h3 className="text-xl font-bold text-white mb-2">Enterprise Ready</h3>
               <p className="text-slate-300">RBAC, audit logs, batch operations, and team collaboration features.</p>
             </div>
@@ -168,9 +167,9 @@ export default function HomePage() {
         </p>
         <Link
           href="/osint"
-          className="inline-flex px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition-colors"
+          className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition-colors"
         >
-          Open OSINT Dashboard <ArrowRight className="w-6 h-6 ml-2" />
+          Open OSINT Dashboard →
         </Link>
       </section>
 
@@ -180,7 +179,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Shield className="w-6 h-6 text-blue-400" />
+                <span className="text-2xl">🛡️</span>
                 <span className="font-bold text-white">TrustShield</span>
               </div>
               <p className="text-slate-400 text-sm">Professional OSINT Intelligence Platform</p>
