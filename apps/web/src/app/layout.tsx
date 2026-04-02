@@ -2,14 +2,8 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Noto_Serif, Public_Sans } from 'next/font/google';
 import '@trustshield/ui/styles.css';
-// Syncfusion Material Design System Theme
-import '@syncfusion/ej2-react-grids/styles/bds.css';
-import '@syncfusion/ej2-react-charts/styles/bds.css';
-import '@syncfusion/ej2-react-inputs/styles/bds.css';
-import '@syncfusion/ej2-react-navigations/styles/bds.css';
-import '@syncfusion/ej2-react-buttons/styles/bds.css';
-import '@syncfusion/ej2-react-dropdowns/styles/bds.css';
-import '@syncfusion/ej2-react-popups/styles/bds.css';
+// Syncfusion Material Theme - Bootstrap 5 variant for modern look
+import '@syncfusion/ej2-base/styles/bootstrap5.css';
 import { initSyncfusionLicense } from '@/lib/syncfusion-license';
 
 const inter = Inter({
