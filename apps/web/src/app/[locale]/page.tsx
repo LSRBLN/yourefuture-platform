@@ -8,25 +8,27 @@ export default function HomePage() {
   const t = useTranslations();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-surface text-on-surface">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
+      <nav className="sticky top-0 z-50 bg-surface/95 backdrop-blur-lg border-b border-outline-variant/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <span className="text-2xl">🛡️</span>
-            <span className="text-xl font-bold text-white">TrustShield</span>
+            <span className="text-2xl font-serif font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              TrustShield
+            </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <LanguageSwitcher />
             <Link
               href="/profile"
-              className="px-4 py-2 text-slate-300 hover:text-white transition-colors"
+              className="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium"
             >
               {t('nav.profile')}
             </Link>
             <Link
               href="/auth/login"
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-1"
             >
               {t('nav.login')}
             </Link>
@@ -35,38 +37,38 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+      <section className="max-w-7xl mx-auto px-6 py-32">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <h1 className="text-5xl md:text-6xl font-serif font-bold leading-tight text-on-surface">
               {t('home.title')}
             </h1>
-            <p className="text-xl text-slate-300">
+            <p className="text-lg text-on-surface-variant leading-relaxed max-w-md">
               {t('home.description')}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-4">
               <Link
                 href="/osint"
-                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+                className="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-2"
               >
                 {t('home.cta')} →
               </Link>
               <Link
                 href="/auth/login"
-                className="px-8 py-3 border border-slate-600 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+                className="px-8 py-3 bg-surface-container-high text-primary rounded-md font-medium hover:bg-surface-container-highest transition-colors shadow-elevation-1"
               >
                 {t('nav.login')}
               </Link>
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur-xl opacity-20"></div>
-            <div className="relative bg-slate-800/50 border border-slate-700 rounded-lg p-8 backdrop-blur">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur-3xl opacity-60"></div>
+            <div className="relative bg-surface-container-high/60 backdrop-blur-md rounded-lg p-12 shadow-elevation-3">
               <div className="space-y-4">
-                <div className="h-3 bg-slate-700 rounded-full w-3/4"></div>
-                <div className="h-3 bg-slate-700 rounded-full w-1/2"></div>
-                <div className="h-12 bg-slate-700 rounded mt-6"></div>
-                <div className="h-3 bg-slate-700 rounded-full w-2/3"></div>
+                <div className="h-3 bg-surface-container-highest rounded-full w-3/4"></div>
+                <div className="h-3 bg-surface-container-highest rounded-full w-1/2"></div>
+                <div className="h-12 bg-primary/20 rounded-md mt-8"></div>
+                <div className="h-3 bg-surface-container-highest rounded-full w-2/3"></div>
               </div>
             </div>
           </div>
@@ -74,9 +76,11 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="bg-slate-800/50 border-t border-slate-700/50">
-        <div className="max-w-6xl mx-auto px-6 py-24">
-          <h2 className="text-4xl font-bold text-white mb-16 text-center">{t('home.features')}</h2>
+      <section className="bg-surface-container border-t border-outline-variant/20">
+        <div className="max-w-7xl mx-auto px-6 py-32">
+          <h2 className="text-5xl font-serif font-bold text-on-surface mb-20 text-center">
+            {t('home.features')}
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { emoji: '🔍', title: 'Multi-Source Search', desc: 'Search across 10+ OSINT sources in seconds' },
@@ -86,37 +90,47 @@ export default function HomePage() {
               { emoji: '🔐', title: 'Privacy First', desc: 'Self-hosted, no data collection' },
               { emoji: '🏢', title: 'Enterprise Ready', desc: 'Batch operations and API access' },
             ].map((feature) => (
-              <div key={feature.title} className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 hover:border-blue-500 transition-colors">
-                <div className="text-4xl mb-4">{feature.emoji}</div>
-                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-400">{feature.desc}</p>
+              <div
+                key={feature.title}
+                className="bg-surface-container-high/60 rounded-lg p-8 hover:bg-surface-container-highest/80 transition-colors shadow-elevation-1 group"
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{feature.emoji}</div>
+                <h3 className="text-lg font-serif font-semibold text-on-surface mb-3">{feature.title}</h3>
+                <p className="text-on-surface-variant leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-4xl mx-auto px-6 py-16 text-center">
-        <h2 className="text-4xl font-bold text-white mb-6">{t('home.cta')}</h2>
-        <p className="text-xl text-slate-300 mb-8">
+      {/* CTA Section */}
+      <section className="max-w-4xl mx-auto px-6 py-32 text-center">
+        <h2 className="text-5xl font-serif font-bold text-on-surface mb-8">{t('home.cta')}</h2>
+        <p className="text-lg text-on-surface-variant mb-12 leading-relaxed">
           Get instant access to powerful OSINT tools.
         </p>
         <div className="flex gap-4 justify-center">
           <Link
             href="/auth/register"
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+            className="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-md font-medium transition-colors shadow-elevation-2"
           >
             {t('auth.register')}
           </Link>
           <Link
             href="/auth/login"
-            className="px-8 py-4 border border-slate-600 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+            className="px-8 py-3 bg-surface-container-high text-primary rounded-md font-medium hover:bg-surface-container-highest transition-colors shadow-elevation-1"
           >
             {t('auth.login')}
           </Link>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-surface-container border-t border-outline-variant/20 py-12">
+        <div className="max-w-7xl mx-auto px-6 text-center text-on-surface-variant text-sm">
+          <p>© 2026 TrustShield. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }

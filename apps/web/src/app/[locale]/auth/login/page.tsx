@@ -48,27 +48,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-6">
+    <div className="min-h-screen bg-surface flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
-        <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 backdrop-blur">
+        <div className="bg-surface-container-high/60 rounded-lg p-8 backdrop-blur-md shadow-elevation-2">
           {/* Header */}
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white mb-2">{t('auth.loginTitle')}</h1>
-            <p className="text-slate-400">{t('auth.loginDescription')}</p>
+            <h1 className="text-3xl font-serif font-bold text-on-surface mb-2">{t('auth.loginTitle')}</h1>
+            <p className="text-on-surface-variant">{t('auth.loginDescription')}</p>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
-              <p className="text-red-300">{error}</p>
+            <div className="mb-6 p-4 bg-error-container/50 rounded-md">
+              <p className="text-red-700 text-sm">{error}</p>
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-on-surface mb-2">
                 {t('auth.email')}
               </label>
               <input
@@ -76,14 +76,14 @@ export default function LoginPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                 placeholder="name@example.com"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-on-surface mb-2">
                 {t('auth.password')}
               </label>
               <input
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2.5 bg-surface-container rounded-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                 placeholder="••••••••"
               />
             </div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-6 px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 text-white rounded-lg font-semibold transition-colors"
+              className="w-full mt-8 px-4 py-3 bg-primary hover:bg-primary/90 disabled:bg-on-surface/20 text-white rounded-md font-medium transition-colors shadow-elevation-2 disabled:shadow-elevation-0"
             >
               {loading ? t('auth.loadingSubmit') : t('auth.login')}
             </button>
@@ -108,16 +108,16 @@ export default function LoginPage() {
 
           {/* Links */}
           <div className="mt-4 flex justify-between text-sm">
-            <Link href="/auth/forgot-password" className="text-blue-400 hover:text-blue-300">
+            <Link href="/auth/forgot-password" className="text-primary hover:text-primary/80 font-medium">
               {t('auth.forgotPassword')}
             </Link>
           </div>
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-slate-400">
+            <p className="text-on-surface-variant text-sm">
               {t('auth.noAccount')}{' '}
-              <Link href="/auth/register" className="text-blue-400 hover:text-blue-300">
+              <Link href="/auth/register" className="text-primary hover:text-primary/80 font-medium">
                 {t('auth.register')}
               </Link>
             </p>

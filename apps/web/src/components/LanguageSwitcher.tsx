@@ -18,23 +18,23 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1 p-1 bg-surface-container-high/40 rounded-md shadow-elevation-1">
       <button
         onClick={() => handleLanguageChange('de')}
-        className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+        className={`px-4 py-1.5 rounded text-sm font-medium transition-all ${
           locale === 'de'
-            ? 'bg-blue-600 text-white'
-            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+            ? 'bg-primary text-white shadow-elevation-1'
+            : 'text-on-surface-variant hover:text-on-surface'
         }`}
       >
         DE
       </button>
       <button
         onClick={() => handleLanguageChange('en')}
-        className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+        className={`px-4 py-1.5 rounded text-sm font-medium transition-all ${
           locale === 'en'
-            ? 'bg-blue-600 text-white'
-            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+            ? 'bg-primary text-white shadow-elevation-1'
+            : 'text-on-surface-variant hover:text-on-surface'
         }`}
       >
         EN
