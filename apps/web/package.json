@@ -11,9 +11,18 @@
     "clean": "rm -rf .next dist"
   },
   "dependencies": {
+    "@syncfusion/ej2-react-buttons": "^33.1.44",
+    "@syncfusion/ej2-react-charts": "^33.1.44",
+    "@syncfusion/ej2-react-dropdowns": "^33.1.46",
+    "@syncfusion/ej2-react-grids": "^33.1.46",
+    "@syncfusion/ej2-react-inputs": "^33.1.44",
+    "@syncfusion/ej2-react-navigations": "^33.1.46",
+    "@syncfusion/ej2-react-popups": "^33.1.44",
+    "@tanstack/react-query": "^5.96.1",
     "@trustshield/core": "workspace:*",
-    "@trustshield/validation": "workspace:*",
     "@trustshield/ui": "workspace:*",
+    "@trustshield/validation": "workspace:*",
+    "axios": "^1.14.0",
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
