@@ -2,14 +2,15 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Noto_Serif, Public_Sans } from 'next/font/google';
 import '@trustshield/ui/styles.css';
-import '@syncfusion/ej2-react-grids/styles/material.css';
-import '@syncfusion/ej2-react-charts/styles/material.css';
-import '@syncfusion/ej2-react-inputs/styles/material.css';
-import '@syncfusion/ej2-react-navigations/styles/material.css';
-import '@syncfusion/ej2-react-buttons/styles/material.css';
-import '@syncfusion/ej2-react-dropdowns/styles/material.css';
-import '@syncfusion/ej2-react-popups/styles/material.css';
-import { registerSyncfusionLicense } from '@/lib/syncfusion-license';
+// Syncfusion Material Design System Theme
+import '@syncfusion/ej2-react-grids/styles/bds.css';
+import '@syncfusion/ej2-react-charts/styles/bds.css';
+import '@syncfusion/ej2-react-inputs/styles/bds.css';
+import '@syncfusion/ej2-react-navigations/styles/bds.css';
+import '@syncfusion/ej2-react-buttons/styles/bds.css';
+import '@syncfusion/ej2-react-dropdowns/styles/bds.css';
+import '@syncfusion/ej2-react-popups/styles/bds.css';
+import { initSyncfusionLicense } from '@/lib/syncfusion-license';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,7 +32,7 @@ const publicSans = Public_Sans({
 
 // Initialize Syncfusion license at build time
 if (typeof window === 'undefined') {
-  registerSyncfusionLicense();
+  initSyncfusionLicense();
 }
 
 export const metadata: Metadata = {
