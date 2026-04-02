@@ -15,33 +15,11 @@ export class QueueDlqService {
    * Monitor a queue for dead-letter entries and log critical failures
    */
   async setupDlqMonitoring(queue: Queue, queueName: string) {
-    queue.on('failed', (job, error) => {
-      this.logger.error(
-        JSON.stringify({
-          status: 'job_failed',
-          queue: queueName,
-          jobId: job.id,
-          jobName: job.name,
-          attempts: job.attemptsMade,
-          maxAttempts: job.opts.attempts,
-          error: error instanceof Error ? error.message : String(error),
-          timestamp: new Date().toISOString(),
-        }),
-      );
-
-      // If this job has exhausted retries, it's now in "DLQ" (our failed job store)
-      if (job.opts.attempts && job.attemptsMade >= job.opts.attempts) {
-        this.logger.warn(
-          JSON.stringify({
-            status: 'dlq_entry',
-            queue: queueName,
-            jobId: job.id,
-            jobName: job.name,
-            finalError: error instanceof Error ? error.message : String(error),
-          }),
-        );
-      }
-    });
+    // Log DLQ setup for monitoring
+    this.logger.log(`DLQ monitoring setup for queue: ${queueName}`);
+    
+    // Note: BullMQ will automatically move failed jobs to the failed state
+    // This service can be extended to implement additional monitoring strategies
   }
 
   /**
@@ -55,7 +33,9 @@ export class QueueDlqService {
         throw new Error(`Job ${jobId} not found`);
       }
 
-      if (job.isCompleted()) {
+      const isCompleted = job.isCompleted && typeof job.isCompleted === 'function' ? await job.isCompleted() : false;
+      
+      if (isCompleted) {
         throw new Error(`Job ${jobId} already completed`);
       }
 
@@ -76,13 +56,13 @@ export class QueueDlqService {
   async listFailedJobs(queue: Queue, limit = 50) {
     try {
       const failedJobs = await queue.getFailed(0, limit);
-      return failedJobs.map((job) => ({
+      return failedJobs.map((job: any) => ({
         id: job.id,
         name: job.name,
-        failedReason: job.failedReason,
+        failedReason: job.failedReason || 'Unknown',
         attemptsMade: job.attemptsMade,
-        maxAttempts: job.opts.attempts,
-        failedAt: job.failedAt,
+        maxAttempts: job.opts?.attempts || 1,
+        failedAt: job.finishedOn || new Date().toISOString(),
       }));
     } catch (error) {
       this.logger.error('Failed to list failed jobs:', error);

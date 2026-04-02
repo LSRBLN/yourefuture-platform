@@ -36,6 +36,17 @@ export interface ImageAnalysisResult {
   moderation_labels?: string[];
 }
 
+export interface ReverseImageSearchResult {
+  found: boolean;
+  source_url?: string;
+  similarity_percentage?: number;
+  matches: Array<{
+    title?: string;
+    url?: string;
+    similarity: number;
+  }>;
+}
+
 export interface VideoAnalysisResult {
   frames_analyzed: number;
   has_faces: number;
@@ -387,6 +398,172 @@ export class VideoAnalysisService {
 }
 
 // ============================================================================
+// REVERSE IMAGE SEARCH SERVICE (SauceNAO - Free)
+// ============================================================================
+
+export class ReverseImageSearchService {
+  private baseUrl = 'https://saucenao.com/api/lookup';
+  private client: AxiosInstance;
+
+  constructor() {
+    this.client = axios.create({
+      timeout: 30000,
+    });
+  }
+
+  /**
+   * Search for image source using SauceNAO (FREE API)
+   * No API key required, 200 requests/day free limit
+   * @param imageUrl URL to image
+   * @returns ReverseImageSearchResult
+   */
+  async searchImage(imageUrl: string): Promise<ReverseImageSearchResult> {
+    try {
+      const response = await this.client.get(this.baseUrl, {
+        params: {
+          url: imageUrl,
+          numres: 5,
+          api_key: process.env.SAUCENAO_API_KEY || '', // Optional - higher limits if provided
+        },
+      });
+
+      const results = response.data.results || [];
+      
+      if (results.length === 0) {
+        return {
+          found: false,
+          matches: [],
+        };
+      }
+
+      // Get the best match (first result)
+      const bestMatch = results[0];
+      const similarity = bestMatch.header?.similarity || 0;
+
+      return {
+        found: similarity > 50, // Consider match if > 50% similar
+        source_url: bestMatch.data?.ext_urls?.[0],
+        similarity_percentage: parseFloat(similarity),
+        matches: results.slice(0, 5).map((result: any) => ({
+          title: result.data?.title || result.data?.ext_urls?.[0],
+          url: result.data?.ext_urls?.[0],
+          similarity: parseFloat(result.header?.similarity || 0),
+        })),
+      };
+    } catch (error) {
+      console.error('SauceNAO reverse search failed:', error);
+      // Return safe default instead of throwing
+      return {
+        found: false,
+        matches: [],
+      };
+    }
+  }
+}
+
+// ============================================================================
+// GOOGLE CLOUD VISION SERVICE (Dedicated)
+// ============================================================================
+
+export class GoogleCloudVisionService {
+  private client: AxiosInstance;
+  private projectId: string;
+
+  constructor() {
+    this.projectId = process.env.GOOGLE_CLOUD_PROJECT_ID || '';
+    
+    // Use service account credentials if available
+    const keyPath = process.env.GOOGLE_CLOUD_API_KEY_PATH;
+    let apiKey = process.env.GOOGLE_CLOUD_API_KEY;
+    
+    if (!apiKey && keyPath) {
+      try {
+        const fs = require('fs');
+        const keyFile = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+        // For service account, we'd need to generate access token
+        // For now, use API key approach if available
+      } catch (error) {
+        console.warn('Could not load Google Cloud key file:', error);
+      }
+    }
+
+    this.client = axios.create({
+      baseURL: 'https://vision.googleapis.com/v1',
+      timeout: 30000,
+    });
+  }
+
+  /**
+   * Analyze image using Google Cloud Vision API
+   * Free tier: 1,000 images/month
+   * @param imageUrl URL to image
+   * @returns ImageAnalysisResult
+   */
+  async analyzeImage(imageUrl: string): Promise<ImageAnalysisResult> {
+    try {
+      const apiKey = process.env.GOOGLE_CLOUD_API_KEY;
+      
+      if (!apiKey && !process.env.GOOGLE_CLOUD_API_KEY_PATH) {
+        throw new Error('Google Cloud API key not configured');
+      }
+
+      const response = await this.client.post(
+        '/images:annotate',
+        {
+          requests: [
+            {
+              image: { source: { imageUri: imageUrl } },
+              features: [
+                { type: 'LABEL_DETECTION', maxResults: 10 },
+                { type: 'FACE_DETECTION', maxResults: 10 },
+                { type: 'SAFE_SEARCH_DETECTION' },
+                { type: 'OBJECT_LOCALIZATION' },
+              ],
+            },
+          ],
+        },
+        {
+          params: apiKey ? { key: apiKey } : {},
+        }
+      );
+
+      const annotations = response.data.responses?.[0];
+      
+      if (!annotations) {
+        throw new Error('No annotations returned from Vision API');
+      }
+
+      const safeSearch = annotations.safeSearchAnnotation || {};
+      const nsfw = 
+        safeSearch.adult === 'VERY_LIKELY' || 
+        safeSearch.racy === 'VERY_LIKELY' ||
+        safeSearch.violence === 'VERY_LIKELY';
+
+      return {
+        hasNSFW: nsfw,
+        nsfw_score: nsfw ? 0.9 : 0.1,
+        labels: annotations.labelAnnotations?.map((l: any) => l.description) || [],
+        faces: annotations.faceAnnotations?.length || 0,
+        contains_deepfake: false, // GCV doesn't detect deepfakes
+        moderation_labels: this.getModerationLabels(safeSearch),
+      };
+    } catch (error) {
+      console.error('Google Cloud Vision analysis failed:', error);
+      throw new Error('Failed to analyze image with Google Cloud Vision');
+    }
+  }
+
+  private getModerationLabels(safeSearch: any): string[] {
+    const labels: string[] = [];
+    if (safeSearch.adult === 'VERY_LIKELY') labels.push('adult');
+    if (safeSearch.racy === 'VERY_LIKELY') labels.push('racy');
+    if (safeSearch.violence === 'VERY_LIKELY') labels.push('violence');
+    if (safeSearch.medical === 'VERY_LIKELY') labels.push('medical');
+    return labels;
+  }
+}
+
+// ============================================================================
 // FACTORY / MAIN SERVICE
 // ============================================================================
 
@@ -394,11 +571,15 @@ export class ExternalAPIService {
   leakCheck: LeakCheckService;
   pwnedPasswords: PwnedPasswordsService;
   imageAnalysis: ImageAnalysisService;
+  googleCloudVision: GoogleCloudVisionService;
+  reverseImageSearch: ReverseImageSearchService;
 
   constructor() {
     this.leakCheck = new LeakCheckService();
     this.pwnedPasswords = new PwnedPasswordsService();
     this.imageAnalysis = new ImageAnalysisService('huggingface');
+    this.googleCloudVision = new GoogleCloudVisionService();
+    this.reverseImageSearch = new ReverseImageSearchService();
   }
 
   /**
@@ -406,19 +587,53 @@ export class ExternalAPIService {
    */
   async fullLeakCheck(email: string): Promise<{
     leakcheck: LeakCheckResult;
-    hibp: LeakCheckResult | null;
+    hibp: PasswordCheckResult | null;
     combined: { found: boolean; totalBreaches: number };
   }> {
     const leakcheck_result = await this.leakCheck.checkEmail(email);
     
     return {
       leakcheck: leakcheck_result,
-      hibp: null, // Add HIBP check if API key available
+      hibp: null,
       combined: {
         found: leakcheck_result.found,
         totalBreaches: leakcheck_result.breaches,
       },
     };
+  }
+
+  /**
+   * Comprehensive image analysis combining Hugging Face + Google Cloud Vision
+   */
+  async comprehensiveImageAnalysis(
+    imageUrl: string,
+    useGoogleCloud: boolean = false
+  ): Promise<{
+    huggingface: ImageAnalysisResult;
+    googlecloud?: ImageAnalysisResult;
+    reverseSearch?: ReverseImageSearchResult;
+  }> {
+    const results: any = {
+      huggingface: await this.imageAnalysis.analyzeImage(imageUrl),
+    };
+
+    // Try Google Cloud Vision if configured and requested
+    if (useGoogleCloud) {
+      try {
+        results.googlecloud = await this.googleCloudVision.analyzeImage(imageUrl);
+      } catch (error) {
+        console.warn('Google Cloud Vision analysis failed, skipping');
+      }
+    }
+
+    // Always try reverse image search (free)
+    try {
+      results.reverseSearch = await this.reverseImageSearch.searchImage(imageUrl);
+    } catch (error) {
+      console.warn('Reverse image search failed, skipping');
+    }
+
+    return results;
   }
 }
 

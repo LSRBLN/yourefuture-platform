@@ -1,11 +1,12 @@
 /**
  * Checks Controller
  * Endpoints für Leak-Checks und Image/Video Analysis
+ * All APIs are FREE: LeakCheck, HIBP, Hugging Face, Google Cloud Vision, SauceNAO
  */
 
 import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
 import { ExternalAPIService } from '../lib/external-apis';
-import { LeakCheckResult, PasswordCheckResult, ImageAnalysisResult } from '../lib/external-apis';
+import { LeakCheckResult, PasswordCheckResult, ImageAnalysisResult, ReverseImageSearchResult } from '../lib/external-apis';
 
 export interface LeakCheckRequest {
   email?: string;
@@ -264,6 +265,109 @@ export class ChecksController {
       return {
         success: false,
         error: error.message || 'Password strength check failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/reverse-search
+   * Find where image appears online (SauceNAO - FREE)
+   */
+  @Post('reverse-search')
+  async reverseImageSearch(@Body() body: { imageUrl: string }): Promise<{
+    success: boolean;
+    data?: ReverseImageSearchResult;
+    error?: string;
+  }> {
+    try {
+      if (!body.imageUrl) {
+        throw new BadRequestException('imageUrl required');
+      }
+
+      const result = await this.externalAPI.reverseImageSearch.searchImage(body.imageUrl);
+
+      return {
+        success: true,
+        data: result,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Reverse search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/image-advanced
+   * Comprehensive image analysis with multiple providers
+   * Hugging Face + Google Cloud Vision + Reverse Search (all FREE)
+   */
+  @Post('image-advanced')
+  async imageAnalysisAdvanced(@Body() body: { imageUrl: string; includeGoogleCloud?: boolean }): Promise<{
+    success: boolean;
+    data?: {
+      huggingface: ImageAnalysisResult;
+      googlecloud?: ImageAnalysisResult;
+      reverseSearch?: ReverseImageSearchResult;
+      summary: {
+        isNsfw: boolean;
+        isDeepfake: boolean;
+        foundOnline: boolean;
+        riskLevel: 'critical' | 'high' | 'medium' | 'low' | 'safe';
+        message: string;
+      };
+    };
+    error?: string;
+  }> {
+    try {
+      if (!body.imageUrl) {
+        throw new BadRequestException('imageUrl required');
+      }
+
+      const results = await this.externalAPI.comprehensiveImageAnalysis(
+        body.imageUrl,
+        body.includeGoogleCloud || false
+      );
+
+      const hf = results.huggingface;
+      const gv = results.googlecloud;
+      const rs = results.reverseSearch;
+
+      // Determine risk level
+      let riskLevel: 'critical' | 'high' | 'medium' | 'low' | 'safe' = 'safe';
+      let message = 'Image appears safe';
+
+      if ((hf.contains_deepfake && hf.deepfake_confidence! > 0.8) || (gv?.hasNSFW)) {
+        riskLevel = 'critical';
+        message = '🚨 CRITICAL: Image may be deepfake or explicit content';
+      } else if (hf.hasNSFW || rs?.found) {
+        riskLevel = 'high';
+        message = '⚠️ WARNING: Image contains unsafe content or found online';
+      } else if (hf.faces > 0 && rs?.found) {
+        riskLevel = 'medium';
+        message = '⚠️ Faces detected and image found online - verify source';
+      }
+
+      return {
+        success: true,
+        data: {
+          huggingface: hf,
+          googlecloud: gv,
+          reverseSearch: rs,
+          summary: {
+            isNsfw: hf.hasNSFW || gv?.hasNSFW || false,
+            isDeepfake: hf.contains_deepfake || false,
+            foundOnline: rs?.found || false,
+            riskLevel,
+            message,
+          },
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Advanced image analysis failed',
       };
     }
   }
