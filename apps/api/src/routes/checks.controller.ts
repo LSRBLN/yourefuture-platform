@@ -23,6 +23,7 @@ import {
   VideoFrameExtractorService,
   ComprehensiveFaceReverseSearchAggregator,
 } from '../lib/face-reverse-search-apis';
+import faceSeekService, { FaceSeekService } from '../lib/faceseek-integration';
 
 export interface LeakCheckRequest {
   email?: string;
@@ -844,5 +845,276 @@ export class ChecksController {
         error: error.message || 'Face exposure report failed',
       };
     }
+  }
+
+  /**
+   * FaceSeek.online Integration Endpoint
+   * Advanced face search with better accuracy and caching
+   * Uses FaceSeek API for deep web search, video detection, social media coverage
+   */
+  @Post('/faceseek-search')
+  async faceSeekSearch(
+    @Body() body: { imageUrl?: string; imageBase64?: string; personName?: string; deepWebSearch?: boolean; includeVideos?: boolean }
+  ) {
+    try {
+      if (!body.imageUrl && !body.imageBase64) {
+        throw new BadRequestException('imageUrl or imageBase64 required');
+      }
+
+      const result = await faceSeekService.searchFace({
+        imageUrl: body.imageUrl,
+        imageBase64: body.imageBase64,
+        personName: body.personName,
+        searchDeepWeb: body.deepWebSearch !== false,
+        includeVideos: body.includeVideos !== false,
+        searchSocialMedia: true,
+      });
+
+      return {
+        success: true,
+        data: {
+          requestId: result.requestId,
+          status: result.status,
+          totalMatches: result.totalMatches,
+          searchTime: result.searchTime,
+          matches: result.matches.slice(0, 20).map((match: any) => ({
+            url: match.url,
+            title: match.title,
+            source: match.domain,
+            similarity_score: Math.round(match.similarity * 100),
+            is_video: match.isVideo,
+            imageUrl: match.imageUrl,
+            crawlDate: match.crawlDate,
+          })),
+          coverage: result.coverage,
+          qualityScore: result.qualityScore,
+          warnings: result.warnings,
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'FaceSeek search failed',
+      };
+    }
+  }
+
+  /**
+   * FaceSeek Advanced Search with Filters
+   * Search with minimum similarity threshold, date range, domain filters
+   */
+  @Post('/faceseek-advanced')
+  async faceSeekAdvanced(
+    @Body() body: {
+      imageUrl?: string;
+      imageBase64?: string;
+      personName?: string;
+      minSimilarity?: number;
+      maxResults?: number;
+      dateRange?: { from: string; to: string };
+      filterDomains?: string[];
+    }
+  ) {
+    try {
+      if (!body.imageUrl && !body.imageBase64) {
+        throw new BadRequestException('imageUrl or imageBase64 required');
+      }
+
+      const result = await faceSeekService.advancedSearch({
+        imageUrl: body.imageUrl,
+        imageBase64: body.imageBase64,
+        personName: body.personName,
+        minSimilarity: body.minSimilarity || 0.7,
+        maxResults: body.maxResults || 100,
+        filterDomains: body.filterDomains,
+        dateRange: body.dateRange,
+        searchDeepWeb: true,
+        includeVideos: true,
+        searchSocialMedia: true,
+      });
+
+      return {
+        success: true,
+        data: {
+          totalMatches: result.totalMatches,
+          matches: result.matches.map((match: any) => ({
+            url: match.url,
+            title: match.title,
+            source: match.domain,
+            similarity_score: Math.round(match.similarity * 100),
+            is_video: match.isVideo,
+            imageUrl: match.imageUrl,
+            metadata: match.metadata,
+          })),
+          coverage: result.coverage,
+          qualityScore: result.qualityScore,
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Advanced search failed',
+      };
+    }
+  }
+
+  /**
+   * FaceSeek Video Search
+   * Extract faces from video URLs and search for matches
+   */
+  @Post('/faceseek-video-search')
+  async faceSeekVideoSearch(
+    @Body() body: { videoUrl: string; personName?: string }
+  ) {
+    try {
+      if (!body.videoUrl) {
+        throw new BadRequestException('videoUrl required');
+      }
+
+      const result = await faceSeekService.searchVideo(body.videoUrl);
+
+      return {
+        success: true,
+        data: {
+          videoUrl: body.videoUrl,
+          totalMatches: result.totalMatches,
+          searchTime: result.searchTime,
+          matches: result.matches.slice(0, 20).map((match: any) => ({
+            url: match.url,
+            source: match.domain,
+            similarity_score: Math.round(match.similarity * 100),
+            is_video: match.isVideo,
+            imageUrl: match.imageUrl,
+          })),
+          coverage: result.coverage,
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Video search failed',
+      };
+    }
+  }
+
+  /**
+   * Combined Search: FaceSeek + FaceOnLive + Local Services
+   * Best of both worlds - uses FaceSeek for coverage, FaceOnLive for speed
+   */
+  @Post('/combined-face-search')
+  async combinedFaceSearch(
+    @Body() body: {
+      imageUrl?: string;
+      imageBase64?: string;
+      personName?: string;
+      strategy?: 'fast' | 'comprehensive' | 'balanced'; // fast=FaceOnLive, comprehensive=FaceSeek, balanced=both
+    }
+  ) {
+    try {
+      if (!body.imageUrl && !body.imageBase64) {
+        throw new BadRequestException('imageUrl or imageBase64 required');
+      }
+
+      const strategy = body.strategy || 'balanced';
+      const results: any = { success: true, data: {} };
+
+      // Fast strategy: Use FaceOnLive only (instant results)
+      if (strategy === 'fast' || strategy === 'balanced') {
+        try {
+          const faceOnLiveResult = await this.faceOnLive.searchFace(
+            body.imageUrl,
+            body.imageBase64,
+          );
+          results.data.faceOnLive = faceOnLiveResult;
+        } catch (e) {
+          console.warn('FaceOnLive search failed:', e);
+        }
+      }
+
+      // Comprehensive strategy: Use FaceSeek API (slower, better coverage)
+      if (strategy === 'comprehensive' || strategy === 'balanced') {
+        try {
+          const faceSeekResult = await faceSeekService.searchFace({
+            imageUrl: body.imageUrl,
+            imageBase64: body.imageBase64,
+            personName: body.personName,
+            searchDeepWeb: true,
+            includeVideos: true,
+            searchSocialMedia: true,
+          });
+          results.data.faceSeek = faceSeekResult;
+        } catch (e) {
+          console.warn('FaceSeek search failed:', e);
+        }
+      }
+
+      // Merge and deduplicate results if both strategies used
+      if (results.data.faceOnLive && results.data.faceSeek) {
+        const merged = this.mergeSearchResults(
+          results.data.faceOnLive,
+          results.data.faceSeek,
+        );
+        results.data.merged = merged;
+      }
+
+      return results;
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Combined search failed',
+      };
+    }
+  }
+
+  /**
+   * Helper function to merge and deduplicate search results from multiple sources
+   */
+  private mergeSearchResults(faceOnLiveResult: any, faceSeekResult: any): any {
+    const urlSet = new Set<string>();
+    const merged = [];
+
+    // Add FaceSeek results first (usually more comprehensive)
+    if (faceSeekResult.matches) {
+      for (const match of faceSeekResult.matches) {
+        if (!urlSet.has(match.url)) {
+          urlSet.add(match.url);
+          merged.push({
+            ...match,
+            sources: ['faceseek'],
+            primaryScore: match.similarity * 100,
+          });
+        }
+      }
+    }
+
+    // Add FaceOnLive results that aren't duplicates
+    if (faceOnLiveResult.matches) {
+      for (const match of faceOnLiveResult.matches) {
+        if (!urlSet.has(match.url)) {
+          urlSet.add(match.url);
+          merged.push({
+            ...match,
+            sources: ['faceonlive'],
+            primaryScore: match.similarity_score || 0,
+          });
+        } else {
+          // Mark as found in both sources
+          const existing = merged.find((m: any) => m.url === match.url);
+          if (existing) {
+            existing.sources.push('faceonlive');
+            existing.crossVerified = true;
+          }
+        }
+      }
+    }
+
+    // Sort by score and remove duplicates
+    return {
+      totalUniqueMatches: merged.length,
+      crossVerifiedMatches: merged.filter((m: any) => m.crossVerified).length,
+      matches: merged
+        .sort((a: any, b: any) => b.primaryScore - a.primaryScore)
+        .slice(0, 50),
+    };
   }
 }
