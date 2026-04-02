@@ -1,0 +1,281 @@
+version: '3.8'
+
+services:
+  # ============ VECTOR DATABASE (Qdrant) ============
+  # For reverse image search with embeddings
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: yourefuture-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    environment:
+      QDRANT_API_KEY: "${QDRANT_API_KEY:-secure-key-change-this}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ IMAGE EMBEDDING SERVICE (Python) ============
+  # Generates CLIP embeddings for images
+  embeddings-service:
+    build:
+      context: ./services/embeddings
+      dockerfile: Dockerfile
+    container_name: yourefuture-embeddings
+    ports:
+      - "8001:8001"
+    environment:
+      MODEL: "sentence-transformers/clip-ViT-B-32"
+      DEVICE: "cpu"  # Change to "cuda" if GPU available
+    volumes:
+      - embeddings-cache:/root/.cache
+    depends_on:
+      - qdrant
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ REVERSE IMAGE SEARCH (MRISA) ============
+  # Meta Reverse Image Search API
+  mrisa:
+    image: vivithemage/mrisa:latest
+    container_name: yourefuture-mrisa
+    ports:
+      - "5000:5000"
+    environment:
+      WORKERS: "4"
+      MAX_REQUEST_SIZE: "52428800"  # 50MB
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ OSINT FRAMEWORK (SpiderFoot) ============
+  # Comprehensive OSINT reconnaissance
+  spiderfoot:
+    image: linuxserver/spiderfoot:latest
+    container_name: yourefuture-spiderfoot
+    ports:
+      - "5800:5800"
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: "UTC"
+    volumes:
+      - spiderfoot-data:/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5800"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ PHONE INTELLIGENCE (PhoneInfoga) ============
+  # Phone number reconnaissance
+  phoneinfoga:
+    image: sundowndev/phoneinfoga:latest
+    container_name: yourefuture-phoneinfoga
+    ports:
+      - "5001:80"
+    environment:
+      PHONEINFOGA_GITHUB_TOKEN: "${PHONEINFOGA_GITHUB_TOKEN:-}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ SELF-HOSTED HIBP (Breach Check) ============
+  # Have I Been Pwned alternative with Bloom filters
+  hibp-service:
+    build:
+      context: ./services/hibp
+      dockerfile: Dockerfile
+    container_name: yourefuture-hibp
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: "postgresql://hibp:hibp@hibp-db:5432/hibp"
+      LOG_LEVEL: "info"
+    depends_on:
+      hibp-db:
+        condition: service_healthy
+    volumes:
+      - hibp-data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ HIBP DATABASE (PostgreSQL) ============
+  hibp-db:
+    image: postgres:15-alpine
+    container_name: yourefuture-hibp-db
+    environment:
+      POSTGRES_USER: hibp
+      POSTGRES_PASSWORD: "${HIBP_DB_PASSWORD:-secure-password}"
+      POSTGRES_DB: hibp
+    volumes:
+      - hibp-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hibp"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ SEARCH INFRASTRUCTURE (Elasticsearch) ============
+  # For indexing and searching OSINT results
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.0.0
+    container_name: yourefuture-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ META-SEARCH ENGINE (SearXNG) ============
+  # Privacy-focused meta search aggregator
+  searxng:
+    image: searxng/searxng:latest
+    container_name: yourefuture-searxng
+    ports:
+      - "8888:8080"
+    environment:
+      BASE_URL: "http://localhost:8888/"
+    volumes:
+      - searxng-data:/etc/searxng
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ CACHING LAYER (Redis) ============
+  # For caching OSINT results and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: yourefuture-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+  # ============ MAIN API (NestJS) ============
+  # Your main application with OSINT integration
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: yourefuture-api
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "${DATABASE_URL:-postgresql://user:password@postgres:5432/yourefuture}"
+      QDRANT_URL: "http://qdrant:6333"
+      MRISA_URL: "http://mrisa:5000"
+      SPIDERFOOT_URL: "http://spiderfoot:5800"
+      PHONEINFOGA_URL: "http://phoneinfoga:80"
+      HIBP_URL: "http://hibp-service:8080"
+      ELASTICSEARCH_URL: "http://elasticsearch:9200"
+      SEARXNG_URL: "http://searxng:8080"
+      REDIS_URL: "redis://redis:6379"
+      EMBEDDINGS_URL: "http://embeddings-service:8001"
+      # Feature flags
+      FEATURE_OSINT_ENABLED: "true"
+      FEATURE_REVERSE_IMAGE_ENABLED: "true"
+      FEATURE_BREACH_CHECK_ENABLED: "true"
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      embeddings-service:
+        condition: service_healthy
+      mrisa:
+        condition: service_healthy
+      spiderfoot:
+        condition: service_healthy
+      phoneinfoga:
+        condition: service_healthy
+      hibp-service:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      searxng:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./apps:/app/apps
+      - ./node_modules:/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - osint-network
+
+# ============ VOLUMES ============
+volumes:
+  qdrant-storage:
+    driver: local
+  embeddings-cache:
+    driver: local
+  spiderfoot-data:
+    driver: local
+  hibp-data:
+    driver: local
+  hibp-postgres:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  searxng-data:
+    driver: local
+  redis-data:
+    driver: local
+
+# ============ NETWORKS ============
+networks:
+  osint-network:
+    driver: bridge
