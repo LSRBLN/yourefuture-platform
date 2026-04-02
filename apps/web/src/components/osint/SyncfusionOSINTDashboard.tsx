@@ -22,11 +22,11 @@ import {
   ExcelExport,
 } from '@syncfusion/ej2-react-grids';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject as ChartInject, LineSeries, Category, DateTime, Legend, Tooltip } from '@syncfusion/ej2-react-charts';
-import { TabItemDirective, TabsDirective } from '@syncfusion/ej2-react-navigations';
+import { TabComponent, TabItemDirective } from '@syncfusion/ej2-react-navigations';
 import { TextBoxComponent } from '@syncfusion/ej2-react-inputs';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
-import { SpinnerComponent } from '@syncfusion/ej2-react-popups';
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import {
   useUsernameSearch,
@@ -397,9 +397,9 @@ export function SyncfusionOSINTDashboard() {
 
       {/* Results Tabs */}
       {(totalResults > 0 || isLoading) && (
-        <TabsDirective
+        <TabComponent
           heightAdjustMode="Content"
-          onTabSelecting={(e: any) => setActiveTab(e.selectedIndex)}
+          selecting={(e: any) => setActiveTab(e.selectedIndex)}
           style={{ marginBottom: '30px' }}
         >
           {/* Results Grid Tab */}
@@ -522,7 +522,7 @@ export function SyncfusionOSINTDashboard() {
               <ChartInject services={[LineSeries, Category, Legend, Tooltip]} />
             </ChartComponent>
           </TabItemDirective>
-        </TabsDirective>
+        </TabComponent>
       )}
 
       {/* Empty State */}

@@ -4,6 +4,7 @@ import { Inter, Noto_Serif, Public_Sans } from 'next/font/google';
 import '@trustshield/ui/styles.css';
 // Syncfusion Material Theme - Bootstrap 5 variant for modern look
 import '@syncfusion/ej2-base/styles/bootstrap5.css';
+import { QueryProvider } from '@/providers/QueryProvider';
 import { initSyncfusionLicense } from '@/lib/syncfusion-license';
 
 const inter = Inter({
@@ -38,8 +39,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="de" className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable}`}>
       <body className="min-h-screen bg-stone-50 font-sans text-stone-900 antialiased">
-        <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(9,76,178,0.08),_transparent_38%)]">
-          <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-6 sm:px-8 lg:px-12">
+        <QueryProvider>
+          <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(9,76,178,0.08),_transparent_38%)]">
+            <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-6 sm:px-8 lg:px-12">
             <header className="bg-white/80 backdrop-blur-xl rounded-3xl px-6 py-5 text-stone-700">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div className="max-w-3xl space-y-2">
@@ -81,6 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </main>
           </div>
         </div>
+        </QueryProvider>
       </body>
     </html>
   );
