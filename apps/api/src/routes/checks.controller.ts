@@ -2,11 +2,20 @@
  * Checks Controller
  * Endpoints für Leak-Checks und Image/Video Analysis
  * All APIs are FREE: LeakCheck, HIBP, Hugging Face, Google Cloud Vision, SauceNAO
+ * Extended APIs: DeHashed, Google Search, SecurityTrails, Pastebin
  */
 
 import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
 import { ExternalAPIService } from '../lib/external-apis';
 import { LeakCheckResult, PasswordCheckResult, ImageAnalysisResult, ReverseImageSearchResult } from '../lib/external-apis';
+import {
+  DeHashedService,
+  GoogleSearchBreachService,
+  SecurityTrailsService,
+  PastebinAggregatorService,
+  ComprehensiveBreachAggregator,
+  ComprehensiveBreachReport,
+} from '../lib/extended-breach-apis';
 
 export interface LeakCheckRequest {
   email?: string;
@@ -43,6 +52,11 @@ export interface ImageAnalysisResponse {
 @Controller('api/v1/checks')
 export class ChecksController {
   private externalAPI = new ExternalAPIService();
+  private deHashed = new DeHashedService();
+  private googleSearch = new GoogleSearchBreachService();
+  private securityTrails = new SecurityTrailsService();
+  private pastebin = new PastebinAggregatorService();
+  private comprehensiveAggregator = new ComprehensiveBreachAggregator();
 
   /**
    * POST /api/v1/checks/leak
@@ -368,6 +382,198 @@ export class ChecksController {
       return {
         success: false,
         error: error.message || 'Advanced image analysis failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/dehashed
+   * Search DeHashed breach database (FREE TRIAL: 5 lookups/day)
+   */
+  @Post('dehashed')
+  async dehashedSearch(@Body() body: { email?: string; username?: string; domain?: string }) {
+    if (!body.email && !body.username && !body.domain) {
+      throw new BadRequestException('Email, username, or domain required');
+    }
+
+    try {
+      let result;
+
+      if (body.email) {
+        result = await this.deHashed.searchEmail(body.email);
+      } else if (body.username) {
+        result = await this.deHashed.searchUsername(body.username);
+      } else {
+        result = await this.deHashed.searchDomain(body.domain!);
+      }
+
+      return {
+        success: true,
+        data: {
+          service: 'DeHashed',
+          query: body.email || body.username || body.domain,
+          result,
+          note: 'DeHashed provides access to compiled breach databases with actual credentials',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'DeHashed search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/web-search
+   * Search the web for breach/leak mentions (FREE: 100 queries/day with Google Custom Search)
+   */
+  @Post('web-search')
+  async webBreachSearch(@Body() body: { email: string }) {
+    if (!body.email) {
+      throw new BadRequestException('Email required');
+    }
+
+    try {
+      const result = await this.googleSearch.searchForLeaks(body.email);
+
+      return {
+        success: true,
+        data: {
+          service: 'Google Custom Search',
+          query: body.email,
+          found: result.found,
+          sources: result.sources,
+          note: 'Searches publicly indexed web pages for breach mentions',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Web search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/domain-intel
+   * Get domain breach intelligence from SecurityTrails (FREE: 50 requests/month)
+   */
+  @Post('domain-intel')
+  async domainIntelligence(@Body() body: { domain: string }) {
+    if (!body.domain) {
+      throw new BadRequestException('Domain required');
+    }
+
+    try {
+      const breaches = await this.securityTrails.getDomainBreaches(body.domain);
+      const subdomains = await this.securityTrails.getSubdomainBreach(body.domain);
+
+      return {
+        success: true,
+        data: {
+          service: 'SecurityTrails',
+          domain: body.domain,
+          breaches,
+          subdomains,
+          note: 'Domain breach history and compromised subdomains',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Domain intelligence lookup failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/pastebin-search
+   * Search public pastebin data for leaked credentials (FREE)
+   */
+  @Post('pastebin-search')
+  async pastebinSearch(@Body() body: { email?: string; username?: string }) {
+    if (!body.email && !body.username) {
+      throw new BadRequestException('Email or username required');
+    }
+
+    try {
+      let result;
+
+      if (body.email) {
+        result = await this.pastebin.searchPublicPastes(body.email);
+      } else {
+        result = await this.pastebin.searchByUsername(body.username!);
+      }
+
+      return {
+        success: true,
+        data: {
+          service: 'Pastebin',
+          query: body.email || body.username,
+          ...result,
+          note: 'Searches public pastebin data for credential leaks',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Pastebin search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/comprehensive-breach-report
+   * Comprehensive search across ALL free breach databases
+   * Combines: LeakCheck, DeHashed, Google Search, Pastebin, HIBP
+   */
+  @Post('comprehensive-breach-report')
+  async comprehensiveBreachReport(@Body() body: { email: string }) {
+    if (!body.email) {
+      throw new BadRequestException('Email required');
+    }
+
+    try {
+      // Get from LeakCheck
+      const leakcheckResult = await this.externalAPI.leakCheck.checkEmail(body.email);
+
+      // Get from comprehensive aggregator (DeHashed, Google, Pastebin, etc.)
+      const aggregatedResult = await this.comprehensiveAggregator.comprehensiveBreachSearch(
+        body.email
+      );
+
+      // Combine results
+      const totalBreaches = aggregatedResult.total_breaches + leakcheckResult.breaches;
+
+      return {
+        success: true,
+        data: {
+          email: body.email,
+          summary: {
+            total_breaches: totalBreaches,
+            risk_level: aggregatedResult.risk_level,
+            sources_affected: [
+              ...new Set([
+                ...aggregatedResult.sources_affected,
+                ...leakcheckResult.sources,
+              ]),
+            ],
+          },
+          leakcheck_result: {
+            found: leakcheckResult.found,
+            breaches: leakcheckResult.breaches,
+            sources: leakcheckResult.sources,
+          },
+          aggregated_result: aggregatedResult,
+          recommendations: aggregatedResult.recommendations,
+          message: `Email found in ${totalBreaches} breaches. Risk level: ${aggregatedResult.risk_level}`,
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Comprehensive breach report failed',
       };
     }
   }
