@@ -39,10 +39,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="de" className={`${inter.variable} ${notoSerif.variable} ${publicSans.variable}`}>
       <body className="min-h-screen bg-stone-50 font-sans text-stone-900 antialiased">
-        <QueryProvider>
-          <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(9,76,178,0.08),_transparent_38%)]">
+        <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(9,76,178,0.08),_transparent_38%)]">
+          <QueryProvider>
             <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-6 sm:px-8 lg:px-12">
-            <header className="bg-white/80 backdrop-blur-xl rounded-3xl px-6 py-5 text-stone-700">
+              <header className="bg-white/80 backdrop-blur-xl rounded-3xl px-6 py-5 text-stone-700">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div className="max-w-3xl space-y-2">
                   <p className="font-[family-name:var(--font-label)] text-xs uppercase tracking-[0.28em] text-stone-500">
@@ -81,9 +81,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </aside>
               </section>
             </main>
-          </div>
+            </div>
+          </QueryProvider>
         </div>
-        </QueryProvider>
       </body>
     </html>
   );
