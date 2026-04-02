@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 export default function HomePage() {
   const t = useTranslations();
@@ -16,14 +17,15 @@ export default function HomePage() {
             <span className="text-xl font-bold text-white">TrustShield</span>
           </div>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <Link
-              href="#"
+              href="/profile"
               className="px-4 py-2 text-slate-300 hover:text-white transition-colors"
             >
               {t('nav.profile')}
             </Link>
             <Link
-              href="#"
+              href="/auth/login"
               className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
             >
               {t('nav.login')}
@@ -44,13 +46,13 @@ export default function HomePage() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="#/osint"
+                href="/osint"
                 className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
               >
                 {t('home.cta')} →
               </Link>
               <Link
-                href="#/auth/login"
+                href="/auth/login"
                 className="px-8 py-3 border border-slate-600 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
               >
                 {t('nav.login')}
@@ -102,13 +104,13 @@ export default function HomePage() {
         </p>
         <div className="flex gap-4 justify-center">
           <Link
-            href="#/auth/register"
+            href="/auth/register"
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
           >
             {t('auth.register')}
           </Link>
           <Link
-            href="#/auth/login"
+            href="/auth/login"
             className="px-8 py-4 border border-slate-600 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
           >
             {t('auth.login')}
