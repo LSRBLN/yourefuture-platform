@@ -16,6 +16,13 @@ import {
   ComprehensiveBreachAggregator,
   ComprehensiveBreachReport,
 } from '../lib/extended-breach-apis';
+import {
+  FaceOnLiveService,
+  YandexImagesService,
+  CompreFaceService,
+  VideoFrameExtractorService,
+  ComprehensiveFaceReverseSearchAggregator,
+} from '../lib/face-reverse-search-apis';
 
 export interface LeakCheckRequest {
   email?: string;
@@ -57,6 +64,13 @@ export class ChecksController {
   private securityTrails = new SecurityTrailsService();
   private pastebin = new PastebinAggregatorService();
   private comprehensiveAggregator = new ComprehensiveBreachAggregator();
+  
+  // Face Reverse Search Services
+  private faceOnLive = new FaceOnLiveService();
+  private yandex = new YandexImagesService();
+  private compreface = new CompreFaceService();
+  private videoExtractor = new VideoFrameExtractorService();
+  private facereverseAggregator = new ComprehensiveFaceReverseSearchAggregator();
 
   /**
    * POST /api/v1/checks/leak
@@ -574,6 +588,260 @@ export class ChecksController {
       return {
         success: false,
         error: error.message || 'Comprehensive breach report failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/face-reverse-search
+   * Search entire internet for a person's face
+   * Finds: Images, Videos, Deepfakes, NSFW content
+   * FREE APIs: FaceOnLive + Yandex
+   */
+  @Post('face-reverse-search')
+  async faceReverseSearch(
+    @Body() body: { imageUrl?: string; imageBase64?: string; checkDeepfakes?: boolean; checkNSFW?: boolean }
+  ) {
+    if (!body.imageUrl && !body.imageBase64) {
+      throw new BadRequestException('Image URL or base64 required');
+    }
+
+    try {
+      const result = await this.facereverseAggregator.comprehensiveFaceSearch(
+        body.imageUrl || '',
+        body.imageBase64,
+        body.checkDeepfakes !== false,
+        body.checkNSFW !== false
+      );
+
+      return {
+        success: true,
+        data: {
+          service: 'Comprehensive Face Reverse Search',
+          search_type: 'Internet-Scale Face Search',
+          sources: ['FaceOnLive', 'Yandex Images'],
+          ...result,
+          message: `Found ${result.total_matches} potential matches. Risk level: ${result.risk_assessment.overall_risk}`,
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Face reverse search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/faceonlive-search
+   * Direct FaceOnLive search (Free unlimited basic tier)
+   */
+  @Post('faceonlive-search')
+  async faceOnLiveSearch(
+    @Body() body: { imageUrl?: string; imageBase64?: string }
+  ) {
+    if (!body.imageUrl && !body.imageBase64) {
+      throw new BadRequestException('Image URL or base64 required');
+    }
+
+    try {
+      const result = await this.faceOnLive.searchFace(body.imageUrl || '', body.imageBase64);
+
+      return {
+        success: true,
+        data: {
+          service: 'FaceOnLive',
+          ...result,
+          note: 'FaceOnLive provides unlimited basic searches, free tier',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'FaceOnLive search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/yandex-reverse-search
+   * Yandex Images reverse search (Free)
+   * Often better than Google for face detection
+   */
+  @Post('yandex-reverse-search')
+  async yandexReverseSearch(@Body() body: { imageUrl: string }) {
+    if (!body.imageUrl) {
+      throw new BadRequestException('Image URL required');
+    }
+
+    try {
+      const result = await this.yandex.searchFace(body.imageUrl);
+
+      return {
+        success: true,
+        data: {
+          service: 'Yandex Images',
+          ...result,
+          note: 'Yandex often finds face matches better than Google',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Yandex search failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/compreface-extract-embedding
+   * Extract face embedding (requires CompreFace self-hosted)
+   * Returns face confidence + bounding box + optional embedding
+   */
+  @Post('compreface-extract-embedding')
+  async compreFaceExtract(@Body() body: { imageUrl: string }) {
+    if (!body.imageUrl) {
+      throw new BadRequestException('Image URL required');
+    }
+
+    try {
+      const result = await this.compreface.extractFaceEmbedding(body.imageUrl);
+
+      return {
+        success: true,
+        data: {
+          service: 'CompreFace (Self-hosted)',
+          ...result,
+          note: 'Requires CompreFace Docker instance running locally',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'CompreFace extraction failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/video-frame-extract
+   * Extract frames from video URL for face analysis
+   * Requires FFmpeg installed on system
+   */
+  @Post('video-frame-extract')
+  async extractVideoFrames(@Body() body: { videoUrl: string; fps?: number }) {
+    if (!body.videoUrl) {
+      throw new BadRequestException('Video URL required');
+    }
+
+    try {
+      const fps = body.fps || 1;
+      const frames = await this.videoExtractor.extractFrames(body.videoUrl, undefined, fps);
+      const duration = await this.videoExtractor.getVideoDuration(body.videoUrl);
+
+      return {
+        success: true,
+        data: {
+          service: 'Video Frame Extractor',
+          videoUrl: body.videoUrl,
+          frames_extracted: frames.length,
+          frame_paths: frames.slice(0, 10), // Return first 10
+          duration_seconds: duration,
+          extraction_rate_fps: fps,
+          note: 'Requires FFmpeg installed on system',
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Frame extraction failed',
+      };
+    }
+  }
+
+  /**
+   * POST /api/v1/checks/face-exposure-report
+   * Comprehensive face exposure report
+   * Combines all face search sources + deepfake + NSFW analysis
+   * This is the MAIN endpoint for users uploading their own face
+   */
+  @Post('face-exposure-report')
+  async faceExposureReport(
+    @Body()
+    body: {
+      imageUrl?: string;
+      imageBase64?: string;
+      checkDeepfakes?: boolean;
+      checkNSFW?: boolean;
+      personName?: string;
+    }
+  ) {
+    if (!body.imageUrl && !body.imageBase64) {
+      throw new BadRequestException('Image URL or base64 required');
+    }
+
+    try {
+      // Main search
+      const faceSearchResult = await this.facereverseAggregator.comprehensiveFaceSearch(
+        body.imageUrl || '',
+        body.imageBase64,
+        body.checkDeepfakes !== false,
+        body.checkNSFW !== false
+      );
+
+      // Additional analysis on key findings
+      let deepfakeAnalysis = null;
+      let nsfwAnalysis = null;
+
+      // If deepfakes found, get more details from Hugging Face
+      if (faceSearchResult.deepfake_count > 0) {
+        try {
+          const topMatch = faceSearchResult.matches[0];
+          if (topMatch.imageUrl) {
+            deepfakeAnalysis = await this.externalAPI.imageAnalysis.analyzeImage(topMatch.imageUrl);
+          }
+        } catch (e) {
+          console.warn('Deepfake detail analysis failed');
+        }
+      }
+
+      // If NSFW content found
+      if (faceSearchResult.nsfw_count > 0) {
+        nsfwAnalysis = {
+          count: faceSearchResult.nsfw_count,
+          type: 'Non-consensual intimate images detected',
+          action: 'Consider DMCA removal / legal action',
+        };
+      }
+
+      return {
+        success: true,
+        data: {
+          person: body.personName || 'Unknown',
+          search_summary: {
+            total_images: faceSearchResult.total_matches,
+            videos_found: faceSearchResult.video_matches,
+            deepfakes: faceSearchResult.deepfake_count,
+            nsfw_content: faceSearchResult.nsfw_count,
+          },
+          risk_assessment: faceSearchResult.risk_assessment,
+          top_matches: faceSearchResult.matches.slice(0, 10),
+          deepfake_analysis: deepfakeAnalysis,
+          nsfw_analysis: nsfwAnalysis,
+          recommendations: faceSearchResult.recommendations,
+          next_steps: [
+            'Review all matches carefully',
+            'Report non-consensual content to platforms',
+            'Consider DMCA takedowns for infringing content',
+            'Monitor for new matches periodically',
+            'Document evidence for potential legal action',
+          ],
+        },
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Face exposure report failed',
       };
     }
   }
