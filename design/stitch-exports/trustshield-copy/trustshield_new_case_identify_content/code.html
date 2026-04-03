@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield | Case Wizard - New Removal Case</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#4a3f00",
+              "tertiary": "#6d5e00",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b1c5ff",
+              "on-background": "#1b1c1d",
+              "on-secondary-fixed": "#171c20",
+              "on-error-container": "#93000a",
+              "primary": "#094cb2",
+              "primary-container": "#3366cc",
+              "on-primary-container": "#e7ebff",
+              "surface-bright": "#faf9fa",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e9e8e9",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f9e37a",
+              "background": "#faf9fa",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed": "#211b00",
+              "surface-variant": "#e3e2e3",
+              "surface-container-highest": "#e3e2e3",
+              "secondary-container": "#dfe3e8",
+              "surface-tint": "#2259bf",
+              "on-error": "#ffffff",
+              "tertiary-container": "#bfab49",
+              "outline-variant": "#c3c6d5",
+              "secondary-fixed-dim": "#c2c7cc",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-surface-variant": "#434653",
+              "on-surface": "#1b1c1d",
+              "on-primary-fixed-variant": "#00419d",
+              "on-tertiary-fixed-variant": "#524600",
+              "tertiary-fixed-dim": "#dcc661",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#606569",
+              "surface-dim": "#dbdadb",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#303031",
+              "secondary-fixed": "#dfe3e8",
+              "outline": "#737784",
+              "on-primary-fixed": "#001946",
+              "surface": "#faf9fa",
+              "surface-container-low": "#f5f3f4",
+              "on-secondary-fixed-variant": "#42474b",
+              "secondary": "#5a5f63",
+              "surface-container": "#efedee",
+              "inverse-on-surface": "#f2f0f1"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-8 h-16 w-full max-w-none">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif font-black tracking-tight text-slate-900 dark:text-white">TrustShield</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-label text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Dashboard</a>
+<a class="font-label text-sm font-medium text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Case Wizard</a>
+<a class="font-label text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors" href="#">Monitoring</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">shield</span>
+<input class="bg-surface-container-low border-none rounded-full py-1.5 pl-10 pr-4 text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search archives..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">account_circle</span>
+</div>
+</nav>
+</header>
+<!-- SideNavBar (Restricted as Case Wizard is a top-level tool) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-50 border-r border-slate-200/50 flex flex-col py-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-sm text-slate-900">Case Wizard</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-slate-500">Archival Removal</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 bg-white text-blue-700 font-semibold rounded-lg mx-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label text-sm tracking-wide">Overview</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">policy</span>
+<span class="font-label text-sm tracking-wide">Case Details</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label text-sm tracking-wide">Evidence</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label text-sm tracking-wide">Legal Review</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">send</span>
+<span class="font-label text-sm tracking-wide">Submission</span>
+</div>
+</nav>
+<div class="mt-auto px-2 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm tracking-wide">Settings</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label text-sm tracking-wide">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 pb-12 px-12 max-w-6xl mx-auto">
+<!-- Header & Stepper Section -->
+<div class="mb-12">
+<h1 class="font-headline text-4xl font-bold text-on-surface mb-2 tracking-tight">Initiate Removal Case</h1>
+<p class="font-body text-slate-500 max-w-2xl text-lg leading-relaxed">
+                Provide the precise location and nature of the infringing content. Our scholarly review team will use this to build your legal justification.
+            </p>
+</div>
+<!-- Progress Stepper Component -->
+<div class="grid grid-cols-3 gap-8 mb-16 relative">
+<div class="absolute top-4 left-0 w-full h-[2px] bg-surface-container-high -z-10"></div>
+<div class="flex flex-col items-center group">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mb-3 ring-4 ring-background">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-primary">Content</span>
+<span class="font-body text-[11px] text-slate-400 mt-1">Discovery &amp; Identification</span>
+</div>
+<div class="flex flex-col items-center group">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface-container-highest flex items-center justify-center text-on-surface-variant mb-3 ring-4 ring-background">
+<span class="font-label font-bold text-xs">2</span>
+</div>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-slate-400">Legal Basis</span>
+<span class="font-body text-[11px] text-slate-400 mt-1">Regulatory Frameworks</span>
+</div>
+<div class="flex flex-col items-center group">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface-container-highest flex items-center justify-center text-on-surface-variant mb-3 ring-4 ring-background">
+<span class="font-label font-bold text-xs">3</span>
+</div>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-slate-400">Review</span>
+<span class="font-body text-[11px] text-slate-400 mt-1">Final Attestation</span>
+</div>
+</div>
+<!-- Bento Grid Form Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Primary Form Section -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">link</span>
+<h2 class="font-headline text-xl font-bold">Content Identification</h2>
+</div>
+<div class="space-y-6">
+<div class="group">
+<label class="block font-label text-xs font-bold uppercase tracking-tighter text-slate-500 mb-2 group-focus-within:text-primary transition-colors">Infringing URL</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 py-3 text-on-surface placeholder:text-slate-400 font-body transition-all" placeholder="https://example.com/archived/personal-data-entry" type="url"/>
+<p class="mt-2 font-body text-[11px] text-slate-400 italic">Include the full canonical link to ensure precise archival targeting.</p>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="group">
+<label class="block font-label text-xs font-bold uppercase tracking-tighter text-slate-500 mb-2 group-focus-within:text-primary transition-colors">Platform Name</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 py-3 text-on-surface placeholder:text-slate-400 font-body transition-all" placeholder="e.g., WayBack Machine, Google Search" type="text"/>
+</div>
+<div class="group">
+<label class="block font-label text-xs font-bold uppercase tracking-tighter text-slate-500 mb-2 group-focus-within:text-primary transition-colors">Exposure Duration</label>
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 py-3 text-on-surface font-body transition-all">
+<option>Less than 1 month</option>
+<option>1-6 months</option>
+<option>Over 1 year</option>
+<option>Indefinite / Permanent Archive</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">visibility</span>
+<h2 class="font-headline text-xl font-bold">Personally Identifiable Information (PII)</h2>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block font-label text-xs font-bold uppercase tracking-tighter text-slate-500 mb-4">PII Types Detected</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">Full Name</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">Home Address</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">Phone Number</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">Financial Records</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">Biometric Data</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<input class="rounded-sm text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label text-xs font-medium text-slate-700">ID Numbers</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-label text-xs font-bold uppercase tracking-tighter text-slate-500 mb-2">Detailed Narrative of Infringement</label>
+<textarea class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 py-3 text-on-surface placeholder:text-slate-400 font-body transition-all resize-none" placeholder="Describe where and how the information appears..." rows="4"></textarea>
+</div>
+<div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-8 text-center hover:bg-surface-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-slate-300 mb-2">cloud_upload</span>
+<p class="font-headline font-bold text-slate-700">Upload Screenshot / Evidence</p>
+<p class="font-label text-[11px] text-slate-400 mt-1 uppercase tracking-widest">PDF, PNG, JPG up to 10MB</p>
+</div>
+</div>
+</section>
+<div class="flex items-center justify-between pt-4">
+<button class="font-label text-sm font-bold text-slate-400 hover:text-slate-600 flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Save Draft
+                    </button>
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-8 py-4 rounded-full font-label font-bold text-sm shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+                        Next: Legal Grounds
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Sidebar Context/Help -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-dim/40 rounded-xl p-6 border border-outline-variant/10">
+<h3 class="font-headline font-bold text-lg mb-4 text-on-surface">Compliance Tip</h3>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="shrink-0 w-8 h-8 rounded-lg bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<p class="font-body text-sm text-slate-600 leading-relaxed">
+                                Content removal requests are <span class="text-on-surface font-semibold underline decoration-tertiary/30">42% more successful</span> when specific PII types are mapped directly to GDPR or CCPA frameworks.
+                            </p>
+</div>
+<div class="h-[1px] bg-outline-variant/20"></div>
+<div class="flex gap-4">
+<div class="shrink-0 w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">policy</span>
+</div>
+<p class="font-body text-sm text-slate-600 leading-relaxed">
+                                Our "Right to be Forgotten" engine will auto-scan the provided URL for additional metadata upon submission.
+                            </p>
+</div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden relative h-64 shadow-lg group">
+<img alt="Legal library interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Interior of a modern high-end legal library with leather-bound books and warm ambient light on dark wood shelves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNoB18fg6RHZQFV104DliZ4cZ29xqnpH-X8TnFssL2YcAs2fIRhGCk0x6SOxszL3BwV4Mn2GRj3vsA6rot-d3THZM24JUx05VyQn5obFmj_MJckKXn2MmOa2RPJI4aL_6Vq9lhjWBN423L4_v92f2afv_3wlQE7hQiiDqodcyb-5mhsedchId6F-hxO-eXBDD6STIG0rVjBsEITp0wp80-tDe2svlgOxazfBkfErGyuZTXUj2eoQ_0ykiR3KhSBwYaQeynm-dheDzA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg leading-tight">Expert Archival Review</h4>
+<p class="text-white/70 font-body text-xs mt-2">Our scholars ensure every case meets the highest evidentiary standards.</p>
+</div>
+</div>
+<div class="bg-surface-container-highest/30 rounded-xl p-6 border border-outline-variant/10">
+<h3 class="font-label text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Case Statistics</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<span class="font-body text-xs text-slate-600">Avg. Removal Time</span>
+<span class="font-headline font-bold text-on-surface text-xl">14 Days</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[65%] h-full bg-primary"></div>
+</div>
+<p class="font-body text-[10px] text-slate-400">Calculated based on 2,400+ successful removals in the last quarter.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed on Step 1 as requested: Suppress FAB on Details/Transactional) -->
+<!-- The FAB is suppressed to maintain focus on the form journey -->
+</body></html>

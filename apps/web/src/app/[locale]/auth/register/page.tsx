@@ -1,0 +1,154 @@
+'use client';
+
+import { useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { getApiErrorMessage } from '@/lib/http-client';
+import { setAccessToken, setRefreshToken } from '@/lib/auth-storage';
+
+export default function RegisterPage() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    firstName: '',
+    lastName: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const errorId = 'register-error';
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    // Validation
+    if (!formData.email || !formData.password || !formData.confirmPassword) {
+      setError(t('auth.errors.fillRequiredFields'));
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError(t('auth.passwordMismatch'));
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError(t('auth.passwordTooShort'));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // API call to register
+      const response = await fetch('/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || t('auth.errors.registrationFailed'));
+      }
+
+      const { token, refreshToken } = await response.json();
+      if (token) {
+        setAccessToken(token);
+      }
+      if (refreshToken) {
+        setRefreshToken(refreshToken);
+      }
+
+      router.push(`/${locale}/profile`);
+    } catch (err) {
+      setError(getApiErrorMessage(err, t('auth.errors.registrationFailed')));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-[var(--app-bg)] px-6 py-12 text-[var(--app-fg)] transition-colors">
+      <div className="w-full max-w-sm">
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-10 h-10 rounded-xl bg-[#1a2035] flex items-center justify-center mb-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6l-8-4z" fill="#3b82f6" />
+            </svg>
+          </div>
+          <h1 className="mb-1 text-xl font-bold text-[var(--app-fg)]">{t('auth.registerTitle')}</h1>
+          <p className="text-sm text-[var(--app-fg-variant)]">{t('auth.registerDescription')}</p>
+        </div>
+
+        <div className="rounded-xl bg-[var(--app-surface)] p-6">
+          {error && (
+            <div id={errorId} role="alert" aria-live="assertive" className="mb-5 rounded-lg bg-[#3b0a0a] p-3">
+              <p className="text-[#f87171] text-sm">{error}</p>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate aria-describedby={error ? errorId : undefined}>
+            {[  
+              { label: t('auth.email'), name: 'email', type: 'email', placeholder: t('auth.placeholders.email') },
+              { label: t('auth.firstName'), name: 'firstName', type: 'text', placeholder: t('auth.placeholders.firstName') },
+              { label: t('auth.lastName'), name: 'lastName', type: 'text', placeholder: t('auth.placeholders.lastName') },
+              { label: t('auth.password'), name: 'password', type: 'password', placeholder: t('auth.placeholders.password') },
+              { label: t('auth.confirmPassword'), name: 'confirmPassword', type: 'password', placeholder: t('auth.placeholders.password') },
+            ].map((field) => (
+              <div key={field.name}>
+                <label htmlFor={`register-${field.name}`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[var(--app-fg-variant)]">
+                  {field.label}
+                </label>
+                <input
+                  id={`register-${field.name}`}
+                  type={field.type}
+                  name={field.name}
+                  value={formData[field.name as keyof typeof formData]}
+                  onChange={handleChange}
+                  required={field.name === 'email' || field.name === 'password' || field.name === 'confirmPassword'}
+                  autoComplete={field.name === 'email' ? 'email' : field.name === 'firstName' ? 'given-name' : field.name === 'lastName' ? 'family-name' : 'new-password'}
+                  minLength={field.name === 'password' || field.name === 'confirmPassword' ? 8 : undefined}
+                  aria-invalid={Boolean(error)}
+                  className="w-full rounded-lg border border-[var(--app-border)] bg-[var(--app-surface-high)] px-4 py-2.5 text-sm text-[var(--app-fg)] placeholder-[var(--app-fg-muted)] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/40"
+                  placeholder={field.placeholder}
+                />
+              </div>
+            ))}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-2 w-full rounded-lg bg-[#3b82f6] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2563eb] disabled:bg-[var(--app-surface-high)] disabled:text-[var(--app-fg-muted)]"
+            >
+              {loading ? t('auth.loadingSubmit') : t('auth.register')}
+            </button>
+          </form>
+
+          <div className="mt-4 text-center">
+            <Link href={`/${locale}/auth/login`} className="text-xs text-[#3b82f6] hover:text-[#60a5fa] font-medium transition-colors">
+              {t('auth.alreadyHaveAccount')} {t('auth.login')}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

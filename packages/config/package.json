@@ -1,0 +1,15 @@
+{
+  "name": "@trustshield/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig/base": "./tsconfig/base.json"
+  },
+  "scripts": {
+    "build": "mkdir -p dist && cp tsconfig/base.json dist/base.json && echo 'config package artifacts synced'",
+    "lint": "echo 'config package has no lint target'",
+    "typecheck": "echo 'config package has no typecheck target'",
+    "clean": "rm -rf dist"
+  }
+}

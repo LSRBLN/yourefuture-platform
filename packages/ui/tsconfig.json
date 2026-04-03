@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tailwind.config.ts"]
+}

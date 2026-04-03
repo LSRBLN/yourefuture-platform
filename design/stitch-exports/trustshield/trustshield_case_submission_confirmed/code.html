@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alexandria | Case Submission Confirmed</title>
+<!-- Fonts: Noto Serif (Headlines), Inter (Body), Public Sans (Labels) -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;family=Public+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#737784",
+              "on-primary-fixed-variant": "#00419d",
+              "inverse-primary": "#b1c5ff",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f5f3f4",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#dfe3e8",
+              "primary-fixed": "#d9e2ff",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#c2c7cc",
+              "outline-variant": "#c3c6d5",
+              "tertiary-fixed-dim": "#dcc661",
+              "surface-container-highest": "#e3e2e3",
+              "surface-container": "#efedee",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed": "#211b00",
+              "background": "#faf9fa",
+              "secondary": "#5a5f63",
+              "tertiary-container": "#bfab49",
+              "on-primary-fixed": "#001946",
+              "tertiary": "#6d5e00",
+              "on-surface": "#1b1c1d",
+              "on-tertiary-fixed-variant": "#524600",
+              "on-secondary-fixed-variant": "#42474b",
+              "primary": "#094cb2",
+              "on-secondary-container": "#606569",
+              "inverse-on-surface": "#f2f0f1",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#171c20",
+              "on-background": "#1b1c1d",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-primary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdadb",
+              "surface-tint": "#2259bf",
+              "surface-bright": "#faf9fa",
+              "tertiary-fixed": "#f9e37a",
+              "inverse-surface": "#303031",
+              "surface-variant": "#e3e2e3",
+              "on-surface-variant": "#434653",
+              "secondary-container": "#dfe3e8",
+              "primary-container": "#3366cc",
+              "surface-container-high": "#e9e8e9",
+              "on-tertiary-container": "#4a3f00",
+              "on-primary-container": "#e7ebff",
+              "error": "#ba1a1a",
+              "surface": "#faf9fa"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-label { font-family: 'Public Sans', sans-serif; }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar (Shared Component) -->
+<!-- Shell Visibility Rule: Suppressed on Confirmation screen to focus user on the success message, but keeping branding as anchor. -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-8 h-20">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-serif font-bold text-slate-900 dark:text-slate-50">Alexandria</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-serif tracking-tight leading-relaxed" href="#">Archive</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-serif tracking-tight leading-relaxed" href="#">Cases</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-serif tracking-tight leading-relaxed" href="#">Reports</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-serif tracking-tight leading-relaxed" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-50/50 p-2 rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-50/50 p-2 rounded-full transition-all">history</button>
+<div class="h-10 w-10 rounded-full bg-surface-container overflow-hidden">
+<img alt="Investigator profile" class="h-full w-full object-cover" data-alt="professional portrait of an investigator in a studio setting with neutral lighting and sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeEkgMnjl8nkzpjnHAxmeCMQkYw2lAiwTr7EC3vH97SGlGXnezym5MNlBhQzBv-XcGk-hDW-QUX8k-yZrFdP8du-Tvp438XdAtDWnFKcSxSXfEPp8VDXP5ruSa3xodrsfC3molCY-j_wbh-BmAjV66K7bn-lzrnrbm3tNb049EraidQYBQ_-69NLSOCZy3JOQwISQ_AxHg0EYj4OnE3StlRKPQU2xIa9IalcHNt66GoOH-C9BvQRNIqPT-HMGuuST5t8DZH32bGbmw"/>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 max-w-5xl mx-auto flex flex-col items-center">
+<!-- Submission Success Header -->
+<div class="text-center mb-16">
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 text-primary mb-8 border border-primary/5">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">Submission Successful</h1>
+<p class="text-on-surface-variant font-body text-lg max-w-2xl mx-auto leading-relaxed">
+                Your forensic removal request has been officially recorded in the Alexandria ledger. The chain of custody is now being established.
+            </p>
+</div>
+<!-- Case Identity Card (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-12">
+<!-- Reference ID -->
+<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-xl shadow-sm border border-outline-variant/15 flex flex-col justify-between">
+<div>
+<span class="text-tertiary font-label uppercase tracking-widest text-xs font-semibold mb-2 block">Official Reference</span>
+<h2 class="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tighter">TS-RM-992-K</h2>
+</div>
+<div class="mt-8 flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-label text-sm uppercase tracking-wider">Logged: Oct 24, 2023 — 14:22 UTC</span>
+</div>
+</div>
+<!-- Digital Seal/Status -->
+<div class="bg-primary p-10 rounded-xl text-on-primary flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl mb-4" style="font-variation-settings: 'FILL' 0;">verified_user</span>
+<span class="font-headline italic text-xl">Authenticated</span>
+<div class="mt-4 h-px w-12 bg-on-primary/30"></div>
+<p class="mt-4 font-label text-xs uppercase tracking-[0.2em] opacity-80">Wizard Phase 04/04</p>
+</div>
+</div>
+<!-- Next Steps Timeline -->
+<div class="w-full bg-white p-10 md:p-16 rounded-xl border border-outline-variant/10 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+<h3 class="text-2xl font-headline font-bold mb-12 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                The Curatorial Pipeline
+            </h3>
+<div class="space-y-12 relative">
+<!-- Vertical Line -->
+<div class="absolute left-4 top-2 bottom-2 w-px bg-surface-container-highest"></div>
+<!-- Step 1 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary text-xs font-bold z-10">1</div>
+<div>
+<h4 class="font-headline text-lg font-bold text-on-surface">Forensic Triage</h4>
+<p class="text-on-surface-variant font-body mt-2 leading-relaxed max-w-xl">
+                            Our automated systems are analyzing the submitted data points to cross-reference against global removal standards and platform-specific API requirements.
+                        </p>
+<span class="inline-block mt-3 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-widest">In Progress</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-0 w-8 h-8 bg-surface-container-highest rounded-full flex items-center justify-center text-on-surface-variant text-xs font-bold z-10">2</div>
+<div>
+<h4 class="font-headline text-lg font-bold text-on-surface/60">Legal Review</h4>
+<p class="text-on-surface-variant/70 font-body mt-2 leading-relaxed max-w-xl">
+                            Alexandria’s legal counsel assesses the digital sovereignty implications of Case #8821 to ensure compliance with international privacy protocols.
+                        </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-0 w-8 h-8 bg-surface-container-highest rounded-full flex items-center justify-center text-on-surface-variant text-xs font-bold z-10">3</div>
+<div>
+<h4 class="font-headline text-lg font-bold text-on-surface/60">Submission to Platform</h4>
+<p class="text-on-surface-variant/70 font-body mt-2 leading-relaxed max-w-xl">
+                            Upon verification, a formal removal mandate will be issued to the host platform via the Alexandria Secure Gateway.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Actions -->
+<div class="flex flex-col sm:flex-row gap-4 mt-16 w-full max-w-md">
+<button class="flex-1 bg-gradient-to-r from-primary to-primary-container text-on-primary font-label text-sm font-semibold py-4 rounded-lg shadow-lg hover:opacity-90 active:scale-95 transition-all uppercase tracking-widest flex items-center justify-center gap-2">
+                View Case Status
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+<button class="flex-1 bg-surface-container-high text-primary font-label text-sm font-semibold py-4 rounded-lg hover:bg-surface-container-highest active:scale-95 transition-all uppercase tracking-widest flex items-center justify-center gap-2">
+                Return to Dashboard
+            </button>
+</div>
+<!-- Scholarly Note / Digital Sovereignty Quote -->
+<footer class="mt-24 pt-12 border-t border-outline-variant/20 w-full text-center">
+<blockquote class="font-serif italic text-on-surface-variant text-xl max-w-3xl mx-auto leading-relaxed">
+                “In the digital age, the right to be forgotten is not a luxury, but the fundamental preservation of one’s own historical narrative.”
+            </blockquote>
+<p class="mt-6 font-label text-[10px] uppercase tracking-[0.3em] text-tertiary-container font-bold">The Alexandria Manifesto • Section VII</p>
+<div class="mt-12 flex justify-center items-center gap-8 opacity-40 grayscale">
+<img alt="Institution logo 1" class="h-8 object-contain" data-alt="minimalist professional corporate logo in black and white silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvIXpykg-eerX2vzJNUfTYFtiLmKRfWUkb9bhgGUnI9Tsxr0gAEm2p-Huj-PfC97TONnKzE-CPvsm2qw8QqHBMxWYWK5KOi0NLyHUwfwSmEuuzNwSppM_F-vy_pHGpUklgQRSSnUB85duoI6-VkWUJ8PdP_BPou_N8beQKl4UA9gYtSD1yf_bV9ToaVnXriqlPZg__1E-4TLRwKAA7IY1hCisLlkstHPYMjBcZmKKBd7sWIlbipQ3YvWFKP2r796w_WOVq9GvXoBKD"/>
+<img alt="Institution logo 2" class="h-8 object-contain" data-alt="abstract geometric corporate logo for a technology and privacy firm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Gw4nV-zBj-g5S9pKHdwAgFVfub3qamc8BFmg3vnNsuxdLaEdFuZ-pd13LSul3yKc2O0BkR6I8kaDu7Nb2KO32MuM3uPsIpRLDsA3Qq1VdQFRNF5Aunp_uZLrzfcp_QgozDxLK6Bs-jH4zMMjBOhLyui45Ef88yu_nWtUbzWIyHPHh3c6SVpQjpE0ugCzodKKEdsvECzgTyhjoatV5g0mJQJIGeD7bG0iytG6hw-8SFPRLqYsqmUdkHG3hmxcsR0v2x_dYqqO-nQy"/>
+<img alt="Institution logo 3" class="h-8 object-contain" data-alt="clean modernist typographic logo for an international legal association" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrR0Ni7x1Lyl_E3lmilpBB9lLb_Qxy9NJpQ3g4OFv4sgIAzhaDJfcrmFw4mXg3W2EE6w7HmooKJQ3j1WobpClCkflqTb4sD9p-YefkVdNHAJ-rVwzb1gtO7QdKRm8znjN7HygFFdK0yCxQHKHoSPv9FiDcwuxc-_HHxFCDivVSTqkZyhAfyJWCZMLd6T8tHd6lj8guo7JakWXLK44DtNuxjRLe1qpk09EKrftmeAyKFCq9WufOho4opE8RRiXVh_jBcvReD_CR-uwM"/>
+</div>
+</footer>
+</main>
+<!-- Side Navigation Bar (Hidden on this success/transactional screen to prioritize the message) -->
+<!-- Rule applied: suppress navigation shell for transactional/success screens. -->
+</body></html>

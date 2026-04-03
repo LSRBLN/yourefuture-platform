@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1774980734784,
+      "tag": "0000_ambitious_hammerhead",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774984590743,
+      "tag": "0001_perpetual_edwin_jarvis",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774989000000,
+      "tag": "0002_add_users_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1775103600000,
+      "tag": "0003_auth_session_rotation",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1775158380000,
+      "tag": "0004_osint_foundation",
+      "breakpoints": true
+    }
+  ]
+}

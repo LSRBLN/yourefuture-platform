@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield — Legal Grounds Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@300;400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#4a3f00",
+              "tertiary": "#6d5e00",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b1c5ff",
+              "on-background": "#1b1c1d",
+              "on-secondary-fixed": "#171c20",
+              "on-error-container": "#93000a",
+              "primary": "#094cb2",
+              "primary-fixed": "#d9e2ff",
+              "surface-bright": "#faf9fa",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e9e8e9",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f9e37a",
+              "background": "#faf9fa",
+              "primary-container": "#3366cc",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed": "#211b00",
+              "surface-variant": "#e3e2e3",
+              "surface-container-highest": "#e3e2e3",
+              "secondary-container": "#dfe3e8",
+              "surface-tint": "#2259bf",
+              "on-error": "#ffffff",
+              "tertiary-container": "#bfab49",
+              "outline-variant": "#c3c6d5",
+              "secondary-fixed-dim": "#c2c7cc",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-surface-variant": "#434653",
+              "on-surface": "#1b1c1d",
+              "on-primary-fixed-variant": "#00419d",
+              "on-tertiary-fixed-variant": "#524600",
+              "tertiary-fixed-dim": "#dcc661",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#606569",
+              "surface-dim": "#dbdadb",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#303031",
+              "secondary-fixed": "#dfe3e8",
+              "outline": "#737784",
+              "on-primary-fixed": "#001946",
+              "surface": "#faf9fa",
+              "surface-container-low": "#f5f3f4",
+              "on-secondary-fixed-variant": "#42474b",
+              "secondary": "#5a5f63",
+              "on-primary-container": "#e7ebff",
+              "surface-container": "#efedee",
+              "inverse-on-surface": "#f2f0f1"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm h-16 flex justify-between items-center px-8">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif font-black tracking-tight text-slate-900">TrustShield</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors" href="#">Overview</a>
+<a class="font-label text-sm font-semibold text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Case Wizard</a>
+<a class="font-label text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border-none rounded-full px-4 py-1.5 text-sm focus:ring-1 focus:ring-primary w-64" placeholder="Search cases..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1.5 text-slate-400 text-lg">shield</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer">account_circle</span>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-50 flex flex-col py-6 border-r border-slate-200/50">
+<div class="px-6 mb-8">
+<p class="font-label text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Active Workflow</p>
+<h2 class="font-headline text-lg font-bold text-slate-900">Case Wizard</h2>
+<p class="font-label text-xs text-slate-500">Archival Removal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-blue-700 font-semibold rounded-lg mx-2 shadow-sm" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label text-sm font-medium">Case Details</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">policy</span>
+<span class="font-label text-sm font-medium">Evidence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label text-sm font-medium">Legal Review</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">send</span>
+<span class="font-label text-sm font-medium">Submission</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 pt-24 pb-12 px-12 min-h-screen bg-surface-bright">
+<div class="max-w-4xl mx-auto">
+<!-- Breadcrumbs / Stepper -->
+<div class="flex items-center gap-2 mb-12">
+<div class="flex items-center text-primary">
+<span class="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-label text-xs font-bold">01</span>
+<span class="ml-3 font-label text-xs font-semibold tracking-wider uppercase opacity-60">Content Details</span>
+</div>
+<div class="w-12 h-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center text-primary">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label text-xs font-bold shadow-lg shadow-primary/20">02</span>
+<span class="ml-3 font-label text-xs font-semibold tracking-wider uppercase">Legal Grounds</span>
+</div>
+<div class="w-12 h-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center text-on-surface-variant/40">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label text-xs font-bold">03</span>
+<span class="ml-3 font-label text-xs font-semibold tracking-wider uppercase">Review &amp; Submit</span>
+</div>
+</div>
+<!-- Header Section -->
+<div class="mb-12">
+<h1 class="font-headline text-5xl font-bold text-on-surface mb-4 tracking-tight">Identify Legal Grounds</h1>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Select the regulatory framework or legal precedent that justifies the removal of this content from archival indices.
+                </p>
+</div>
+<!-- Bento Selection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+<!-- Option 1: GDPR -->
+<label class="group relative cursor-pointer">
+<input checked="" class="peer sr-only" name="legal_ground" type="radio"/>
+<div class="h-full p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-white transition-all duration-300 rounded-xl group-hover:bg-white shadow-sm hover:shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">gavel</span>
+</div>
+<div class="opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">GDPR Article 17</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Known as the 'Right to be Forgotten'. Applicable when personal data is no longer necessary or consent is withdrawn within the EU/EEA.
+                        </p>
+</div>
+</label>
+<!-- Option 2: DMCA -->
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="legal_ground" type="radio"/>
+<div class="h-full p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-white transition-all duration-300 rounded-xl group-hover:bg-white shadow-sm hover:shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl">copyright</span>
+</div>
+<div class="opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">DMCA / Copyright</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Digital Millennium Copyright Act. Use when the archival material infringes upon intellectual property or proprietary creative work.
+                        </p>
+</div>
+</label>
+<!-- Option 3: Personal Safety -->
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="legal_ground" type="radio"/>
+<div class="h-full p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-white transition-all duration-300 rounded-xl group-hover:bg-white shadow-sm hover:shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-error-container/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl">security</span>
+</div>
+<div class="opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Harassment / Safety</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Applicable for doxing, non-consensual imagery, or content that poses a direct threat to personal safety and physical security.
+                        </p>
+</div>
+</label>
+<!-- Option 4: Other -->
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="legal_ground" type="radio"/>
+<div class="h-full p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary peer-checked:bg-white transition-all duration-300 rounded-xl group-hover:bg-white shadow-sm hover:shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-on-surface-variant/10 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl">more_horiz</span>
+</div>
+<div class="opacity-0 peer-checked:opacity-100 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Other Legal Basis</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Defamation, trademark infringement, or specific local jurisdiction laws not covered in the primary categories above.
+                        </p>
+</div>
+</label>
+</div>
+<!-- Explanation Text Area -->
+<div class="mb-12">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h4 class="font-headline text-lg font-bold text-on-surface">Explanation</h4>
+<p class="font-body text-xs text-on-surface-variant">Detail the specific reasons why this content meets the criteria selected above.</p>
+</div>
+<span class="font-label text-[10px] text-on-surface-variant bg-surface-container px-2 py-0.5 rounded uppercase tracking-wider">Formal Context</span>
+</div>
+<textarea class="w-full bg-white border-2 border-outline-variant/20 rounded-xl p-6 font-body text-on-surface placeholder:text-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Provide a scholarly and detailed rationale for removal, citing specific sections of the law if possible..." rows="6"></textarea>
+</div>
+<!-- Action Footer -->
+<div class="flex items-center justify-between pt-8 border-t border-outline-variant/20">
+<button class="flex items-center gap-2 px-6 py-3 text-primary font-label font-semibold hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to Content
+                </button>
+<button class="flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-label font-bold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Next: Review &amp; Submit
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Decorative Archival Element -->
+<div class="fixed bottom-0 right-0 w-96 h-96 -z-10 opacity-[0.03] pointer-events-none">
+<div class="w-full h-full rotate-12 bg-primary blur-3xl rounded-full"></div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile (Logic Filter Applied: Hidden on Large screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white h-16 flex items-center justify-around px-4 border-t border-slate-100 z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">overview</span>
+<span class="text-[10px] font-label font-semibold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="text-[10px] font-label font-semibold">Wizard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">policy</span>
+<span class="text-[10px] font-label font-semibold">Evidence</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-label font-semibold">Profile</span>
+</button>
+</nav>
+</body></html>

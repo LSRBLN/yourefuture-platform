@@ -1,0 +1,187 @@
+{
+  "common": {
+    "language": "Language",
+    "german": "Deutsch",
+    "english": "English",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "switchToLight": "Switch to light theme",
+    "switchToDark": "Switch to dark theme"
+  },
+  "appShell": {
+    "brandSubtitle": "Secure Protection",
+    "scanNow": "Scan now",
+    "searchPlaceholder": "Search security logs...",
+    "searchAriaLabel": "Search security logs",
+    "notificationsAriaLabel": "Open notifications",
+    "securityAriaLabel": "Open security status",
+    "nav": {
+      "dashboard": "Dashboard",
+      "myChecks": "My checks",
+      "removalCenter": "Removal center",
+      "manualSources": "Manual sources",
+      "support": "Support",
+      "settings": "Settings"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "osint": "OSINT",
+    "profile": "Profile",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register"
+  },
+  "home": {
+    "title": "TrustShield - Professional OSINT Platform",
+    "description": "Search across 10+ OSINT sources simultaneously. Detect breaches, find social media profiles and generate comprehensive reports.",
+    "cta": "Open Dashboard",
+    "features": "Features",
+    "sources": "Data Sources",
+    "stats": "Statistics"
+  },
+  "auth": {
+    "register": "Register",
+    "registerTitle": "Create Account",
+    "registerDescription": "Create a new account to use OSINT tools",
+    "login": "Login",
+    "loginTitle": "Login to your account",
+    "loginDescription": "Sign in to access your data",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "passwordMismatch": "Passwords do not match",
+    "invalidEmail": "Invalid email address",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "forgotPassword": "Forgot password?",
+    "submit": "Continue",
+    "loadingSubmit": "Processing...",
+    "emailExists": "This email is already registered",
+    "invalidCredentials": "Invalid credentials",
+    "placeholders": {
+      "email": "name@example.com",
+      "password": "••••••••",
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "errors": {
+      "loginFailed": "Login failed",
+      "registrationFailed": "Registration failed",
+      "fillRequiredFields": "Please fill all required fields"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "personalInfo": "Personal Information",
+    "profilePicture": "Profile Picture",
+    "uploadImage": "Upload Image",
+    "bio": "Biography",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "security": "Security",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "myImages": "My Images",
+    "uploadedImages": "Uploaded Images",
+    "uploadNew": "Upload New Image",
+    "deleteImage": "Delete Image",
+    "deleteImageAriaLabel": "Delete image {filename}",
+    "setAsPrimary": "Set as Profile Picture",
+    "deleteAccount": "Delete Account",
+    "deleteAccountConfirm": "Are you sure you want to delete your account? This cannot be undone.",
+    "errors": {
+      "loadFailed": "Failed to load profile",
+      "uploadFailed": "Upload failed",
+      "deleteFailed": "Delete failed"
+    }
+  },
+  "checksNew": {
+    "hero": {
+      "badge": "Intake · Alexandria",
+      "title": "Start a new review request with precise evidence and calm context guidance.",
+      "description": "This intake page maps the stitch flow into Alexandria: clear concern selection, reduced primary color, soft surface hierarchy and evidence-driven leak capture."
+    },
+    "progress": {
+      "label": "Intake progress",
+      "title": "A single finding is structured first, then legally contextualized.",
+      "steps": {
+        "concern": {
+          "label": "Choose concern",
+          "description": "Define the assignment focus"
+        },
+        "intake": {
+          "label": "Capture finding",
+          "description": "Organize leak, source and evidence"
+        },
+        "legal": {
+          "label": "Legal basis",
+          "description": "Add legal claims context"
+        }
+      }
+    },
+    "concern": {
+      "label": "Concern selection",
+      "title": "Which concern would you like to review first?",
+      "active": "Active"
+    },
+    "errors": {
+      "panelTitle": "Required fields, guidance and file errors remain visible before legal flow.",
+      "panelSummary": "The interface explains missing details and problematic evidence calmly, without alarmist interaction patterns. This keeps the next required action clear."
+    },
+    "evidence": {
+      "selectFile": "Select file",
+      "loadExample": "Load example evidence"
+    },
+    "api": {
+      "status": {
+        "idle": "not ready yet",
+        "ready": "ready to hand over",
+        "submitting": "API handover in progress",
+        "submitted": "API handover confirmed"
+      },
+      "validateDraft": "Validate draft for API",
+      "submitSending": "Sending …",
+      "submitConfirmed": "API confirmed",
+      "submitStart": "Start API handover"
+    },
+    "actions": {
+      "saveDraft": "Save draft",
+      "resumeLater": "Resume later",
+      "nextLegal": "Continue to legal basis"
+    }
+  },
+  "osint": {
+    "dashboard": "OSINT Dashboard",
+    "search": "Search",
+    "results": "Results",
+    "breaches": "Breaches",
+    "images": "Images",
+    "analytics": "Analytics",
+    "username": "Username",
+    "email": "Email",
+    "phone": "Phone",
+    "domain": "Domain",
+    "image": "Image",
+    "searchTypes": "Search Types",
+    "integratedSources": "Integrated Sources",
+    "responseTime": "Response Time",
+    "tips": "Tips & Tricks"
+  }
+}

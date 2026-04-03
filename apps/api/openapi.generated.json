@@ -1,0 +1,606 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/assets": {
+      "post": {
+        "operationId": "NestAssetsController_createUploadIntent",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a secure upload intent for an asset",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}": {
+      "get": {
+        "operationId": "NestAssetsController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get asset metadata by id",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/deepfake-results": {
+      "get": {
+        "operationId": "NestAssetsController_getDeepfakeResults",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get deepfake analysis status and results for an asset",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/complete-upload": {
+      "post": {
+        "operationId": "NestAssetsController_completeUpload",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mark quarantine upload as completed for an owned asset",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/start-scan": {
+      "post": {
+        "operationId": "NestAssetsController_startScan",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Transition uploaded asset into secure scanning",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/finalize-security": {
+      "post": {
+        "operationId": "NestAssetsController_finalizeSecurity",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Finalize secure scan and optionally promote asset to private storage",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "NestAuthController_register",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Register a new user",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "NestAuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Login and issue bearer tokens",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "NestAuthController_refresh",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Refresh access token",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "NestAuthController_logout",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Logout current session",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "operationId": "NestAuthController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current authenticated user",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "operationId": "NestUsersController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current user profile",
+        "tags": [
+          "Users"
+        ]
+      },
+      "patch": {
+        "operationId": "NestUsersController_update",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update current user profile",
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "operationId": "NestUsersController_delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete current user profile",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "operationId": "PlatformController_getHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Platform health status",
+        "tags": [
+          "platform"
+        ]
+      }
+    },
+    "/api/v1/health/live": {
+      "get": {
+        "operationId": "PlatformController_getLiveness",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Liveness probe",
+        "tags": [
+          "platform"
+        ]
+      }
+    },
+    "/api/v1/health/ready": {
+      "get": {
+        "operationId": "PlatformController_getReadiness",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Readiness probe",
+        "tags": [
+          "platform"
+        ]
+      }
+    },
+    "/api/v1/jobs/topology": {
+      "get": {
+        "operationId": "PlatformController_getJobsTopology",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Configured queue topology",
+        "tags": [
+          "platform"
+        ]
+      }
+    },
+    "/api/v1/intake/orchestrator": {
+      "post": {
+        "operationId": "NestIntakeController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestIntake"
+        ]
+      }
+    },
+    "/api/v1/checks": {
+      "post": {
+        "operationId": "NestChecksController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestChecks"
+        ]
+      }
+    },
+    "/api/v1/checks/{id}": {
+      "get": {
+        "operationId": "NestChecksController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestChecks"
+        ]
+      }
+    },
+    "/api/v1/sources": {
+      "post": {
+        "operationId": "NestSourcesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSources"
+        ]
+      }
+    },
+    "/api/v1/sources/{id}": {
+      "get": {
+        "operationId": "NestSourcesController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSources"
+        ]
+      }
+    },
+    "/api/v1/jobs": {
+      "get": {
+        "operationId": "NestJobsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestJobs"
+        ]
+      }
+    },
+    "/api/v1/jobs/{id}": {
+      "get": {
+        "operationId": "NestJobsController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestJobs"
+        ]
+      }
+    },
+    "/api/v1/support-requests": {
+      "post": {
+        "operationId": "NestSupportRequestsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSupportRequests"
+        ]
+      },
+      "get": {
+        "operationId": "NestSupportRequestsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSupportRequests"
+        ]
+      }
+    },
+    "/api/v1/support-requests/{id}": {
+      "get": {
+        "operationId": "NestSupportRequestsController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSupportRequests"
+        ]
+      }
+    },
+    "/api/v1/support-requests/{id}/assign": {
+      "post": {
+        "operationId": "NestSupportRequestsController_assign",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSupportRequests"
+        ]
+      }
+    },
+    "/api/v1/support-requests/{id}/status": {
+      "post": {
+        "operationId": "NestSupportRequestsController_transitionStatus",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestSupportRequests"
+        ]
+      }
+    },
+    "/api/v1/removal-cases": {
+      "get": {
+        "operationId": "NestRemovalCasesController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestRemovalCases"
+        ]
+      },
+      "post": {
+        "operationId": "NestRemovalCasesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestRemovalCases"
+        ]
+      }
+    },
+    "/api/v1/removal-cases/{id}": {
+      "get": {
+        "operationId": "NestRemovalCasesController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestRemovalCases"
+        ]
+      }
+    },
+    "/api/v1/removal-cases/{id}/actions": {
+      "post": {
+        "operationId": "NestRemovalCasesController_appendAction",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestRemovalCases"
+        ]
+      }
+    },
+    "/api/v1/reviews": {
+      "get": {
+        "operationId": "NestReviewsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestReviews"
+        ]
+      }
+    },
+    "/api/v1/reviews/{id}": {
+      "get": {
+        "operationId": "NestReviewsController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestReviews"
+        ]
+      }
+    },
+    "/api/v1/evidence-snapshots/{id}": {
+      "get": {
+        "operationId": "NestEvidenceSnapshotsController_getById",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "NestEvidenceSnapshots"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "TrustShield API",
+    "description": "Generated OpenAPI baseline for the TrustShield Phase-1 API.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {}
+  }
+}

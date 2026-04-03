@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield | Security Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#dcc661",
+                        "surface": "#faf9fa",
+                        "primary-fixed": "#d9e2ff",
+                        "on-tertiary-fixed-variant": "#524600",
+                        "on-tertiary-container": "#4a3f00",
+                        "on-primary-fixed": "#001946",
+                        "surface-bright": "#faf9fa",
+                        "outline-variant": "#c3c6d5",
+                        "on-surface-variant": "#434653",
+                        "secondary-container": "#dfe3e8",
+                        "primary": "#094cb2",
+                        "on-secondary-fixed-variant": "#42474b",
+                        "on-primary-fixed-variant": "#00419d",
+                        "tertiary-container": "#bfab49",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "surface-container": "#efedee",
+                        "on-surface": "#1b1c1d",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b1c5ff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#3366cc",
+                        "secondary": "#5a5f63",
+                        "inverse-surface": "#303031",
+                        "on-secondary-fixed": "#171c20",
+                        "tertiary-fixed": "#f9e37a",
+                        "surface-container-highest": "#e3e2e3",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f5f3f4",
+                        "surface-dim": "#dbdadb",
+                        "surface-container-high": "#e9e8e9",
+                        "tertiary": "#6d5e00",
+                        "on-secondary-container": "#606569",
+                        "surface-variant": "#e3e2e3",
+                        "surface-tint": "#2259bf",
+                        "outline": "#737784",
+                        "background": "#faf9fa",
+                        "on-primary-container": "#e7ebff",
+                        "secondary-fixed-dim": "#c2c7cc",
+                        "inverse-on-surface": "#f2f0f1"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf9fa;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif', serif;
+        }
+        .label-text {
+            font-family: 'Public Sans', sans-serif;
+            text-transform: none;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar Execution -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg flex justify-between items-center px-8 h-16">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif font-black tracking-tight text-blue-800 dark:text-blue-200">TrustShield</span>
+<div class="hidden md:flex gap-6">
+<a class="font-sans text-sm font-medium tracking-wide text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 h-16 flex items-center" href="#">Identity</a>
+<a class="font-sans text-sm font-medium tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors h-16 flex items-center" href="#">Security</a>
+<a class="font-sans text-sm font-medium tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors h-16 flex items-center" href="#">Audit Logs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container ml-2">
+<img alt="User profile" data-alt="Close-up studio portrait of a professional man with a confident expression, soft lighting, clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDljHl8bgqZdhLTxR4ndL0mnNzwSyAquhPlnXIIJSlcPgoYUGTKIaKLcmuycd_irLLRzDjSIfkRB-Cc1ifOIHjb5QaFp-kXhpab_z03i9imtLQ_69-jxeK9FXLy59DS-R2gKb4jwKM7_GizRBxPrTQWK23rR_FsvCW6-lez-aQZ-N4-qq8JSdMWGXS8jf2Hh6MHYq5ulhM8lY2ZmOt6QYrvOJe0SZMMHkYu5oVdjJUajuvhe5Bfth4X1dcyTTUQ0-7m0h8CYEUvdkbD"/>
+</div>
+</div>
+</nav>
+<div class="flex min-h-screen pt-16">
+<!-- SideNavBar Execution (Mapped to Identity active state) -->
+<aside class="h-screen w-72 pt-8 sticky left-0 bg-slate-50 dark:bg-slate-900 flex flex-col gap-2 px-4 py-6 hidden lg:flex">
+<div class="mb-8 px-4">
+<p class="font-label text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Secure Portal</p>
+<h2 class="text-xl font-headline font-bold text-on-surface">TrustShield</h2>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-blue-800 dark:text-blue-300 font-bold bg-white dark:bg-slate-800 shadow-sm rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+<span class="font-sans text-sm font-medium tracking-wide">Identity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:pl-5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="shield">shield</span>
+<span class="font-sans text-sm font-medium tracking-wide">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:pl-5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="notifications_active">notifications_active</span>
+<span class="font-sans text-sm font-medium tracking-wide">Preferences</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:pl-5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="payments">payments</span>
+<span class="font-sans text-sm font-medium tracking-wide">Billing</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="history">history</span>
+<span class="font-sans text-sm font-medium tracking-wide">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span class="font-sans text-sm font-medium tracking-wide">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 max-w-5xl mx-auto px-8 py-12">
+<!-- Profile Header -->
+<header class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16">
+<div class="flex items-center gap-8">
+<div class="relative">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container-highest shadow-xl">
+<img alt="Marcus Thompson avatar" data-alt="Professional headshot of a mature man with glasses and a thoughtful expression, high-end editorial lighting, neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqh-Fl9vPg_p_W5MzR-z43fYvIGwHXFQodlzFGdMK1Cst0lKh_UW3boDalz_08H88_ZCyvFbaURGX3qgV4174Q4zwLaeqQDHsezOAvjtQimd9K7HGh9pillcJaa2Y3oCoyvWwdX0_liyeeeq15ZTPEdJgIlzHhfJO6TPdcR4pEYHeDk94Z4LxYtuh_xvESLRPKKvZUMJmk4_kY5aSBgcTMy1ncuYH4y-I_HAKuLFSS4QgfXNddP8kA368m9xaploI-PSZB-fDJ9xQY"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-white p-1.5 rounded-full shadow-md">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="text-4xl font-headline font-bold text-on-surface tracking-tight">Marcus Thompson</h1>
+<span class="px-3 py-1 bg-primary-container/10 text-primary text-xs font-label font-bold tracking-widest uppercase rounded-full border border-primary/20">Verified</span>
+</div>
+<p class="text-slate-500 font-body text-lg">Senior Security Architect</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-surface-container-high text-on-surface font-label font-semibold rounded-lg hover:bg-surface-dim transition-colors">Edit Photo</button>
+<button class="px-6 py-2.5 bg-gradient-to-r from-primary to-primary-container text-white font-label font-semibold rounded-lg shadow-sm hover:opacity-90 transition-opacity">Save Changes</button>
+</div>
+</header>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Personal Information (Form) -->
+<section class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl flex flex-col gap-8 border border-outline-variant/10">
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-headline font-bold">Personal Information</h3>
+<span class="material-symbols-outlined text-slate-300" data-icon="id_card">id_card</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div class="flex flex-col gap-2">
+<label class="font-label text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name</label>
+<input class="bg-white border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary font-body text-on-surface py-2 px-0 text-base" type="text" value="Marcus Thompson"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address</label>
+<input class="bg-white border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary font-body text-on-surface py-2 px-0 text-base" type="email" value="m.thompson@trustshield.io"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
+<input class="bg-white border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary font-body text-on-surface py-2 px-0 text-base" type="tel" value="+1 (555) 942-0182"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-xs font-bold text-slate-500 uppercase tracking-wider">Job Title</label>
+<input class="bg-white border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary font-body text-on-surface py-2 px-0 text-base" type="text" value="Senior Security Architect"/>
+</div>
+</div>
+<div class="mt-4 p-4 bg-surface-container-low rounded-lg border border-primary/5 flex gap-4 items-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="info">info</span>
+<p class="text-sm text-slate-600 font-body leading-relaxed">Changes to your primary identity may require a re-verification of your secure credentials by the administrative board.</p>
+</div>
+</section>
+<!-- Subscription Summary -->
+<section class="md:col-span-4 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between border border-outline-variant/10">
+<div>
+<h3 class="text-xl font-headline font-bold mb-6">Plan Summary</h3>
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl" data-icon="corporate_fare" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-slate-400 uppercase tracking-widest">Current Plan</p>
+<p class="font-headline text-lg font-bold text-primary">Enterprise Elite</p>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-label text-xs font-bold text-slate-500 uppercase tracking-widest">Next Renewal</p>
+<p class="font-body text-on-surface font-semibold">October 14, 2024</p>
+</div>
+</div>
+</div>
+<a class="mt-8 group flex items-center justify-between text-primary font-label font-bold text-sm tracking-wide" href="#">
+<span>Manage Subscription</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</section>
+<!-- Security Section -->
+<section class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- 2FA & Password -->
+<div class="md:col-span-2 bg-surface-container-highest/30 p-8 rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 bg-tertiary-fixed flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-fixed" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<h3 class="text-2xl font-headline font-bold">Security &amp; Access</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex flex-col justify-between">
+<div>
+<h4 class="font-label text-sm font-bold uppercase tracking-widest mb-2">Two-Factor Auth</h4>
+<p class="text-slate-600 font-body text-sm mb-4">Multi-layered protection is active on this account via Hardware Key.</p>
+</div>
+<div class="flex items-center gap-2 text-green-700 font-bold font-label text-xs">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    ACTIVE &amp; SECURE
+                                </div>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h4 class="font-label text-sm font-bold uppercase tracking-widest mb-2">Password Manager</h4>
+<p class="text-slate-600 font-body text-sm mb-4">Last rotated 42 days ago. We recommend rotations every 90 days.</p>
+</div>
+<a class="text-primary font-bold font-label text-sm underline underline-offset-4 hover:text-blue-800 transition-colors" href="#">Rotate Credentials</a>
+</div>
+</div>
+</div>
+<!-- Emergency Lock -->
+<div class="bg-error-container/20 p-8 rounded-xl border border-error/10 flex flex-col items-center text-center justify-center gap-4">
+<span class="material-symbols-outlined text-error text-5xl" data-icon="emergency_home" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+<h4 class="text-xl font-headline font-bold text-error">Emergency Lock</h4>
+<p class="text-xs font-body text-slate-500 max-w-[200px]">Instantly revoke all active sessions and lock global data access.</p>
+<button class="mt-2 w-full py-3 bg-white border-2 border-error text-error font-label font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-error hover:text-white transition-all">Execute Lockout</button>
+</div>
+</section>
+</div>
+<!-- Scholarly Footer -->
+<footer class="mt-24 pt-12 border-t border-outline-variant/20">
+<div class="max-w-2xl">
+<h5 class="font-headline text-lg font-bold mb-4 italic text-slate-700">A Note on Data Sovereignty</h5>
+<p class="font-serif text-slate-500 leading-relaxed text-sm mb-6">
+                        In the architecture of TrustShield, we operate under the "Principle of Minimal Exposure." Your identity is not merely a record, but a cryptographic asset. We maintain that the individual remains the sole arbiter of their digital footprint. Our protocols are designed to ensure that while metadata facilitates function, your core identity remains shrouded behind sovereign-grade encryption.
+                    </p>
+<div class="flex gap-8 items-center">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Archival ID: TS-882-991</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Privacy Policy v4.2</span>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Floating Action Button (Only on Mobile) -->
+<button class="md:hidden fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</body></html>

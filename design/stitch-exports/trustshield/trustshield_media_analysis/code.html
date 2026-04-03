@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrustShield | Deepfake Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#dcc661",
+              "on-primary-fixed": "#001946",
+              "tertiary": "#6d5e00",
+              "on-surface": "#1b1c1d",
+              "on-secondary-container": "#606569",
+              "outline-variant": "#c3c6d5",
+              "on-surface-variant": "#434653",
+              "surface-container-low": "#f5f3f4",
+              "surface-variant": "#e3e2e3",
+              "secondary": "#5a5f63",
+              "inverse-surface": "#303031",
+              "surface-container-highest": "#e3e2e3",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#524600",
+              "on-primary-container": "#e7ebff",
+              "outline": "#737784",
+              "on-secondary-fixed-variant": "#42474b",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#3366cc",
+              "on-background": "#1b1c1d",
+              "secondary-container": "#dfe3e8",
+              "surface-container-high": "#e9e8e9",
+              "on-primary-fixed-variant": "#00419d",
+              "secondary-fixed-dim": "#c2c7cc",
+              "on-secondary-fixed": "#171c20",
+              "secondary-fixed": "#dfe3e8",
+              "inverse-on-surface": "#f2f0f1",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed": "#211b00",
+              "surface-container": "#efedee",
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#b1c5ff",
+              "background": "#faf9fa",
+              "on-tertiary-container": "#4a3f00",
+              "on-primary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#f9e37a",
+              "surface-tint": "#2259bf",
+              "surface": "#faf9fa",
+              "tertiary-container": "#bfab49",
+              "surface-dim": "#dbdadb",
+              "inverse-primary": "#b1c5ff",
+              "surface-bright": "#faf9fa",
+              "primary": "#094cb2",
+              "primary-fixed": "#d9e2ff",
+              "on-error": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-8 h-20 w-full fixed top-0 z-50 bg-white dark:bg-slate-950">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50 font-['Noto_Serif']">TrustShield</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-[#094cb2] dark:hover:text-blue-300 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-[#094cb2] dark:hover:text-blue-300 transition-colors" href="#">Leak Check</a>
+<a class="text-[#094cb2] dark:text-blue-400 font-semibold border-b-2 border-[#094cb2]" href="#">Deepfake Analysis</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-[#094cb2] dark:hover:text-blue-300 transition-colors" href="#">Case Manager</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile settings" data-alt="Professional headshot of a corporate executive with a clean background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPpo7oGKhZ5EfEO6rHKV_YUlpPuu3D2kfFQbBaTctMWVkD09Rxi88zdDA8Mlngsv1GyjWbWf9YYWlsAbCID2ewFY7VsDPu98MegGZg9qoNskXMgPmzKIQiUy8xZe3JtB960gxCx-gPPFoWF7DCypP3Vsr4m71BGexTjgbpwN3UYHMxluUfsdEYNV6LpUNyw65nH-578E7FLTl0LdZrgpDAYnj5GvubYEY-_ctIXMLF1dvBE9jwyp_3vlnxkc1SrEryU4rL07JhVl7m"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Hidden on small, visible on large) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 py-6 px-4 bg-slate-50 dark:bg-slate-900 border-r border-slate-200/15 dark:border-slate-800/15 z-40 pt-24">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+</div>
+<div>
+<h2 class="text-xl font-black text-slate-900 dark:text-slate-50 font-['Public_Sans']">TrustShield</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Enterprise Privacy</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Leak Check</span>
+</a>
+<a class="flex items-center space-x-3 bg-white dark:bg-slate-800 text-[#094cb2] dark:text-blue-300 rounded-lg px-4 py-3 shadow-sm font-['Public_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="face_retouching_off">face_retouching_off</span>
+<span>Deepfake Analysis</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span>Case Manager</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/50">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white py-3 px-4 rounded-xl font-semibold text-sm mb-6 shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Removal Case
+            </button>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-xs uppercase tracking-tighter" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all font-['Public_Sans'] text-xs uppercase tracking-tighter" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>Audit Log</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:pl-64 pt-24 min-h-screen">
+<div class="max-w-7xl mx-auto px-8 py-12">
+<!-- Header Section -->
+<header class="mb-12">
+<nav class="flex gap-2 text-xs font-label text-on-surface-variant mb-4 uppercase tracking-[0.2em]">
+<span>Analysis</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-bold">Deepfake Diagnostic</span>
+</nav>
+<h1 class="text-5xl font-headline font-bold text-on-surface leading-tight mb-4">Deepfake Analysis Engine</h1>
+<p class="text-lg font-body text-on-surface-variant max-w-2xl leading-relaxed">
+                    Utilizing multi-layered neural network verification to detect synthetic manipulation, facial inconsistencies, and biological artifact mismatches.
+                </p>
+</header>
+<!-- Workspace Bento Grid -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Main Preview Panel -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm relative group">
+<div class="aspect-video w-full bg-surface-container-low flex items-center justify-center relative overflow-hidden">
+<img alt="Video Analysis Frame" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" data-alt="High-resolution portrait of a man with subtle digital diagnostic overlays and scanning lines highlighting facial features" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCaPuBSW0JpKF60H0DIQs7-HV6Yp6ogLuM-KeANf2rPwgJ5QY4sEL37rkxQWqbpXEyT8VNjDyTBIDQDVPBfs_JJHjoWRpjO2bsQbUIwtZtWU1Wuq-Qd2YH19Semem0uXx-3lqi-Gp4Jg8OWrBKt8L7VWOO1RdjzNcyoptbAlBMYR8A5eKBtUgNB8d3ecOUzLJCtFfi9IrtG4S_uLGkKIJTUC3lh2xr49kW4prNhfuw6OOyW-t-ve9Oaj6wW2-WFyei-sCanJwrJQNo"/>
+<!-- Analysis Overlays -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-[300px] h-[300px] border-2 border-primary/40 rounded-full animate-pulse flex items-center justify-center">
+<div class="w-[200px] h-[200px] border border-primary/20 rounded-full"></div>
+</div>
+<!-- Bounding Boxes -->
+<div class="absolute top-[25%] left-[35%] w-[30%] h-[40%] border-2 border-error border-dashed rounded-lg opacity-60">
+<span class="absolute -top-6 left-0 bg-error text-white text-[10px] font-label px-2 py-0.5 rounded uppercase">Manipulation Zone Delta_04</span>
+</div>
+</div>
+<!-- Play/Control Glass Bar -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 glass-panel rounded-full px-6 py-3 flex items-center gap-6 shadow-2xl">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="fast_rewind">fast_rewind</span>
+</button>
+<button class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="fast_forward">fast_forward</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-label text-on-surface-variant">00:12 / 00:45</span>
+<div class="w-24 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-1/3 h-full bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Analysis Verdict -->
+<div class="grid grid-cols-3 gap-6">
+<div class="col-span-3 md:col-span-1 bg-error-container/20 p-6 rounded-xl border-l-4 border-error">
+<span class="text-[10px] font-label uppercase tracking-widest text-error font-black block mb-2">Final Verdict</span>
+<h3 class="text-2xl font-headline font-bold text-on-error-container">Likely Manipulated</h3>
+<p class="text-xs font-body text-on-error-container mt-2 opacity-80">High confidence of AI-generated content detected in facial geometry.</p>
+</div>
+<div class="col-span-3 md:col-span-1 bg-surface-container p-6 rounded-xl">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black block mb-2">Manipulation Score</span>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-headline font-bold text-primary">87.4</span>
+<span class="text-lg font-headline text-on-surface-variant pb-1">%</span>
+</div>
+</div>
+<div class="col-span-3 md:col-span-1 bg-surface-container p-6 rounded-xl">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black block mb-2">Face Count</span>
+<div class="flex items-center gap-4 mt-1">
+<span class="text-4xl font-headline font-bold text-on-surface">01</span>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-container-high overflow-hidden">
+<img alt="Face preview" data-alt="Cropped thumbnail of a man's face from a video frame for identification purposes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrpp_j8NGJMezSQD94XeAZf5Wezeq12Z5PsixxNnUkKDtoPUxqHKqmJlWpfJ_hp5r9H68IN3WWK2Jx9PLBxZ2Hq7v2fkdDUIP0wQ9f_5MM-BDkMSS6hgKVZT4X-EnakhF8nDpgPXCWen0F8Sl97xDi4vNyXgcyTy66PGnosnR6JTIE8pSFo8mjzKn2M_ExfX1HfrNafFJqX1uhmp7qydTGrHEkD31kTEMdu5T5ETfRtPDI0JcgdypF1BGiop_h1L7_eGQ6Klr30v9i"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Analysis Detail -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Artifact Flags -->
+<section class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="text-sm font-label font-black uppercase tracking-widest text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+                            Artifact Flags
+                        </h3>
+<div class="space-y-4">
+<!-- Flag Item -->
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="text-sm font-body font-semibold text-on-surface">Frequency Mismatch</span>
+<span class="text-xs font-label text-on-surface-variant">Spectral inconsistencies in background</span>
+</div>
+<span class="bg-error text-white text-[10px] font-bold px-2 py-1 rounded">CRITICAL</span>
+</div>
+<div class="h-[1px] bg-outline-variant/20"></div>
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="text-sm font-body font-semibold text-on-surface">Phoneme-Viseme Lag</span>
+<span class="text-xs font-label text-on-surface-variant">Lip sync out of 50ms tolerance</span>
+</div>
+<span class="bg-tertiary text-white text-[10px] font-bold px-2 py-1 rounded">MEDIUM</span>
+</div>
+<div class="h-[1px] bg-outline-variant/20"></div>
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="text-sm font-body font-semibold text-on-surface">Specular Highlight Aliasing</span>
+<span class="text-xs font-label text-on-surface-variant">Artificial eye reflection patterns</span>
+</div>
+<span class="bg-error text-white text-[10px] font-bold px-2 py-1 rounded">CRITICAL</span>
+</div>
+<div class="h-[1px] bg-outline-variant/20"></div>
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="text-sm font-body font-semibold text-on-surface">Skin Texture Smoothing</span>
+<span class="text-xs font-label text-on-surface-variant">Neural network blurring artifacts</span>
+</div>
+<span class="bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded">LOW</span>
+</div>
+</div>
+</section>
+<!-- File Information -->
+<section class="bg-white p-8 rounded-xl border-l border-t border-outline-variant/10 shadow-sm">
+<h3 class="text-sm font-label font-black uppercase tracking-widest text-on-surface mb-6">File Metadata</h3>
+<div class="space-y-4">
+<div class="flex justify-between py-2 border-b border-surface-container-low">
+<span class="text-xs font-label text-on-surface-variant">Filename</span>
+<span class="text-xs font-body font-medium">evidence_mp4_v2.mp4</span>
+</div>
+<div class="flex justify-between py-2 border-b border-surface-container-low">
+<span class="text-xs font-label text-on-surface-variant">File Size</span>
+<span class="text-xs font-body font-medium">124.5 MB</span>
+</div>
+<div class="flex justify-between py-2 border-b border-surface-container-low">
+<span class="text-xs font-label text-on-surface-variant">Resolution</span>
+<span class="text-xs font-body font-medium">3840 x 2160 (4K)</span>
+</div>
+<div class="flex justify-between py-2">
+<span class="text-xs font-label text-on-surface-variant">Date Processed</span>
+<span class="text-xs font-body font-medium">Oct 24, 2023 · 14:22 GMT</span>
+</div>
+</div>
+<div class="mt-8 flex flex-col gap-3">
+<button class="w-full bg-surface-container-high text-primary font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                                Download Audit Report
+                            </button>
+<button class="w-full bg-surface-container-low text-on-surface-variant font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+                                Share for Legal Review
+                            </button>
+</div>
+</section>
+<!-- Analysis Queue -->
+<section class="p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
+<h4 class="text-[10px] font-label font-black uppercase tracking-tighter text-on-surface-variant mb-4 px-2">History &amp; Batch</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<div class="w-10 h-10 rounded bg-slate-200 flex-shrink-0">
+<img alt="Past analysis thumbnail" class="w-full h-full object-cover rounded" data-alt="Small square thumbnail of a woman in a newsroom setting, processed through deepfake analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKmE4eQIkRHPfUULvsCwQLATkQ9fQhJ1obT6BnhkZwOOnmQZDvRmlsDQyIiWQxy4vDV9av_eN4sWFgtK1lDNAI8w6926WpgPX9mAiHtxjuMPloLzKSgOS0IYsWQjHQkhOLv5qkq-yBKZzsQV4g5PiPWA8TDFNUPBnq1nnw_-K5IjGE_W_zi92h1YKP1rUjVBKAIZi1bq_q-hQegYZ7Q_a8jCySX7kNNmMT01xYkD_CQ4oPkxme8LWnZAsGq62i-cVWkdiQVC9YlG1E"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-body font-bold truncate">interview_clip_09.mov</p>
+<p class="text-[10px] text-primary">Verdict: Organic (98%)</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded bg-slate-200 flex-shrink-0">
+<img alt="Past analysis thumbnail" class="w-full h-full object-cover rounded" data-alt="Small square thumbnail showing a business meeting being analyzed for synthetic voice and video manipulation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbhbYF9cXFtJxPmu2_Xw97LLTt_Psjity5j-K-1QlMP4qovBd7Z563lghL-ZpUEeyfC1krD-5EcWWtXNWplKJkM0r-RmKbLHly69S3SgoTAp12UkBr1J_OY-albKK_lGzf3oeKnevnuhQdttzpwBKWXxMu-ENVMVyLBL5NgCFlRjpyrq4-2zkJHUJ-H0ZoHPnuEn42QJLU1goNlLzkrEtfRmdJFSvFrqVEVsFlCY7O1tJ9K6H2AF0nt2x7mew1oNtDD2WHK-zjHaro"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-body font-bold truncate">ceo_announcement_fake.mp4</p>
+<p class="text-[10px] text-error">Verdict: Deepfake (92%)</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Upload Floating Action -->
+<div class="fixed bottom-12 right-12 z-50">
+<button class="flex items-center gap-3 bg-primary text-white pl-4 pr-6 py-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-2xl" data-icon="cloud_upload" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+<span class="font-label font-bold tracking-wide">Analyze New Media</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 h-20 flex justify-around items-center px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-label">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#094cb2]">
+<span class="material-symbols-outlined" data-icon="face_retouching_off" style="font-variation-settings: 'FILL' 1;">face_retouching_off</span>
+<span class="text-[10px] font-label font-bold">Analysis</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="text-[10px] font-label">Cases</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-label">Settings</span>
+</button>
+</nav>
+</body></html>
